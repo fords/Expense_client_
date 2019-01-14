@@ -1,10 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 
+// body { background-color: lightgreen }
+h1{
+  margin-left: 30px;
+  margin: 20px;
+}
+
+@keyframes example {
+  from { background-color: red; }
+  to { background-color: yellow; }
+}
+
+body {
+  background-color: lightgreen;
+  animation-name: example;
+  animation-duration: 4s;
+}
+
 .btn {
   background: orange;
   width: 200px;
   height: 40px;
-  margin: 10px;
+  margin-left: 40px;
   color: black;
   display: inline-block;
   text-align: center;
