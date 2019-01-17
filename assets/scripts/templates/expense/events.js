@@ -13,16 +13,16 @@ const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
   store.people.push(data.name)
-  console.log(store.people)
+  // console.log(store.people)
   document.getElementById('addPerson-form-add').reset()
   show(event)
 }
 
 const onAddExpenseForm = function (event) {
   event.preventDefault()
-  // console.log("in add expense button")
+  console.log("in add expense button")
   const data = getFormFields(this)
-  console.log(data)
+  // console.log(data.description)
   const temp = []
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
@@ -30,7 +30,11 @@ const onAddExpenseForm = function (event) {
     }
   }
   store.selectedPeople = temp
-  console.log(store.selectedPeople)
+  store.description.push(data.description)
+  store.totalAmount.push(data.amount)
+  store.listpeople_with_index.push(temp)
+  // console.log(store.description)
+  show(event)
 }
 
 const onAddExpenseTop = function (event) {
@@ -44,20 +48,21 @@ const onAddExpenseTop = function (event) {
     options.text = store.people[i]
     $('#listPeople')[0].appendChild(options)
   }
+
   // console.log(data)
 }
 
 const show = function (event) {
+  // show person name
   $('.person-show ul')[0].innerHTML = ''
-  console.log('in show')
   for (let i = 0; i < store.people.length; i++) {
-    console.log(i)
-    const thisLi = document.createElement('LI')
+    // console.log(i)
+    const listElement = document.createElement('LI')
     const name = document.createElement('span')
     const div = document.createElement('div')
     const div2 = document.createElement('div')
     name.append(document.createTextNode(store.people[i]))
-    console.log(store.people[i])
+    // console.log(store.people[i])
     const editName = document.createElement('a')
     editName.href = 'javascript:;'
     editName.addEventListener('click', onEditName)
@@ -68,13 +73,41 @@ const show = function (event) {
     deleteName.href = 'javascript:;'
     deleteName.addEventListener('click', onDeleteName)
     deleteName.appendChild(document.createTextNode('Delete'))
-    thisLi.append(name)
-    thisLi.append(div)
-    thisLi.append(editName)
-    thisLi.append(div2)
-    thisLi.append(deleteName)
-    thisLi.setAttribute('data-attr', i)
-    $('.person-show  ul')[0].appendChild(thisLi)
+    listElement.append(name)
+    listElement.append(div)
+    listElement.append(editName)
+    listElement.append(div2)
+    listElement.append(deleteName)
+    listElement.setAttribute('data-attr', i)
+    $('.person-show  ul')[0].appendChild(listElement)
+  }
+
+  // show the expense
+  $('.expense-show ul')[0].innerHTML = ''
+  const name2 = document.createElement('span')
+  console.log('show')
+  for (let i = 0; i < store.description.length; i++) {
+    console.log("i", i)
+    // console.log(store.listpeople_with_index[i])
+    const listElement2 = document.createElement('LI')
+    // const description = document.createElement('span')
+    const div4 = document.createElement('div')
+    const div5 = document.createElement('div')
+    name2.append(document.createTextNode(store.people[i]))
+    const h3 = document.createElement('h3')
+    h3.append(store.description[i])
+    listElement2.append(h3)
+    for (let j = 0; j < store.listpeople_with_index[i].length; j++) {
+      // console.log("j",j)
+      // listpeople_with_index
+      listElement2.append(store.listpeople_with_index[i][j])
+      listElement2.append(' would pay ', store.totalAmount[i] / store.listpeople_with_index[i].length)
+      const div3 = document.createElement('div')
+      listElement2.append(div3)
+      console.log(store.listpeople_with_index[i][j])
+    }
+    listElement2.setAttribute('data-attr', i)
+    $('.expense-show  ul')[0].appendChild(listElement2)
   }
 }
 const onDeleteName = function (event) {
