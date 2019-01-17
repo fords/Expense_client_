@@ -66,7 +66,7 @@ const show = function (event) {
     // editName.append(</div>)
     const deleteName = document.createElement('a')
     deleteName.href = 'javascript:;'
-    // deleteName.addEventListener()
+    deleteName.addEventListener('click', onDeleteName)
     deleteName.appendChild(document.createTextNode('Delete'))
     thisLi.append(name)
     thisLi.append(div)
@@ -76,6 +76,14 @@ const show = function (event) {
     thisLi.setAttribute('data-attr', i)
     $('.person-show  ul')[0].appendChild(thisLi)
   }
+}
+const onDeleteName = function (event) {
+  event.preventDefault()
+  let i = event.target.parentNode
+  i = i.getAttribute('data-attr')
+  store.index_person = i
+  store.people.splice(i, 1)
+  show(event)
 }
 
 const onEditName = function (event) {
