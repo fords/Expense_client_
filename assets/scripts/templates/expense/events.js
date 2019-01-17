@@ -20,7 +20,7 @@ const onAddPersonForm = function (event) {
 
 const onAddExpenseForm = function (event) {
   event.preventDefault()
-  console.log("in add expense button")
+  // console.log("in add expense button")
   const data = getFormFields(this)
   // console.log(data.description)
   const temp = []
@@ -85,31 +85,65 @@ const show = function (event) {
   // show the expense
   $('.expense-show ul')[0].innerHTML = ''
   const name2 = document.createElement('span')
-  console.log('show')
+  // console.log('show')
   for (let i = 0; i < store.description.length; i++) {
-    console.log("i", i)
+    // console.log("i", i)
     // console.log(store.listpeople_with_index[i])
     const listElement2 = document.createElement('LI')
     // const description = document.createElement('span')
     const div4 = document.createElement('div')
-    const div5 = document.createElement('div')
+    // const div5 = document.createElement('div')
     name2.append(document.createTextNode(store.people[i]))
     const h3 = document.createElement('h3')
+
+    const editExpense = document.createElement('a')
+    editExpense.href = 'javascript:;'
+    editExpense.addEventListener('click', onEditExpense)
+    editExpense.appendChild(document.createTextNode('Edit'))
+    const deleteExpense = document.createElement('a')
+    deleteExpense.href = 'javascript:;'
+    deleteExpense.addEventListener('click', onDeleteExpense)
+    deleteExpense.appendChild(document.createTextNode('Delete'))
     h3.append(store.description[i])
     listElement2.append(h3)
     for (let j = 0; j < store.listpeople_with_index[i].length; j++) {
-      // console.log("j",j)
-      // listpeople_with_index
       listElement2.append(store.listpeople_with_index[i][j])
       listElement2.append(' would pay ', store.totalAmount[i] / store.listpeople_with_index[i].length)
       const div3 = document.createElement('div')
       listElement2.append(div3)
       console.log(store.listpeople_with_index[i][j])
     }
+    listElement2.append(editExpense)
+    listElement2.append(div4)
+    listElement2.append(deleteExpense)
     listElement2.setAttribute('data-attr', i)
     $('.expense-show  ul')[0].appendChild(listElement2)
   }
 }
+
+const onEditExpense = function (event) {
+  event.preventDefault()
+  // const data = getFormFields(this)
+  let i = event.target.parentNode
+  i = i.getAttribute('data-attr')
+  // console.log(i)
+  store.index_person = i
+  // console.log(store.people[i])
+  // $('#person-form-save')[0].placeholder = store.people[i]
+}
+
+
+const onDeleteExpense = function (event) {
+  event.preventDefault()
+  let i = event.target.parentNode
+  i = i.getAttribute('data-attr')
+  store.index_person = i
+  store.description.splice(i, 1)
+  store.totalAmount.splice(i, 1)
+  store.listpeople_with_index.splice(i, 1)
+  show(event)
+}
+
 const onDeleteName = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
