@@ -2,7 +2,9 @@
 
 const store = {
   people: [],
-  selectedPeople: []
+  selectedPeople: [],
+  description: '',
+  totalAmount: 0
 }
 
 module.exports = store

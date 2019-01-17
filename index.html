@@ -36,15 +36,15 @@
           <fieldset>
             <div class="formDiv">
                 <span> Enter Expense Description </span>
-                <input type="text"class="expense-name" name="description" placeholder="Expense Description">
+                <input required type="text"class="expense-name" name="description" placeholder="Expense Description">
             </div>
             <div class="formDiv">
                 <span> Enter Total Bill Amount </span>
-                <input type="number"class="expense-amount"  name="amount" placeholder="Enter Amount">
+                <input required type="number"class="expense-amount"  name="amount" placeholder="Enter Amount">
             </div>
             <div class="formDiv">
               <div> <span> Select People</span> </div>
-              <select  multiple id="listPeople"></select>
+              <select required multiple id="listPeople"></select>
               <!-- required multiple -->
             </div>
               <input class="formDiv" id="expense-submit" type="submit" class="expense-name-btn" value="ADD">
@@ -58,7 +58,7 @@
           <ul> </ul>
         </div>
         <div style="float: right; margin-right: 40%;" class="person">
-          <h1>Friends</h1>
+          <h1>People</h1>
           <ul> </ul>
         </div>
     </div>
