@@ -22,11 +22,20 @@
       </div>
 
       <div class="addPerson person" >
-        <form id="addPerson" class="addPerson-panel">
+        <form id="addPerson-form-add" class="addPerson-panel">
           <fieldset>
             <span> Enter Person's Name </span>
             <input class="person-form" type="text" name="name" placeholder="Person's name"> <!--person[name]* -->
             <input type="submit"class="add-person-form-button" value="ADD">
+            <!-- <input type="submit"class="add-person-form-save" value="SAVE"> -->
+          </fieldset>
+        </form>
+        <form id="add-person-form-save" class="addPerson-panel-save">
+          <fieldset>
+            <span> Enter Person's Name </span>
+            <input id="person-form-save" class="person-form" type="text" name="name" placeholder="Person's name"> <!--person[name]* -->
+            <!-- <input type="submit"class="add-person-form-button" value="ADD"> -->
+            <input type="submit"class="add-person-form-save" value="SAVE">
           </fieldset>
         </form>
       </div>
@@ -53,11 +62,11 @@
       </div>
 
       <div class="show">
-        <div style="float: left; margin-top: 22px; margin-left:3%;" class="expense">
+        <div style="float: left ; margin-left:3%;" class="expense-show">
           <h1>Expense</h1>
           <ul> </ul>
         </div>
-        <div style="float: right; margin-right: 40%;" class="person">
+        <div style="float: right; margin-right: 40%;" class="person-show">
           <h1>People</h1>
           <ul> </ul>
         </div>

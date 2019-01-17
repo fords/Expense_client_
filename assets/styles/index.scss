@@ -18,6 +18,11 @@ h1 {
   margin: 5px;
 }
 // background-color: blue;
+.person-show li,
+.expense-show li {
+  padding: 10px;
+}
+
 
 #listPeople {
   max-height: 150px;
