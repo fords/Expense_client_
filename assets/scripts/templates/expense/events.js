@@ -22,15 +22,14 @@ const onAddExpenseForm = function (event) {
   // console.log("in add expense button")
   const data = getFormFields(this)
   // console.log(data)
-
-  let partners = []
+  const temp = []
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
-      partners.push($('#listPeople')[0].selectedOptions[i].value)
+      temp.push($('#listPeople')[0].selectedOptions[i].value)
     }
   }
-  console.log(partners)
-
+  store.selectedPeople = temp
+  console.log(store.selectedPeople)
 }
 
 const onAddExpenseTop = function (event) {

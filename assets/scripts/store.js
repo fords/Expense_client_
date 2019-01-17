@@ -1,7 +1,8 @@
 'use strict'
 
 const store = {
-  people: []
+  people: [],
+  selectedPeople: []
 }
 
 module.exports = store
