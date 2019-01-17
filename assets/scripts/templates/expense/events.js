@@ -66,7 +66,7 @@ const show = function (event) {
     // editName.append(</div>)
     const deleteName = document.createElement('a')
     deleteName.href = 'javascript:;'
-    // deleteName.addEventListener('click', this.deleteThisName)
+    // deleteName.addEventListener()
     deleteName.appendChild(document.createTextNode('Delete'))
     thisLi.append(name)
     thisLi.append(div)
