@@ -1,11 +1,52 @@
 @import '~bootstrap/scss/bootstrap';
 
+// body { background-color: lightgreen }
+h1 {
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+// @keyframes flash {
+//   0% { background-color: pink; }
+//   25% { background-color: yellow; }
+//   50% { background-color: red; }
+//   100% { background-color: blue; }
+// }
+.formDiv {
+  padding: 4px;
+  margin: 5px;
+}
+// background-color: blue;
+
+#listPeople {
+  max-height: 150px;
+  min-height: 50px;
+  width: 250px;
+  border: 1px solid brown;
+}
+
+body {
+  background-color: lightgreen;
+  animation-name: flash;
+  animation-duration: 3s;
+}
+
 .btn {
   background: orange;
   width: 200px;
   height: 40px;
-  margin: 10px;
+  margin-left: 40px;
   color: black;
   display: inline-block;
   text-align: center;
+}
+
+.buttons {
+  background: purple;
+  padding: 20px;
+}
+
+.person {
+  padding: 20px;
 }
