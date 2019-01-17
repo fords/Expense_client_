@@ -85,8 +85,8 @@ const onEditName = function (event) {
   i = i.getAttribute('data-attr')
   // console.log(i)
   store.index_person = i
-  // $('.addPerson-panel').hide()
-  // $('.addPerson-panel-save').show()
+  $('.addPerson-panel').hide()
+  $('.addPerson-panel-save').show()
   // console.log(store.people[i])
   // $('#person-form')[0].placeholder = store.people[index]
 }
@@ -97,15 +97,15 @@ const onAddPersonFormSave = function (event) {
   store.people[store.index_person] = data.name
   show(event)
   document.getElementById('add-person-form-save').reset()
-  // $('.addPerson-panel').show()
-  // $('.addPerson-panel-save').hide()
+  $('.addPerson-panel').show()
+  $('.addPerson-panel-save').hide()
 }
 const addHandlers = () => {
   // $('#sign-up').on('submit', onSignUp)
   $('.addPerson').hide()
   $('.addExpense').hide()
-  // $('.addPerson-panel').show()
-  // $('.addPerson-panel-save').hide()
+  $('.addPerson-panel').show()
+  $('.addPerson-panel-save').hide()
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
   $('#addExpense').on('submit', onAddExpenseForm)
