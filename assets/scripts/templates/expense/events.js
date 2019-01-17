@@ -88,7 +88,7 @@ const onEditName = function (event) {
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').show()
   // console.log(store.people[i])
-  // $('#person-form')[0].placeholder = store.people[index]
+  $('#person-form-save')[0].placeholder = store.people[i]
 }
 
 const onAddPersonFormSave = function (event) {
