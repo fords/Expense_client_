@@ -160,6 +160,8 @@ const onAddExpenseFormSave = function (event) {
   }
   store.listpeople_with_index[store.index_expense] = temp
   document.getElementById('add-expense-form-save').reset()
+  $('.addExpense').show()
+  $('.addExpense-save').hide()
   show(event)
   // document.getElementById('expense-amount').reset()
 }
@@ -188,11 +190,9 @@ const onEditName = function (event) {
   // const data = getFormFields(this)
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
-  // console.log(i)
   store.index_person = i
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').show()
-  // console.log(store.people[i])
   $('#person-form-save')[0].placeholder = store.people[i]
 }
 
