@@ -7,12 +7,13 @@ h1 {
   margin-bottom: 20px;
 }
 
-// @keyframes flash {
-//   0% { background-color: pink; }
-//   25% { background-color: yellow; }
-//   50% { background-color: red; }
-//   100% { background-color: blue; }
-// }
+@keyframes flash {
+  0% { background-color: pink; }
+  25% { background-color: yellow; }
+  50% { background-color: red; }
+  100% { background-color: blue; }
+}
+
 .formDiv {
   padding: 4px;
   margin: 5px;
