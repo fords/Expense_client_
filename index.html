@@ -40,16 +40,16 @@
         </form>
       </div>
 
-      <div class="addExpense Expense" >
-        <form name="addExpense" id="addExpense" class="addExpense-panel">
+      <div class="addExpenseClass Expense" >
+        <form name="addExpense" id="addExpense" class="addExpense addExpense-panel">
           <fieldset>
             <div class="formDiv">
                 <span> Enter Expense Description </span>
-                <input required type="text"class="expense-name" name="description" placeholder="Expense Description">
+                <input required type="text" id="expense-name2" class="expense-name" name="description" placeholder="Expense Description">
             </div>
             <div class="formDiv">
                 <span> Enter Total Bill Amount </span>
-                <input required type="float"class="expense-amount"  name="amount" placeholder="Enter Amount">
+                <input required type="float" id="expense-amount2" class="expense-amount"  name="amount" placeholder="Enter Amount">
             </div>
             <div class="formDiv">
               <div> <span> Select People</span> </div>
@@ -57,6 +57,25 @@
               <!-- required multiple -->
             </div>
               <input class="formDiv" id="expense-submit" type="submit" class="expense-name-btn" value="ADD">
+          </fieldset>
+        </form>
+
+        <form name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
+          <fieldset>
+            <div class="formDiv">
+                <span> Enter Expense Description </span>
+                <input required type="text" id="expense-name" class="expense-name" name="description" placeholder="Expense Description">
+            </div>
+            <div class="formDiv">
+                <span> Enter Total Bill Amount </span>
+                <input required type="float" id="expense-amount" class="expense-amount"  name="amount" placeholder="Enter Amount">
+            </div>
+            <div class="formDiv">
+              <div> <span> Select People</span> </div>
+              <select required multiple id="listPeople2"></select>
+              <!-- required multiple -->
+            </div>
+              <input class="formDiv" id="expense-submit-save" type="submit" class="expense-name-btn" value="SAVE">
           </fieldset>
         </form>
       </div>

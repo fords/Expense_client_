@@ -29,6 +29,8 @@ const onAddExpenseForm = function (event) {
       temp.push($('#listPeople')[0].selectedOptions[i].value)
     }
   }
+  document.getElementById('addExpense').reset()
+  // document.getElementById('expense-amount2').reset()
   store.selectedPeople = temp
   store.description.push(data.description)
   store.totalAmount.push(data.amount)
@@ -40,6 +42,7 @@ const onAddExpenseForm = function (event) {
 const onAddExpenseTop = function (event) {
   $('.addExpense').show()
   $('.addPerson').hide()
+  $('.addExpense-save').hide()
   event.preventDefault()
   $('#listPeople')[0].innerHTML = ''
   for (let i = 0; i < store.people.length; i++) {
@@ -123,16 +126,36 @@ const show = function (event) {
 
 const onEditExpense = function (event) {
   event.preventDefault()
+  $('.addExpense').hide()
+  $('.addExpense-save').show()
+  $('#listPeople2')[0].innerHTML = ''
+  for (let i = 0; i < store.people.length; i++) {
+    const options = document.createElement('option')
+    options.value = store.people[i]
+    options.text = store.people[i]
+    $('#listPeople2')[0].appendChild(options)
+  }
   // const data = getFormFields(this)
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
-  // console.log(i)
-  store.index_person = i
+  console.log(i)
+  store.index_expense = i
+  $('#expense-name')[0].placeholder = store.description[store.index_expense]
+  $('#expense-amount')[0].placeholder = store.totalAmount[store.index_expense]
   // console.log(store.people[i])
   // $('#person-form-save')[0].placeholder = store.people[i]
 }
 
+const onAddExpenseFormSave = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  document.getElementById('add-expense-form-save').reset()
+  store.description[store.index_expense] = data.description
+  store.totalAmount[store.index_expense] = data.amount
 
+  show(event)
+  // document.getElementById('expense-amount').reset()
+}
 const onDeleteExpense = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
@@ -181,9 +204,12 @@ const addHandlers = () => {
   $('.addExpense').hide()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
+  $('.addExpense').show()
+  $('.addExpense-save').hide()
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
   $('#addExpense').on('submit', onAddExpenseForm)
+  $('#add-expense-form-save').on('submit', onAddExpenseFormSave)
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
 }
