@@ -7,6 +7,7 @@ const onAddPersonTop = function (event) {
   $('.addPerson').show()
   event.preventDefault()
   $('.addExpense').hide()
+  $('.addExpense-save').hide()
 }
 
 const onAddPersonForm = function (event) {
@@ -114,7 +115,7 @@ const show = function (event) {
       listElement2.append(' would pay ', store.totalAmount[i] / store.listpeople_with_index[i].length)
       const div3 = document.createElement('div')
       listElement2.append(div3)
-      console.log(store.listpeople_with_index[i][j])
+      // console.log(store.listpeople_with_index[i][j])
     }
     listElement2.append(editExpense)
     listElement2.append(div4)
@@ -138,7 +139,7 @@ const onEditExpense = function (event) {
   // const data = getFormFields(this)
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
-  console.log(i)
+  // console.log(i)
   store.index_expense = i
   $('#expense-name')[0].placeholder = store.description[store.index_expense]
   $('#expense-amount')[0].placeholder = store.totalAmount[store.index_expense]
@@ -149,10 +150,16 @@ const onEditExpense = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  document.getElementById('add-expense-form-save').reset()
   store.description[store.index_expense] = data.description
   store.totalAmount[store.index_expense] = data.amount
-
+  const temp = []
+  for (const i in $('#listPeople2')[0].selectedOptions) {
+    if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
+      temp.push($('#listPeople2')[0].selectedOptions[i].value)
+    }
+  }
+  store.listpeople_with_index[store.index_expense] = temp
+  document.getElementById('add-expense-form-save').reset()
   show(event)
   // document.getElementById('expense-amount').reset()
 }
