@@ -13,7 +13,7 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.people.push(data.name)
+  store.people.push(data.person.name)
   // console.log(store.people)
   document.getElementById('addPerson-form-add').reset()
   show(event)
@@ -33,8 +33,8 @@ const onAddExpenseForm = function (event) {
   document.getElementById('addExpense').reset()
   // document.getElementById('expense-amount2').reset()
   store.selectedPeople = temp
-  store.description.push(data.description)
-  store.totalAmount.push(data.amount)
+  store.description.push(data.expense.description)
+  store.totalAmount.push(data.expense.amount)
   store.listpeople_with_index.push(temp)
   // console.log(store.description)
   show(event)
@@ -150,8 +150,8 @@ const onEditExpense = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.description[store.index_expense] = data.description
-  store.totalAmount[store.index_expense] = data.amount
+  store.description[store.index_expense] = data.expense.description
+  store.totalAmount[store.index_expense] = data.expense.amount
   const temp = []
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
@@ -199,7 +199,7 @@ const onEditName = function (event) {
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.people[store.index_person] = data.name
+  store.people[store.index_person] = data.person.name
   show(event)
   document.getElementById('add-person-form-save').reset()
   $('.addPerson-panel').show()
