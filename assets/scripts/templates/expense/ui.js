@@ -1,6 +1,7 @@
 'use strict'
+const getFormFields = require('../../../../lib/get-form-fields')
 const store = require('../../store.js')
-const events = require('./events.js')
+// const events = require('./events.js')
 const api = require('./api.js')
 const createPersonSuccess = data => {
   store.people.push(data.person.name)
@@ -26,8 +27,6 @@ const deletePersonFailure = () => {
 }
 
 const getAllPersonSuccess = data => {
-  console.log('get all people')
-  console.log(data.persons[1]._id)
   $('.person-show ul')[0].innerHTML = ''
   for (let i = 0; i < data.persons.length; i++) {
     // console.log(data)
@@ -35,7 +34,7 @@ const getAllPersonSuccess = data => {
     const name = document.createElement('span')
     const div = document.createElement('div')
     const div2 = document.createElement('div')
-    name.append(document.createTextNode(data.persons[i]))
+    name.append(document.createTextNode(data.persons[i].name))
     // console.log(store.people[i])
     const editName = document.createElement('a')
     editName.href = 'javascript:;'
@@ -58,7 +57,7 @@ const getAllPersonSuccess = data => {
 }
 
 const getAllPersonFailure = () => {
-  $('#feedbackOnAction').show().text('Could not show person(s)')
+  $('#feedbackOnAction').show().text('Could not delete person')
   $('#feedbackOnAction').fadeOut(5000)
 }
 
@@ -80,10 +79,19 @@ const onDeleteName = function (event) {
   api.deletePerson(i)
     .then(deletePersonSuccess)
     // .then(store.index_person = i)
-    .then(() => store.people.splice(i, 1))  // MODIFY
-    .then(() => getAllPersonSuccess())
+    // .then(() => store.people.splice(i, 1))  // MODIFY
+    .then(() => show(event))
     .catch(deletePersonFailure)
 }
+
+const show = function (event) {
+  // show person name
+  const data = getFormFields(event.target)
+  api.getAllPerson(data)
+    .then(getAllPersonSuccess)
+    .catch(getAllPersonFailure)
+}
+
 module.exports = {
   createPersonSuccess,
   createPersonFailure,

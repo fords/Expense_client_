@@ -8,7 +8,8 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
-  // api.getAllPerson(event)
+  // ui.getAllPersonSuccess()
+  show(event)
 }
 
 const onAddPersonForm = function (event) {
@@ -106,6 +107,11 @@ const show = function (event) {
 }
 
 const onEditExpense = function (event) {
+  const data = getFormFields(event.target)
+  api.updatePerson(data)
+    .then(ui.updatePersonSuccess)
+    .catch(ui.updatePersonFailure)
+
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').show()
