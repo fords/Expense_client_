@@ -1,68 +1,43 @@
 'use strict'
-const store = require('../store.js')
+const store = require('../../store.js')
 
-const signUpSuccess = data => {
-  $('#up-message').show().text('Sign Up Success')
-  $('#up-message').removeClass()
-  $('#up-message').addClass('success')
-  $('#up-message').fadeOut(5000)
+const signUpSuccess = function (data) {
+  $('#feedbackOnAction').html(' ')
+  $('#feedbackOnAction').text('Signed up successfully!!')
+  $('#sign-up')[0].reset()
+  // console.log(' sign up success')
 }
 
-const signUpFailure = () => { // removed error parameter
-  $('#up-message').show().text('Error on Sign Up')
-  $('#up-message').removeClass()
-  $('#up-message').addClass('failure')
-  $('#up-message').fadeOut(9000)
+const signInSuccess = function (data) {
+  store.user = data.user
+  $('#feedbackOnAction').html(' ')
+  $('#feedbackOnAction').text('Signed in successfully!!')
 }
 
-const signInSuccess = data => {
-  $('#up-message').removeClass()
-  $('#up-message').addClass('success')
-  $('#create-button').css('visibility', 'visible')
-  $('#update-button').css('visibility', 'visible')
-  $('#sign-up-button').hide() // sign up is hidden
+const signOutSuccess = function () {
+  $('#feedbackOnAction').html(' ')
+  $('#feedbackOnAction').text('Signed out successfully!!')
 }
 
-const signInFailure = () => { // removed error parameter
-  $('#up-message').show().text('Error on Sign In')
-  $('#up-message').removeClass()
-  $('#up-message').addClass('failure')
-  // removed console.error
-  $('#up-message').fadeOut(9000)
+const changePasswordSuccess = function (data) {
+  $('#feedbackOnAction').html(' ')
+  $('#feedbackOnAction').text('Password changed successfully!!')
+  $('#change-password')[0].reset()
 }
 
-const changePasswordSuccess = data => {
-  $('#out-message').show().text('Your Password Has Been Changed!')
-  $('#out-message').removeClass()
-  $('#out-message').addClass('success')
-  $('#out-message').fadeOut(5000)
-}
-
-const changePasswordFailure = () => { // removed error parameter
-  $('#out-message').show().text('Error on password change')
-  $('#out-message').removeClass()
-  $('#out-message').addClass('failure')
-  $('#out-message').fadeOut(4000)
-}
-
-const signOutSuccess = data => {
-}
-
-const signOutFailure = () => { // removed error parameter
-  $('#out-message').show().text('Error on Sign Out')
-  $('#out-message').removeClass()
-  $('#out-message').addClass('failure')
-  // removed console.error
-  $('#out-message').fadeOut(9000)
+const failure = function () {
+  $('#feedbackOnAction').html(' ')
+  $('#feedbackOnAction').text('Error!!!')
 }
 
 module.exports = {
   signUpSuccess,
-  signUpFailure,
+  // signUpFailure,
   signInSuccess,
-  signInFailure,
+  // signInFailure,
   changePasswordSuccess,
-  changePasswordFailure,
+  // changePasswordFailure,
   signOutSuccess,
-  signOutFailure
+  // signOutFailure
+  failure
 }
