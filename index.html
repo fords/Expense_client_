@@ -15,6 +15,44 @@
     <body>
 
       <h1>Expense</h1>
+      <div class='signInUp'>
+      <div id="signUp">
+        <form id="sign-up">
+          <fieldset>
+            <h2>Sign Up Here</h2>
+            <input type="email" name="credentials[email]" placeholder="Email"><br>
+            <input type="password" name="credentials[password]" placeholder="Password"><br>
+            <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password"><br>
+            <input type="submit" value="Sign Up">
+          </fieldset>
+        </form>
+      </div>
+
+      <div id="signIn">
+          <form id="sign-in">
+              <fieldset>
+                <h2>Sign In Here</h2>
+                <input type="text" name="credentials[email]" placeholder="Email"><br>
+                <input type="password" name="credentials[password]" placeholder="Password"><br>
+                <input type="submit" value="Sign In">
+              </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <form id="sign-out">
+            <input type="submit" class='button' value="Sign Out">
+      </form>
+
+      <form id="change-password">
+              <br>
+              <h3>Change Password</h3>
+              <input type="password" name="passwords[old]" placeholder="Old Password"><br>
+              <input type="password" name="passwords[new]" placeholder="New Password"><br>
+              <input type="submit" value="Change Password">
+      </form>
+
+      <div  id='feedbackOnAction'> <br> </div>
 
       <div class = buttons>
         <button type="button" id="addPersonTop" class="btn">Add Person</button>
@@ -25,7 +63,7 @@
         <form id="addPerson-form-add" class="addPerson-panel">
           <fieldset>
             <span> Enter Person's Name </span>
-            <input required id="person-form-add" class="person-form" type="text" name="name" placeholder="Person's name"> <!--person[name]* -->
+            <input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name"> <!--person[name]* -->
             <input type="submit"class="add-person-form-button" value="ADD">
             <!-- <input type="submit"class="add-person-form-save" value="SAVE"> -->
           </fieldset>
@@ -33,7 +71,7 @@
         <form id="add-person-form-save" class="addPerson-panel-save">
           <fieldset>
             <span> Enter Person's Name </span>
-            <input required id="person-form-save" class="person-form" type="text" name="name" placeholder="Person's name"> <!--person[name]* -->
+            <input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name"> <!--person[name]* -->
             <!-- <input type="submit"class="add-person-form-button" value="ADD"> -->
             <input type="submit"class="add-person-form-save" value="SAVE">
           </fieldset>
@@ -45,11 +83,11 @@
           <fieldset>
             <div class="formDiv">
                 <span> Enter Expense Description </span>
-                <input required type="text" id="expense-name2" class="expense-name" name="description" placeholder="Expense Description">
+                <input required type="text" id="expense-name2" class="expense-name" name="expense[description]" placeholder="Expense Description">
             </div>
             <div class="formDiv">
                 <span> Enter Total Bill Amount </span>
-                <input required type="float" id="expense-amount2" class="expense-amount"  name="amount" placeholder="Enter Amount">
+                <input required type="float" id="expense-amount2" class="expense-amount"  name="expense[amount]" placeholder="Enter Amount">
             </div>
             <div class="formDiv">
               <div> <span> Select People</span> </div>
@@ -64,11 +102,11 @@
           <fieldset>
             <div class="formDiv">
                 <span> Enter Expense Description </span>
-                <input required type="text" id="expense-name" class="expense-name" name="description" placeholder="Expense Description">
+                <input required type="text" id="expense-name" class="expense-name" name="expense[description]" placeholder="Expense Description">
             </div>
             <div class="formDiv">
                 <span> Enter Total Bill Amount </span>
-                <input required type="float" id="expense-amount" class="expense-amount"  name="amount" placeholder="Enter Amount">
+                <input required type="float" id="expense-amount" class="expense-amount"  name="expense[amount]" placeholder="Enter Amount">
             </div>
             <div class="formDiv">
               <div> <span> Select People</span> </div>

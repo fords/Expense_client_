@@ -8,15 +8,19 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
+  // ui.getAllPersonSuccess()
+  show(event)
 }
 
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.people.push(data.name)
+  api.createPerson(data)
+    .then(ui.createPersonSuccess)
+    // .then(store.people.push(data.person.name))
+    .then(() => show(event))
+    .catch(ui.createPersonFailure)
   // console.log(store.people)
-  document.getElementById('addPerson-form-add').reset()
-  show(event)
 }
 
 const onAddExpenseForm = function (event) {
@@ -33,8 +37,8 @@ const onAddExpenseForm = function (event) {
   document.getElementById('addExpense').reset()
   // document.getElementById('expense-amount2').reset()
   store.selectedPeople = temp
-  store.description.push(data.description)
-  store.totalAmount.push(data.amount)
+  store.description.push(data.expense.description)
+  store.totalAmount.push(data.expense.amount)
   store.listpeople_with_index.push(temp)
   // console.log(store.description)
   show(event)
@@ -58,33 +62,10 @@ const onAddExpenseTop = function (event) {
 
 const show = function (event) {
   // show person name
-  $('.person-show ul')[0].innerHTML = ''
-  for (let i = 0; i < store.people.length; i++) {
-    // console.log(i)
-    const listElement = document.createElement('LI')
-    const name = document.createElement('span')
-    const div = document.createElement('div')
-    const div2 = document.createElement('div')
-    name.append(document.createTextNode(store.people[i]))
-    // console.log(store.people[i])
-    const editName = document.createElement('a')
-    editName.href = 'javascript:;'
-    editName.addEventListener('click', onEditName)
-    // editName.append(<div>)
-    editName.appendChild(document.createTextNode('Edit'))
-    // editName.append(</div>)
-    const deleteName = document.createElement('a')
-    deleteName.href = 'javascript:;'
-    deleteName.addEventListener('click', onDeleteName)
-    deleteName.appendChild(document.createTextNode('Delete'))
-    listElement.append(name)
-    listElement.append(div)
-    listElement.append(editName)
-    listElement.append(div2)
-    listElement.append(deleteName)
-    listElement.setAttribute('data-attr', i)
-    $('.person-show  ul')[0].appendChild(listElement)
-  }
+  const data = getFormFields(event.target)
+  api.getAllPerson(data)
+    .then(ui.getAllPersonSuccess)
+    .catch(ui.getAllPersonFailure)
 
   // show the expense
   $('.expense-show ul')[0].innerHTML = ''
@@ -126,6 +107,11 @@ const show = function (event) {
 }
 
 const onEditExpense = function (event) {
+  const data = getFormFields(event.target)
+  api.updatePerson(data)
+    .then(ui.updatePersonSuccess)
+    .catch(ui.updatePersonFailure)
+
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').show()
@@ -150,8 +136,8 @@ const onEditExpense = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.description[store.index_expense] = data.description
-  store.totalAmount[store.index_expense] = data.amount
+  store.description[store.index_expense] = data.expense.description
+  store.totalAmount[store.index_expense] = data.expense.amount
   const temp = []
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
@@ -180,8 +166,11 @@ const onDeleteName = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
-  store.index_person = i
-  store.people.splice(i, 1)
+  api.deletePerson(i)
+    .then(ui.deletePersonSuccess)
+    // .then(store.index_person = i)
+    .then(() => store.people.splice(i, 1))
+    .catch(ui.deletePersonFailure)
   show(event)
 }
 
@@ -199,7 +188,7 @@ const onEditName = function (event) {
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.people[store.index_person] = data.name
+  store.people[store.index_person] = data.person.name
   show(event)
   document.getElementById('add-person-form-save').reset()
   $('.addPerson-panel').show()
@@ -222,5 +211,7 @@ const addHandlers = () => {
 }
 
 module.exports = {
-  addHandlers
+  addHandlers,
+  onDeleteName,
+  onEditName
 }
