@@ -3,31 +3,36 @@ const store = require('../../store.js')
 
 const signUpSuccess = function (data) {
   $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').text('Signed up successfully!!')
+  $('#feedbackOnAction').show().text('Signed up successfully!!')
   $('#sign-up')[0].reset()
+  $('#feedbackOnAction').fadeOut(5000)
   // console.log(' sign up success')
 }
 
 const signInSuccess = function (data) {
   store.user = data.user
   $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').text('Signed in successfully!!')
+  $('#feedbackOnAction').show().text('Signed in successfully!!')
+  $('#feedbackOnAction').fadeOut(5000)
 }
 
 const signOutSuccess = function () {
   $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').text('Signed out successfully!!')
+  $('#feedbackOnAction').show().text('Signed out successfully!!')
+  $('#feedbackOnAction').fadeOut(5000)
 }
 
 const changePasswordSuccess = function (data) {
   $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').text('Password changed successfully!!')
+  $('#feedbackOnAction').show().text('Password changed successfully!!')
   $('#change-password')[0].reset()
+  $('#feedbackOnAction').fadeOut(5000)
 }
 
 const failure = function () {
   $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').text('Error!!!')
+  $('#feedbackOnAction').show().text('Error!!!')
+  $('#feedbackOnAction').fadeOut(5000)
 }
 
 module.exports = {
