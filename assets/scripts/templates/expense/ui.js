@@ -52,6 +52,8 @@ const getAllPersonSuccess = data => {
     listElement.append(div2)
     listElement.append(deleteName)
     listElement.setAttribute('data-attr', data.persons[i]._id)
+    listElement.setAttribute('data-indx', i)
+    listElement.setAttribute('data-name', data.persons[i].name)
     $('.person-show  ul')[0].appendChild(listElement)
   }
 }
@@ -63,13 +65,13 @@ const getAllPersonFailure = () => {
 
 const onEditName = function (event) {
   event.preventDefault()
-  // const data = getFormFields(this)
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  store.index_person = i
+  // const data = getFormFields(event)
+  const i = event.target.parentNode
+  const name = i.getAttribute('data-name')
+  store.id_person = i.getAttribute('data-attr')
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').show()
-  $('#person-form-save')[0].placeholder = store.people[i]
+  $('#person-form-save')[0].placeholder = name
 }
 
 const onDeleteName = function (event) {
@@ -83,7 +85,15 @@ const onDeleteName = function (event) {
     .then(() => show(event))
     .catch(deletePersonFailure)
 }
+const updatePersonSuccess = () => {
+  $('#feedbackOnAction').show().text('Updated a person')
+  $('#feedbackOnAction').fadeOut(5000)
+}
 
+const updatePersonFailure = () => {
+  $('#feedbackOnAction').show().text('Could not update a person')
+  $('#feedbackOnAction').fadeOut(5000)
+}
 const show = function (event) {
   // show person name
   const data = getFormFields(event.target)
@@ -98,6 +108,7 @@ module.exports = {
   deletePersonSuccess,
   deletePersonFailure,
   getAllPersonSuccess,
-  getAllPersonFailure
-
+  getAllPersonFailure,
+  updatePersonSuccess,
+  updatePersonFailure
 }

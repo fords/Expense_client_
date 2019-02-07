@@ -108,9 +108,9 @@ const show = function (event) {
 
 const onEditExpense = function (event) {
   const data = getFormFields(event.target)
-  api.updatePerson(data)
-    .then(ui.updatePersonSuccess)
-    .catch(ui.updatePersonFailure)
+  // api.updatePerson(data)
+  //   .then(ui.updatePersonSuccess)
+  //   .catch(ui.updatePersonFailure)
 
   event.preventDefault()
   $('.addExpense').hide()
@@ -162,38 +162,48 @@ const onDeleteExpense = function (event) {
   show(event)
 }
 
-const onDeleteName = function (event) {
-  event.preventDefault()
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  api.deletePerson(i)
-    .then(ui.deletePersonSuccess)
-    // .then(store.index_person = i)
-    .then(() => store.people.splice(i, 1))
-    .catch(ui.deletePersonFailure)
-  show(event)
-}
+// const onDeleteName = function (event) {
+//   event.preventDefault()
+//   let i = event.target.parentNode
+//   i = i.getAttribute('data-attr')
+//   api.deletePerson(i)
+//     .then(ui.deletePersonSuccess)
+//     // .then(store.index_person = i)
+//     .then(() => store.people.splice(i, 1))
+//     .catch(ui.deletePersonFailure)
+//   show(event)
+// }
 
-const onEditName = function (event) {
-  event.preventDefault()
-  // const data = getFormFields(this)
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  store.index_person = i
-  $('.addPerson-panel').hide()
-  $('.addPerson-panel-save').show()
-  $('#person-form-save')[0].placeholder = store.people[i]
-}
+// const onEditName = function (event) {
+//   event.preventDefault()
+//   // const data = getFormFields(this)
+//   let i = event.target.parentNode
+//   console.log(' i is ')
+//   console.log(i)
+//   i = i.getAttribute('data-attr')
+//   store.index_person = i
+//   $('.addPerson-panel').hide()
+//   $('.addPerson-panel-save').show()
+//   $('#person-form-save')[0].placeholder = store.people[i]
+// }
 
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.people[store.index_person] = data.person.name
-  show(event)
+  // console.log(data)
+  // let i = event.target.parentNode
+  // i = i.getAttribute('data-attr')
+  api.updatePerson(store.id_person, data)
+    .then(ui.updatePersonSuccess)
+    .then(() => show(event))
+    .catch(ui.updatePersonFailure)
+  // store.people[store.index_person] = data.person.name
+
   document.getElementById('add-person-form-save').reset()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
 }
+
 const addHandlers = () => {
   // $('#sign-up').on('submit', onSignUp)
   $('.addPerson').hide()
@@ -211,7 +221,7 @@ const addHandlers = () => {
 }
 
 module.exports = {
-  addHandlers,
-  onDeleteName,
-  onEditName
+  addHandlers
+  // onDeleteName,
+  // onEditName
 }
