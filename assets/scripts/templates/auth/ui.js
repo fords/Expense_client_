@@ -22,7 +22,9 @@ const signInSuccess = function (data) {
   $('.addExpense-save').hide()
   $('.buttons').show()
   $('.show').show()
+  $('#authorizationModal').modal('hide')
   $('#sign-up-button').hide()
+  $('#options-button').show()
   // $('.').hide()
 }
 
@@ -38,6 +40,9 @@ const signOutSuccess = function () {
   $('.addPerson-panel-save').hide()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
+  $('#sign-up-button').show()
+  $('#optionsModal').modal('hide')
+  $('#options-button').hide()
 }
 
 const changePasswordSuccess = function (data) {

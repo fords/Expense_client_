@@ -229,6 +229,7 @@ const addHandlers = () => {
   $('.addExpense-save').hide()
   $('.buttons').hide()
   $('.show').hide()
+  $('#options-button').hide()
 }
 
 module.exports = {
