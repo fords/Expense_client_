@@ -28,33 +28,37 @@ const deletePersonFailure = () => {
 
 const getAllPersonSuccess = data => {
   $('.person-show ul')[0].innerHTML = ''
+
   for (let i = 0; i < data.persons.length; i++) {
     // console.log(data)
-    const listElement = document.createElement('LI')
-    const name = document.createElement('span')
-    const div = document.createElement('div')
-    const div2 = document.createElement('div')
-    name.append(document.createTextNode(data.persons[i].name))
-    // console.log(store.people[i])
-    const editName = document.createElement('a')
-    editName.href = 'javascript:;'
-    editName.addEventListener('click', onEditName)
-    // editName.append(<div>)
-    editName.appendChild(document.createTextNode('Edit'))
-    // editName.append(</div>)
-    const deleteName = document.createElement('a')
-    deleteName.href = 'javascript:;'
-    deleteName.addEventListener('click', onDeleteName)
-    deleteName.appendChild(document.createTextNode('Delete'))
-    listElement.append(name)
-    listElement.append(div)
-    listElement.append(editName)
-    listElement.append(div2)
-    listElement.append(deleteName)
-    listElement.setAttribute('data-attr', data.persons[i]._id)
-    listElement.setAttribute('data-indx', i)
-    listElement.setAttribute('data-name', data.persons[i].name)
-    $('.person-show  ul')[0].appendChild(listElement)
+    if (data.persons[i].owner !== store.user._id) {
+    } else {
+      const listElement = document.createElement('LI')
+      const name = document.createElement('span')
+      const div = document.createElement('div')
+      const div2 = document.createElement('div')
+      name.append(document.createTextNode(data.persons[i].name))
+      // console.log(store.people[i])
+      const editName = document.createElement('a')
+      editName.href = 'javascript:;'
+      editName.addEventListener('click', onEditName)
+      // editName.append(<div>)
+      editName.appendChild(document.createTextNode('Edit'))
+      // editName.append(</div>)
+      const deleteName = document.createElement('a')
+      deleteName.href = 'javascript:;'
+      deleteName.addEventListener('click', onDeleteName)
+      deleteName.appendChild(document.createTextNode('Delete'))
+      listElement.append(name)
+      listElement.append(div)
+      listElement.append(editName)
+      listElement.append(div2)
+      listElement.append(deleteName)
+      listElement.setAttribute('data-attr', data.persons[i]._id)
+      listElement.setAttribute('data-indx', i)
+      listElement.setAttribute('data-name', data.persons[i].name)
+      $('.person-show  ul')[0].appendChild(listElement)
+    }
   }
 }
 

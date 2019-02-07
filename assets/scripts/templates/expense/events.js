@@ -17,15 +17,12 @@ const onAddPersonForm = function (event) {
   const data = getFormFields(this)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
-    // .then(store.people.push(data.person.name))
     .then(() => show(event))
     .catch(ui.createPersonFailure)
-  // console.log(store.people)
 }
 
 const onAddExpenseForm = function (event) {
   event.preventDefault()
-  // console.log("in add expense button")
   const data = getFormFields(this)
   // console.log(data.description)
   const temp = []
