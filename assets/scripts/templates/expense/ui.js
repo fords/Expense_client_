@@ -4,11 +4,21 @@ const store = require('../../store.js')
 // const events = require('./events.js')
 const api = require('./api.js')
 const createPersonSuccess = data => {
-  store.people.push(data.person.name)
+  // store.people.push(data.person.name)
   // console.log(store.people)
-  document.getElementById('addPerson-form-add').reset()
+  // console.log(data)
   $('#feedbackOnAction').show().text('Added a person')
   $('#feedbackOnAction').fadeOut(5000)
+  // $('#listPeople')[0].innerHTML = ''
+  // for (let i = 0; i < data.persons.length; i++) {
+  //   const options = document.createElement('option')
+  //   console.log(data.persons[i].name)
+  //   options.value = data.persons[i].name
+  //   options.text = data.persons[i].name
+  //   console.log(options.text)
+  //   $('#listPeople')[0].appendChild(options)
+  // }
+  document.getElementById('addPerson-form-add').reset()
 }
 
 const createPersonFailure = () => {

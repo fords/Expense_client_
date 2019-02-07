@@ -46,17 +46,35 @@ const onAddExpenseTop = function (event) {
   $('.addPerson').hide()
   $('.addExpense-save').hide()
   event.preventDefault()
-  $('#listPeople')[0].innerHTML = ''
-  for (let i = 0; i < store.people.length; i++) {
-    const options = document.createElement('option')
-    options.value = store.people[i]
-    options.text = store.people[i]
-    $('#listPeople')[0].appendChild(options)
-  }
-
+  const data = getFormFields(this)
+  api.getAllPerson(data)
+    .then((data) => fieldVal(data))
+  // console.log(option_val)
+  // $('#listPeople')[0].innerHTML = ''
+  // for (let i = 0; i < data.persons.length; i++) {
+  //   const options = document.createElement('option')
+  //   console.log(data.persons[i].name)
+  //   options.value = data.persons[i].name
+  //   options.text = data.persons[i].name
+  //   console.log(options.text)
+  //   $('#listPeople')[0].appendChild(options)
+  // }
   // console.log(data)
 }
-
+const fieldVal = data => {
+  $('#listPeople')[0].innerHTML = ''
+  for (let i = 0; i < data.persons.length; i++) {
+    if (data.persons[i].owner !== store.user._id) {
+    } else {
+      const options = document.createElement('option')
+      // console.log(data.persons[i].name)
+      options.value = data.persons[i].name
+      options.text = data.persons[i].name
+      // console.log(options.text)
+      $('#listPeople')[0].appendChild(options)
+    }
+  }
+}
 const show = function (event) {
   // show person name
   const data = getFormFields(event.target)
@@ -204,10 +222,12 @@ const onAddPersonFormSave = function (event) {
 const addHandlers = () => {
   // $('#sign-up').on('submit', onSignUp)
   $('.addPerson').show()
-  $('.addExpense').hide()
+  // $('.addExpense').hide()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
   $('.addExpense').hide()
+  // show(event)
+  // $('.addExpense').show()
   $('.addExpense-save').hide()
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)

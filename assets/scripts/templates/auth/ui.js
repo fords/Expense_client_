@@ -13,6 +13,7 @@ const signInSuccess = function (data) {
   store.user = data.user
   $('#feedbackOnAction').html(' ')
   $('#feedbackOnAction').show().text('Signed in successfully!!')
+  $('#sign-in')[0].reset()
   $('#feedbackOnAction').fadeOut(5000)
 }
 
