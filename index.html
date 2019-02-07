@@ -15,7 +15,7 @@
     <body>
 
       <h1>Expense</h1>
-      <div class='signInUp'>
+      <!-- <div class='signInUp'>
       <div id="signUp">
         <form id="sign-up">
           <fieldset>
@@ -50,8 +50,67 @@
               <input type="password" name="passwords[old]" placeholder="Old Password"><br>
               <input type="password" name="passwords[new]" placeholder="New Password"><br>
               <input type="submit" value="Change Password">
-      </form>
+      </form> -->
+    <div class="btn-toolbar justify-content-between" role="toolbar">
+    <div class='table'>
+      <div class='cell'>
+        <div class="btn-group" role="group" aria-label="auth-group">
+        <!-- Sign Up/In Modal-->
+          <button type="button" id="sign-up-button" class="btn btn-primary" data-toggle="modal"
+            data-target="#authorizationModal">Sign Up/In</button>
 
+            <div class="modal fade" id="authorizationModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                    <h5 class="modal-title" id="authorizationModalLabel">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <!--token-auth training-->
+                    <p id="up-message"></p>
+
+                    <form id="sign-up">
+                      <div class="form-group">
+                        <input class="form-control" type="email" name="credentials[email]" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="password" name="credentials[password]"
+                         placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="password" name="credentials[password_confirmation]"
+                         placeholder="Confirm Password">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Sign Up!</button>
+                    </form>
+                    <hr><hr>
+
+                    <h5 class="modal-title" id="authorizationModalLabel">Sign In</h5>
+                    <hr><br>
+                    <form id="sign-in"> <!--id of form is used-->
+                      <div class="form-group">
+                        <input class="form-control" type="email" name="credentials[email]" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="password" name="credentials[password]"
+                       placeholder="Password">
+                     </div>
+                      <button type="submit" class="btn btn-primary">Sign In</button>
+                    </form>
+                    <!--token-auth training-->
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      </div>
+      </div>
+    </div>
+  </div>
       <div  id='feedbackOnAction'> <br> </div>
 
       <div class = buttons>
@@ -119,11 +178,11 @@
       </div>
 
       <div class="show">
-        <div style="float: left ; margin-left: 3%;" class="expense-show">
+        <div style="float: left ; margin-left: 3%; margin-right: 20px;" class="expense-show">
           <h1>Expense</h1>
           <ul> </ul>
         </div>
-        <div style="float: right; margin-right: 30%" class="person-show">
+        <div style="float: right; margin-right: 30%; margin-left: 10px;" class="person-show">
           <h1>People</h1>
           <ul> </ul>
         </div>
