@@ -17,15 +17,12 @@ const onAddPersonForm = function (event) {
   const data = getFormFields(this)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
-    // .then(store.people.push(data.person.name))
     .then(() => show(event))
     .catch(ui.createPersonFailure)
-  // console.log(store.people)
 }
 
 const onAddExpenseForm = function (event) {
   event.preventDefault()
-  // console.log("in add expense button")
   const data = getFormFields(this)
   // console.log(data.description)
   const temp = []
@@ -49,15 +46,25 @@ const onAddExpenseTop = function (event) {
   $('.addPerson').hide()
   $('.addExpense-save').hide()
   event.preventDefault()
-  $('#listPeople')[0].innerHTML = ''
-  for (let i = 0; i < store.people.length; i++) {
-    const options = document.createElement('option')
-    options.value = store.people[i]
-    options.text = store.people[i]
-    $('#listPeople')[0].appendChild(options)
-  }
+  const data = getFormFields(this)
+  api.getAllPerson(data)
+    .then((data) => fieldVal(data))
+  show(event)
+}
 
-  // console.log(data)
+const fieldVal = data => {
+  $('#listPeople')[0].innerHTML = ''
+  for (let i = 0; i < data.persons.length; i++) {
+    if (data.persons[i].owner !== store.user._id) {
+    } else {
+      const options = document.createElement('option')
+      // console.log(data.persons[i].name)
+      options.value = data.persons[i].name
+      options.text = data.persons[i].name
+      // console.log(options.text)
+      $('#listPeople')[0].appendChild(options)
+    }
+  }
 }
 
 const show = function (event) {
@@ -108,9 +115,9 @@ const show = function (event) {
 
 const onEditExpense = function (event) {
   const data = getFormFields(event.target)
-  api.updatePerson(data)
-    .then(ui.updatePersonSuccess)
-    .catch(ui.updatePersonFailure)
+  // api.updatePerson(data)
+  //   .then(ui.updatePersonSuccess)
+  //   .catch(ui.updatePersonFailure)
 
   event.preventDefault()
   $('.addExpense').hide()
@@ -151,6 +158,7 @@ const onAddExpenseFormSave = function (event) {
   show(event)
   // document.getElementById('expense-amount').reset()
 }
+
 const onDeleteExpense = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
@@ -162,56 +170,70 @@ const onDeleteExpense = function (event) {
   show(event)
 }
 
-const onDeleteName = function (event) {
-  event.preventDefault()
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  api.deletePerson(i)
-    .then(ui.deletePersonSuccess)
-    // .then(store.index_person = i)
-    .then(() => store.people.splice(i, 1))
-    .catch(ui.deletePersonFailure)
-  show(event)
-}
+// const onDeleteName = function (event) {
+//   event.preventDefault()
+//   let i = event.target.parentNode
+//   i = i.getAttribute('data-attr')
+//   api.deletePerson(i)
+//     .then(ui.deletePersonSuccess)
+//     // .then(store.index_person = i)
+//     .then(() => store.people.splice(i, 1))
+//     .catch(ui.deletePersonFailure)
+//   show(event)
+// }
 
-const onEditName = function (event) {
-  event.preventDefault()
-  // const data = getFormFields(this)
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  store.index_person = i
-  $('.addPerson-panel').hide()
-  $('.addPerson-panel-save').show()
-  $('#person-form-save')[0].placeholder = store.people[i]
-}
+// const onEditName = function (event) {
+//   event.preventDefault()
+//   // const data = getFormFields(this)
+//   let i = event.target.parentNode
+//   console.log(' i is ')
+//   console.log(i)
+//   i = i.getAttribute('data-attr')
+//   store.index_person = i
+//   $('.addPerson-panel').hide()
+//   $('.addPerson-panel-save').show()
+//   $('#person-form-save')[0].placeholder = store.people[i]
+// }
 
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.people[store.index_person] = data.person.name
-  show(event)
+  // console.log(data)
+  // let i = event.target.parentNode
+  // i = i.getAttribute('data-attr')
+  api.updatePerson(store.id_person, data)
+    .then(ui.updatePersonSuccess)
+    .then(() => show(event))
+    .catch(ui.updatePersonFailure)
+  // store.people[store.index_person] = data.person.name
+
   document.getElementById('add-person-form-save').reset()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
 }
+
 const addHandlers = () => {
   // $('#sign-up').on('submit', onSignUp)
-  $('.addPerson').hide()
-  $('.addExpense').hide()
-  $('.addPerson-panel').show()
-  $('.addPerson-panel-save').hide()
-  $('.addExpense').show()
-  $('.addExpense-save').hide()
+
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
   $('#addExpense').on('submit', onAddExpenseForm)
   $('#add-expense-form-save').on('submit', onAddExpenseFormSave)
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
+
+  $('.addPerson').hide()
+  $('.addPerson-panel').hide()
+  $('.addPerson-panel-save').hide()
+  $('.addExpense').hide()
+  $('.addExpense-save').hide()
+  $('.buttons').hide()
+  $('.show').hide()
+  $('#options-button').hide()
 }
 
 module.exports = {
-  addHandlers,
-  onDeleteName,
-  onEditName
+  addHandlers
+  // onDeleteName,
+  // onEditName
 }
