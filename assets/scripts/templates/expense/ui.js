@@ -63,7 +63,7 @@ const getAllPersonSuccess = data => {
 }
 
 const getAllPersonFailure = () => {
-  $('#feedbackOnAction').show().text('Could not delete person')
+  $('#feedbackOnAction').show().text('Could not get person')
   $('#feedbackOnAction').fadeOut(5000)
 }
 

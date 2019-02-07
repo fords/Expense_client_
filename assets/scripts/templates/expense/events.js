@@ -203,11 +203,11 @@ const onAddPersonFormSave = function (event) {
 
 const addHandlers = () => {
   // $('#sign-up').on('submit', onSignUp)
-  $('.addPerson').hide()
+  $('.addPerson').show()
   $('.addExpense').hide()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
-  $('.addExpense').show()
+  $('.addExpense').hide()
   $('.addExpense-save').hide()
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
