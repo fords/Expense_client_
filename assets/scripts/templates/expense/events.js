@@ -61,7 +61,6 @@ const fieldVal = data => {
       // console.log(data.persons[i].name)
       options.value = data.persons[i].name
       options.text = data.persons[i].name
-      // console.log(options.text)
       $('#listPeople')[0].appendChild(options)
     }
   }

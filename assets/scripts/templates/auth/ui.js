@@ -54,8 +54,16 @@ const changePasswordSuccess = function (data) {
 
 const failure = function () {
   $('#feedbackOnAction').html(' ')
+  $('#up-message').html('')
+  $('#up-message').show().text('Error !!!')
+  $('#up-message').removeClass()
+  $('#out-message').html('')
+  $('#out-message').show().text('Error !!!')
+  $('#out-message').removeClass()
   $('#feedbackOnAction').show().text('Error!!!')
   $('#feedbackOnAction').fadeOut(5000)
+  $('#up-message').fadeOut(5000)
+  $('#out-message').fadeOut(5000)
 }
 
 module.exports = {
