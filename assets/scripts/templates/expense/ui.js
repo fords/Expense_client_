@@ -110,14 +110,104 @@ const updatePersonFailure = () => {
   $('#feedbackOnAction').fadeOut(5000)
 }
 const createExpenseSuccess = data => {
-  $('#feedbackOnAction').show().text('Added an expense')
+  $('#feedbackOnAction').show().text('Created an expense')
   $('#feedbackOnAction').fadeOut(5000)
   document.getElementById('addExpense').reset()
 }
 
 const createExpenseFailure = data => {
-  $('#feedbackOnAction').show().text('could not create an expense ')
+  $('#feedbackOnAction').show().text('Could not create an expense ')
   $('#feedbackOnAction').fadeOut(5000)
+}
+
+const getAllExpenseSuccess = data => {
+  $('#feedbackOnAction').show().text('Get all expense')
+  $('#feedbackOnAction').fadeOut(5000)
+  $('.expense-show ul')[0].innerHTML = ''
+
+  // console.log(data)
+  // console.log('show')
+  for (let i = 0; i < data.expenses.length; i++) {
+    // console.log("i", i)
+    // console.log(store.listpeople_with_index[i])
+    const listElement2 = document.createElement('LI')
+    // const description = document.createElement('span')
+    const div4 = document.createElement('div')
+    const name2 = document.createElement('span')
+    // const div5 = document.createElement('div')
+    name2.append(document.createTextNode(data.expenses[i].description))
+    // console.log(data.expenses[i].description)
+    const h3 = document.createElement('h3')
+
+    const editExpense = document.createElement('a')
+    editExpense.href = 'javascript:;'
+    editExpense.addEventListener('click', onEditExpense)
+    editExpense.appendChild(document.createTextNode('Edit'))
+    const deleteExpense = document.createElement('a')
+    deleteExpense.href = 'javascript:;'
+    deleteExpense.addEventListener('click', onDeleteExpense)
+    deleteExpense.appendChild(document.createTextNode('Delete'))
+    h3.append(name2)
+    listElement2.append(h3)
+    listElement2.append(div4)
+    for (let j = 0; j < data.expenses[i].payments.length; j++) {
+      listElement2.append(data.expenses[i].payments[j].person)
+      // console.log(data.expenses[i].payments)
+      listElement2.append(' would pay ', data.expenses[i].amount / data.expenses[i].payments.length)
+      const div3 = document.createElement('div')
+      listElement2.append(div3)
+      // console.log(store.listpeople_with_index[i][j])
+    }
+
+    listElement2.append(editExpense)
+    listElement2.append(div4)
+    listElement2.append(deleteExpense)
+    listElement2.setAttribute('data-attr', i)
+    $('.expense-show  ul')[0].appendChild(listElement2)
+  }
+}
+
+const getAllExpenseFailure = data => {
+  $('#feedbackOnAction').show().text('Could not get/show expense')
+  $('#feedbackOnAction').fadeOut(5000)
+}
+
+const onEditExpense = function (event) {
+  const data = getFormFields(event.target)
+  // api.updatePerson(data)
+  //   .then(ui.updatePersonSuccess)
+  //   .catch(ui.updatePersonFailure)
+
+  event.preventDefault()
+  $('.addExpense').hide()
+  $('.addExpense-save').show()
+  $('#listPeople2')[0].innerHTML = ''
+  for (let i = 0; i < store.people.length; i++) {
+    const options = document.createElement('option')
+    options.value = store.people[i]
+    options.text = store.people[i].name
+    $('#listPeople2')[0].appendChild(options)
+  }
+  // const data = getFormFields(this)
+  let i = event.target.parentNode
+  i = i.getAttribute('data-attr')
+  // console.log(i)
+  store.index_expense = i
+  $('#expense-name')[0].placeholder = store.description[store.index_expense]
+  $('#expense-amount')[0].placeholder = store.totalAmount[store.index_expense]
+  // console.log(store.people[i])
+  // $('#person-form-save')[0].placeholder = store.people[i]
+}
+
+const onDeleteExpense = function (event) {
+  event.preventDefault()
+  let i = event.target.parentNode
+  i = i.getAttribute('data-attr')
+  store.index_person = i
+  store.description.splice(i, 1)
+  store.totalAmount.splice(i, 1)
+  store.listpeople_with_index.splice(i, 1)
+  show(event)
 }
 
 const show = function (event) {
@@ -138,5 +228,7 @@ module.exports = {
   updatePersonSuccess,
   updatePersonFailure,
   createExpenseSuccess,
-  createExpenseFailure
+  createExpenseFailure,
+  getAllExpenseSuccess,
+  getAllExpenseFailure
 }

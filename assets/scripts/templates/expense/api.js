@@ -50,11 +50,18 @@ const createExpense = function (data) {
     data
   })
 }
+const getAllExpense = function () {
+  return $.ajax({
+    url: config.apiUrl + '/expenses',
+    method: 'GET'
+  })
+}
 
 module.exports = {
   createPerson,
   getAllPerson,
   deletePerson,
   updatePerson,
-  createExpense
+  createExpense,
+  getAllExpense
 }

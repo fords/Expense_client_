@@ -15,6 +15,7 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  console.log(data)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
@@ -26,12 +27,18 @@ const onAddExpenseForm = function (event) {
   const data = getFormFields(this)
 
   const temp = []
-  data.expense.person = []
+  // data.expense.person = []
+  console.log(data)
+  data.expense.payments = []
+  data.expense.payments.pay = 0
+  // data.expense.payments.person
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
       temp.push($('#listPeople')[0].selectedOptions[i].value)
-      data.expense.person.push(store.people[i])
+      const payment = {pay: 0.00, person: store.people[i]}
+      data.expense.payments.push(payment)
+      // console.log(data.expense.payments)
     }
   }
   // console.log('temp')
@@ -46,10 +53,12 @@ const onAddExpenseForm = function (event) {
 
   document.getElementById('addExpense').reset()
   // document.getElementById('expense-amount2').reset()
-  store.selectedPeople = temp
-  store.description.push(data.expense.description)
-  store.totalAmount.push(data.expense.amount)
-  store.listpeople_with_index.push(temp)
+
+  // store.selectedPeople = temp
+  // store.description.push(data.expense.description)
+  // store.totalAmount.push(data.expense.amount)
+  // store.listpeople_with_index.push(temp)
+
   // console.log(store.description)
   show(event)
 }
@@ -93,70 +102,37 @@ const show = function (event) {
     .catch(ui.getAllPersonFailure)
 
   // show the expense
-  $('.expense-show ul')[0].innerHTML = ''
-  const name2 = document.createElement('span')
-  // console.log('show')
-  for (let i = 0; i < store.description.length; i++) {
-    // console.log("i", i)
-    // console.log(store.listpeople_with_index[i])
-    const listElement2 = document.createElement('LI')
-    // const description = document.createElement('span')
-    const div4 = document.createElement('div')
-    // const div5 = document.createElement('div')
-    name2.append(document.createTextNode(store.people[i]))
-    const h3 = document.createElement('h3')
-
-    const editExpense = document.createElement('a')
-    editExpense.href = 'javascript:;'
-    editExpense.addEventListener('click', onEditExpense)
-    editExpense.appendChild(document.createTextNode('Edit'))
-    const deleteExpense = document.createElement('a')
-    deleteExpense.href = 'javascript:;'
-    deleteExpense.addEventListener('click', onDeleteExpense)
-    deleteExpense.appendChild(document.createTextNode('Delete'))
-    h3.append(store.description[i])
-    listElement2.append(h3)
-    for (let j = 0; j < store.listpeople_with_index[i].length; j++) {
-      listElement2.append(store.listpeople_with_index[i][j])
-      listElement2.append(' would pay ', store.totalAmount[i] / store.listpeople_with_index[i].length)
-      const div3 = document.createElement('div')
-      listElement2.append(div3)
-      // console.log(store.listpeople_with_index[i][j])
-    }
-    listElement2.append(editExpense)
-    listElement2.append(div4)
-    listElement2.append(deleteExpense)
-    listElement2.setAttribute('data-attr', i)
-    $('.expense-show  ul')[0].appendChild(listElement2)
-  }
+  api.getAllExpense(data)
+    .then(ui.getAllExpenseSuccess)
+    .catch(ui.getAllExpenseFailure)
 }
 
-const onEditExpense = function (event) {
-  const data = getFormFields(event.target)
-  // api.updatePerson(data)
-  //   .then(ui.updatePersonSuccess)
-  //   .catch(ui.updatePersonFailure)
-
-  event.preventDefault()
-  $('.addExpense').hide()
-  $('.addExpense-save').show()
-  $('#listPeople2')[0].innerHTML = ''
-  for (let i = 0; i < store.people.length; i++) {
-    const options = document.createElement('option')
-    options.value = store.people[i]
-    options.text = store.people[i].name
-    $('#listPeople2')[0].appendChild(options)
-  }
-  // const data = getFormFields(this)
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  // console.log(i)
-  store.index_expense = i
-  $('#expense-name')[0].placeholder = store.description[store.index_expense]
-  $('#expense-amount')[0].placeholder = store.totalAmount[store.index_expense]
-  // console.log(store.people[i])
-  // $('#person-form-save')[0].placeholder = store.people[i]
-}
+// const onEditExpense = function (event) {
+//   const data = getFormFields(event.target)
+//   // api.updatePerson(data)
+//   //   .then(ui.updatePersonSuccess)
+//   //   .catch(ui.updatePersonFailure)
+//
+//   event.preventDefault()
+//   $('.addExpense').hide()
+//   $('.addExpense-save').show()
+//   $('#listPeople2')[0].innerHTML = ''
+//   for (let i = 0; i < store.people.length; i++) {
+//     const options = document.createElement('option')
+//     options.value = store.people[i]
+//     options.text = store.people[i].name
+//     $('#listPeople2')[0].appendChild(options)
+//   }
+//   // const data = getFormFields(this)
+//   let i = event.target.parentNode
+//   i = i.getAttribute('data-attr')
+//   // console.log(i)
+//   store.index_expense = i
+//   $('#expense-name')[0].placeholder = store.description[store.index_expense]
+//   $('#expense-amount')[0].placeholder = store.totalAmount[store.index_expense]
+//   // console.log(store.people[i])
+//   // $('#person-form-save')[0].placeholder = store.people[i]
+// }
 
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
@@ -177,16 +153,16 @@ const onAddExpenseFormSave = function (event) {
   // document.getElementById('expense-amount').reset()
 }
 
-const onDeleteExpense = function (event) {
-  event.preventDefault()
-  let i = event.target.parentNode
-  i = i.getAttribute('data-attr')
-  store.index_person = i
-  store.description.splice(i, 1)
-  store.totalAmount.splice(i, 1)
-  store.listpeople_with_index.splice(i, 1)
-  show(event)
-}
+// const onDeleteExpense = function (event) {
+//   event.preventDefault()
+//   let i = event.target.parentNode
+//   i = i.getAttribute('data-attr')
+//   store.index_person = i
+//   store.description.splice(i, 1)
+//   store.totalAmount.splice(i, 1)
+//   store.listpeople_with_index.splice(i, 1)
+//   show(event)
+// }
 
 // const onDeleteName = function (event) {
 //   event.preventDefault()
