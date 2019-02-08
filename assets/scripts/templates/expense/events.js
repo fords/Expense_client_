@@ -9,6 +9,9 @@ const onAddPersonTop = function (event) {
   $('.addExpense').hide()
   $('.addExpense-save').hide()
   // ui.getAllPersonSuccess()
+  const data = getFormFields(this)
+  api.getAllPerson(data)
+    .then((data) => fieldVal(data))
   show(event)
 }
 
@@ -19,6 +22,7 @@ const onAddPersonForm = function (event) {
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
+    // .then(() => fieldVal(data))
     .catch(ui.createPersonFailure)
 }
 
@@ -26,16 +30,16 @@ const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
 
-  const temp = []
+  // const temp = []
   // data.expense.person = []
   console.log(data)
   data.expense.payments = []
   data.expense.payments.pay = 0
   // data.expense.payments.person
+
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
-      temp.push($('#listPeople')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: store.people[i]}
       data.expense.payments.push(payment)
       // console.log(data.expense.payments)
@@ -99,23 +103,33 @@ const show = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  // console.log(data)
+  // const temp = []
+  // api.getAllPerson(data)
+  //   .then((data) => fieldVal(data))
 
-  const temp = []
+  // data = fieldVal(data)
+  // $('#listPeople')[0].innerHTML = ''
+  // add the person object selected in Add Expense option
+
   data.expense.payments = []
   data.expense.payments.pay = 0
-  $('#listPeople')[0].innerHTML = ''
+  // data.expense.payments.person
   // add the person object selected in Add Expense option
-  for (const i in $('#listPeople')[0].selectedOptions) {
-    if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
-      temp.push($('#listPeople')[0].selectedOptions[i].value)
+  for (const i in $('#listPeople2')[0].selectedOptions) {
+    // debugger
+    if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
+      // temp.push($('#listPeople')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: store.people[i]}
       data.expense.payments.push(payment)
+      // console.log(data.expense.payments)
     }
   }
+  console.log(data)
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
     .catch(ui.updateExpenseFailure)
-
+  // console.log(data)
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()

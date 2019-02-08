@@ -182,7 +182,7 @@ const getAllExpenseFailure = data => {
 }
 
 const onEditExpense = function (event) {
-  const data = getFormFields(event.target)
+  // const data = getFormFields(event.target)
   // api.updatePerson(data)
   //   .then(ui.updatePersonSuccess)
   //   .catch(ui.updatePersonFailure)
@@ -193,7 +193,7 @@ const onEditExpense = function (event) {
   $('#listPeople2')[0].innerHTML = ''
   for (let i = 0; i < store.people.length; i++) {
     const options = document.createElement('option')
-    options.value = store.people[i]
+    options.value = store.people[i]._id
     options.text = store.people[i].name
     $('#listPeople2')[0].appendChild(options)
   }
