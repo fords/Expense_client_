@@ -110,8 +110,8 @@ const createExpenseFailure = data => {
 }
 
 const getAllExpenseSuccess = data => {
-  $('#feedbackOnAction').show().text('Get all expense')
-  $('#feedbackOnAction').fadeOut(5000)
+  // $('#feedbackOnAction').show().text('Get all expense')
+  // $('#feedbackOnAction').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
   // $('.expense-show ul')[0].HTML = ''
   // console.log(data)
@@ -156,7 +156,7 @@ const getAllExpenseSuccess = data => {
             // console.log(data.expenses[i].payments)
             const owe = Math.max(0, (data.expenses[i].amount / data.expenses[i].payments.length) -
                      data.expenses[i].payments[j].pay)
-            listElement2.append(' would pay ', owe)
+            listElement2.append(' would pay ', owe.toFixed(2))
             listElement2.setAttribute('data-indx-j', j)
             const div3 = document.createElement('div')
             listElement2.append(div3)

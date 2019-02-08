@@ -33,12 +33,19 @@ form {
   width: 400px;
   padding: 10px;
   background: blue;
-  margin: 20px;
+  margin: 10px;
+}
+
+.addPerson,
+.addExpenseClass {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .formDiv {
   padding: 10px;
   margin: 10px;
+  // margin-left: 60px;
 }
 // background-color: blue;
 .person-show li,

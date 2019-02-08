@@ -81,7 +81,7 @@
       <div  id='feedbackOnAction'> <br> </div>
 
       <div class = buttons>
-        <button type="button" id="addPersonTop" class="btn">Add Person</button>
+        <button type="button" id="addPersonTop" class="btn">Show Person</button>
         <button type="button" id="addExpenseTop" class="btn">Add Expense</button>
         <button type="button" id="options-button" class="btn btn-primary" data-toggle="modal"
         data-target="#optionsModal">Options</button>
@@ -126,18 +126,20 @@
       <div class="addPerson person" >
         <form id="addPerson-form-add" class="addPerson-panel">
           <fieldset>
-            <span> Enter Person's Name </span>
-            <input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name"> <!--person[name]* -->
-            <input type="submit"class="add-person-form-button" value="ADD">
+            <p>
+            <span> Enter Person's Name </span></p>
+            <p><input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name"></p> <!--person[name]* -->
+            <p><input type="submit"class="add-person-form-button" value="ADD"></p>
             <!-- <input type="submit"class="add-person-form-save" value="SAVE"> -->
           </fieldset>
         </form>
         <form id="add-person-form-save" class="addPerson-panel-save">
           <fieldset>
-            <span> Enter Person's Name </span>
-            <input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name"> <!--person[name]* -->
+            <p>
+            <span> Enter Person's Name </span> </p>
+            <p><input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name"> </p><!--person[name]* -->
             <!-- <input type="submit"class="add-person-form-button" value="ADD"> -->
-            <input type="submit"class="add-person-form-save" value="SAVE">
+            <p><input type="submit"class="add-person-form-save" value="SAVE"></p>
           </fieldset>
         </form>
       </div>
@@ -187,7 +189,7 @@
           <h1>Expense</h1>
           <ul> </ul>
         </div>
-        <div style="float: right; margin-right: 30%; margin-left: 10px;" class="person-show">
+        <div style="float: left ; margin-left: 10px;" class="person-show">
           <h1>People</h1>
           <ul> </ul>
         </div>
