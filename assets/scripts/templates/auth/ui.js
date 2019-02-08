@@ -6,6 +6,7 @@ const signUpSuccess = function (data) {
   $('#feedbackOnAction').show().text('Signed up successfully!!')
   $('#sign-up')[0].reset()
   $('#feedbackOnAction').fadeOut(5000)
+  $('.expense-show ul')[0].innerHTML = ''
   // console.log(' sign up success')
 }
 

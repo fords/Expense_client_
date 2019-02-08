@@ -94,6 +94,8 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
+// NEED TO FIX expense table (total payment)update when person is removed
+
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -101,6 +103,7 @@ const onAddExpenseFormSave = function (event) {
   const temp = []
   data.expense.payments = []
   data.expense.payments.pay = 0
+  $('#listPeople')[0].innerHTML = ''
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
