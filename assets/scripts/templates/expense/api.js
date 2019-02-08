@@ -40,9 +40,21 @@ const updatePerson = function (personId, data) {
   })
 }
 
+const createExpense = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/expenses',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   createPerson,
   getAllPerson,
   deletePerson,
-  updatePerson
+  updatePerson,
+  createExpense
 }

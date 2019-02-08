@@ -25,6 +25,7 @@ const signInSuccess = function (data) {
   $('#authorizationModal').modal('hide')
   $('#sign-up-button').hide()
   $('#options-button').show()
+  // $('h1').hide()
   // $('.').hide()
 }
 

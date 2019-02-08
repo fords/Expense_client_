@@ -24,13 +24,26 @@ const onAddPersonForm = function (event) {
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  // console.log(data.description)
+
   const temp = []
+  data.expense.person = []
+  // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
       temp.push($('#listPeople')[0].selectedOptions[i].value)
+      data.expense.person.push(store.people[i])
     }
   }
+  // console.log('temp')
+  // console.log(temp)
+  // for each in options
+  // data.expense.person = store.people
+  // console.log(data.expense.person)
+  // console.log(data)
+  api.createExpense(data)
+    .then(ui.createExpenseSuccess)
+    .catch(ui.createExpenseFailure)
+
   document.getElementById('addExpense').reset()
   // document.getElementById('expense-amount2').reset()
   store.selectedPeople = temp
@@ -58,10 +71,16 @@ const fieldVal = data => {
     if (data.persons[i].owner !== store.user._id) {
     } else {
       const options = document.createElement('option')
-      // console.log(data.persons[i].name)
-      options.value = data.persons[i].name
+      // console.log(data.persons[i])
+      // const object = data.persons[i]
+      options.value = data.persons[i]._id // options.value = data.persons[i]._id
+      store.people.push(data.persons[i])
+      options.value = i
+      // store.people_indx.append(i)
       options.text = data.persons[i].name
+      // console.log(options)
       $('#listPeople')[0].appendChild(options)
+      // $('#listPeople')[0].appendChild(object)
     }
   }
 }
@@ -125,7 +144,7 @@ const onEditExpense = function (event) {
   for (let i = 0; i < store.people.length; i++) {
     const options = document.createElement('option')
     options.value = store.people[i]
-    options.text = store.people[i]
+    options.text = store.people[i].name
     $('#listPeople2')[0].appendChild(options)
   }
   // const data = getFormFields(this)

@@ -3,6 +3,7 @@ const getFormFields = require('../../../../lib/get-form-fields')
 const store = require('../../store.js')
 // const events = require('./events.js')
 const api = require('./api.js')
+
 const createPersonSuccess = data => {
   // store.people.push(data.person.name)
   // console.log(store.people)
@@ -108,6 +109,17 @@ const updatePersonFailure = () => {
   $('#feedbackOnAction').show().text('Could not update a person')
   $('#feedbackOnAction').fadeOut(5000)
 }
+const createExpenseSuccess = data => {
+  $('#feedbackOnAction').show().text('Added an expense')
+  $('#feedbackOnAction').fadeOut(5000)
+  document.getElementById('addExpense').reset()
+}
+
+const createExpenseFailure = data => {
+  $('#feedbackOnAction').show().text('could not create an expense ')
+  $('#feedbackOnAction').fadeOut(5000)
+}
+
 const show = function (event) {
   // show person name
   const data = getFormFields(event.target)
@@ -124,5 +136,7 @@ module.exports = {
   getAllPersonSuccess,
   getAllPersonFailure,
   updatePersonSuccess,
-  updatePersonFailure
+  updatePersonFailure,
+  createExpenseSuccess,
+  createExpenseFailure
 }
