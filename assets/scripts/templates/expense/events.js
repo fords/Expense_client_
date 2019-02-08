@@ -76,6 +76,7 @@ const onAddExpenseTop = function (event) {
 
 const fieldVal = data => {
   $('#listPeople')[0].innerHTML = ''
+  store.people = []
   for (let i = 0; i < data.persons.length; i++) {
     if (data.persons[i].owner !== store.user._id) {
     } else {

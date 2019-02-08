@@ -124,7 +124,7 @@ const getAllExpenseSuccess = data => {
   $('#feedbackOnAction').show().text('Get all expense')
   $('#feedbackOnAction').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
-
+  $('.expense-show ul')[0].HTML = ''
   // console.log(data)
   // console.log('show')
   for (let i = 0; i < data.expenses.length; i++) {
@@ -138,7 +138,10 @@ const getAllExpenseSuccess = data => {
     name2.append(document.createTextNode(data.expenses[i].description))
     // console.log(data.expenses[i].description)
     const h3 = document.createElement('h3')
-
+    // store.people.forEach(function (entry) {
+    //   console.log(entry)
+    // })
+    // console.log(store.people[i]._id)
     const editExpense = document.createElement('a')
     editExpense.href = 'javascript:;'
     editExpense.addEventListener('click', onEditExpense)
@@ -151,11 +154,19 @@ const getAllExpenseSuccess = data => {
     listElement2.append(h3)
     listElement2.append(div4)
     for (let j = 0; j < data.expenses[i].payments.length; j++) {
-      listElement2.append(data.expenses[i].payments[j].person)
-      // console.log(data.expenses[i].payments)
-      listElement2.append(' would pay ', data.expenses[i].amount / data.expenses[i].payments.length)
-      const div3 = document.createElement('div')
-      listElement2.append(div3)
+      store.people.forEach(function (entry) {
+        // console.log(' in entry')
+        // console.log(entry._id)
+        // console.log('in db')
+        // console.log(data.expenses[i].payments[j].person)
+        if (entry._id === data.expenses[i].payments[j].person) {
+          listElement2.append(entry.name)
+          // console.log(data.expenses[i].payments)
+          listElement2.append(' would pay ', data.expenses[i].amount / data.expenses[i].payments.length)
+          const div3 = document.createElement('div')
+          listElement2.append(div3)
+        }
+      })
       // console.log(store.listpeople_with_index[i][j])
     }
 
