@@ -57,11 +57,22 @@ const getAllExpense = function () {
   })
 }
 
+const deleteExpense = function (expenseId) {
+  return $.ajax({
+    url: config.apiUrl + '/expenses/' + expenseId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   createPerson,
   getAllPerson,
   deletePerson,
   updatePerson,
   createExpense,
-  getAllExpense
+  getAllExpense,
+  deleteExpense
 }
