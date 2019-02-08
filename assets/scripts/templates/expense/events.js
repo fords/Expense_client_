@@ -8,7 +8,6 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
-  // ui.getAllPersonSuccess()
   const data = getFormFields(this)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
@@ -18,31 +17,23 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  // console.log(data)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
-    // .then(() => fieldVal(data))
     .catch(ui.createPersonFailure)
 }
 
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-
-  // const temp = []
-  // data.expense.person = []
-  console.log(data)
   data.expense.payments = []
   data.expense.payments.pay = 0
-  // data.expense.payments.person
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
       const payment = {pay: 0.00, person: store.people[i]}
       data.expense.payments.push(payment)
-      // console.log(data.expense.payments)
     }
   }
   api.createExpense(data)
@@ -71,16 +62,11 @@ const fieldVal = data => {
     if (data.persons[i].owner !== store.user._id) {
     } else {
       const options = document.createElement('option')
-      // console.log(data.persons[i])
-      // const object = data.persons[i]
-      options.value = data.persons[i]._id // options.value = data.persons[i]._id
+      options.value = data.persons[i]._id
       store.people.push(data.persons[i])
       options.value = i
-      // store.people_indx.append(i)
       options.text = data.persons[i].name
-      // console.log(options)
       $('#listPeople')[0].appendChild(options)
-      // $('#listPeople')[0].appendChild(object)
     }
   }
 }
@@ -103,20 +89,15 @@ const show = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-
-  // $('#listPeople')[0].innerHTML = ''
-  // add the person object selected in Add Expense option
   data.expense.payments = []
   data.expense.payments.pay = 0
-  // data.expense.payments.person
+
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     // debugger
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
-      // temp.push($('#listPeople')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: store.people[i]}
       data.expense.payments.push(payment)
-      // console.log(data.expense.payments)
     }
   }
   console.log(data)
@@ -124,7 +105,7 @@ const onAddExpenseFormSave = function (event) {
     .then(ui.updateExpenseSuccess)
     .then(() => show(event))
     .catch(ui.updateExpenseFailure)
-  // console.log(data)
+
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
