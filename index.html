@@ -15,42 +15,7 @@
     <body>
 
       <h1>Expense Track</h1>
-      <!-- <div class='signInUp'>
-      <div id="signUp">
-        <form id="sign-up">
-          <fieldset>
-            <h2>Sign Up Here</h2>
-            <input type="email" name="credentials[email]" placeholder="Email"><br>
-            <input type="password" name="credentials[password]" placeholder="Password"><br>
-            <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password"><br>
-            <input type="submit" value="Sign Up">
-          </fieldset>
-        </form>
-      </div>
 
-      <div id="signIn">
-          <form id="sign-in">
-              <fieldset>
-                <h2>Sign In Here</h2>
-                <input type="text" name="credentials[email]" placeholder="Email"><br>
-                <input type="password" name="credentials[password]" placeholder="Password"><br>
-                <input type="submit" value="Sign In">
-              </fieldset>
-          </form>
-        </div>
-      </div>
-
-      <form id="sign-out">
-            <input type="submit" class='button' value="Sign Out">
-      </form>
-
-      <form id="change-password">
-              <br>
-              <h3>Change Password</h3>
-              <input type="password" name="passwords[old]" placeholder="Old Password"><br>
-              <input type="password" name="passwords[new]" placeholder="New Password"><br>
-              <input type="submit" value="Change Password">
-      </form> -->
     <div class="btn-toolbar justify-content-between" role="toolbar">
     <div class='table'>
       <div class='cell'>
@@ -116,8 +81,8 @@
       <div  id='feedbackOnAction'> <br> </div>
 
       <div class = buttons>
-        <button type="button" id="addPersonTop" class="btn">Add Person</button>
-        <button type="button" id="addExpenseTop" class="btn">Add Expense</button>
+        <button type="button" id="addPersonTop" class="btn">Show Person</button>
+        <button type="button" id="addExpenseTop" class="btn">Show Expense</button>
         <button type="button" id="options-button" class="btn btn-primary" data-toggle="modal"
         data-target="#optionsModal">Options</button>
 
@@ -141,12 +106,12 @@
                     <input class="form-control" type="password" name="passwords[new]"
                      placeholder="New Password">
                   </div>
-                  <button type="submit" class="btn btn-primary">Change password</button>
+                  <button type="submit" class='change-btn' class="btn btn-primary">Change password</button>
                 </form>
                 <br>
 
                 <form id="sign-out" >
-                  <button type="submit" class="btn btn-danger">Sign Out</button>
+                  <button type="submit" class='change-btn' class="btn btn-danger">Sign Out</button>
                 </form>
 
               </div>
@@ -161,18 +126,20 @@
       <div class="addPerson person" >
         <form id="addPerson-form-add" class="addPerson-panel">
           <fieldset>
-            <span> Enter Person's Name </span>
-            <input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name"> <!--person[name]* -->
-            <input type="submit"class="add-person-form-button" value="ADD">
+            <p>
+            <span> Enter Person's Name </span></p>
+            <p><input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name"></p> <!--person[name]* -->
+            <p><input type="submit"class="add-person-form-button" value="ADD"></p>
             <!-- <input type="submit"class="add-person-form-save" value="SAVE"> -->
           </fieldset>
         </form>
         <form id="add-person-form-save" class="addPerson-panel-save">
           <fieldset>
-            <span> Enter Person's Name </span>
-            <input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name"> <!--person[name]* -->
+            <p>
+            <span> Enter Person's Name </span> </p>
+            <p><input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name"> </p><!--person[name]* -->
             <!-- <input type="submit"class="add-person-form-button" value="ADD"> -->
-            <input type="submit"class="add-person-form-save" value="SAVE">
+            <p><input type="submit"class="add-person-form-save" value="SAVE"></p>
           </fieldset>
         </form>
       </div>
@@ -222,7 +189,7 @@
           <h1>Expense</h1>
           <ul> </ul>
         </div>
-        <div style="float: right; margin-right: 30%; margin-left: 10px;" class="person-show">
+        <div style="float: left ; margin-left: 10px;" class="person-show">
           <h1>People</h1>
           <ul> </ul>
         </div>

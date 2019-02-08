@@ -40,9 +40,52 @@ const updatePerson = function (personId, data) {
   })
 }
 
+const createExpense = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/expenses',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+const getAllExpense = function () {
+  return $.ajax({
+    url: config.apiUrl + '/expenses',
+    method: 'GET'
+  })
+}
+
+const deleteExpense = function (expenseId) {
+  return $.ajax({
+    url: config.apiUrl + '/expenses/' + expenseId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const updateExpense = function (expId, data) {
+  const id = expId
+  return $.ajax({
+    url: config.apiUrl + '/expenses/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   createPerson,
   getAllPerson,
   deletePerson,
-  updatePerson
+  updatePerson,
+  createExpense,
+  getAllExpense,
+  deleteExpense,
+  updateExpense
 }

@@ -6,6 +6,7 @@ const signUpSuccess = function (data) {
   $('#feedbackOnAction').show().text('Signed up successfully!!')
   $('#sign-up')[0].reset()
   $('#feedbackOnAction').fadeOut(5000)
+  $('.expense-show ul')[0].innerHTML = ''
   // console.log(' sign up success')
 }
 
@@ -25,6 +26,7 @@ const signInSuccess = function (data) {
   $('#authorizationModal').modal('hide')
   $('#sign-up-button').hide()
   $('#options-button').show()
+  // $('h1').hide()
   // $('.').hide()
 }
 
@@ -43,6 +45,8 @@ const signOutSuccess = function () {
   $('#sign-up-button').show()
   $('#optionsModal').modal('hide')
   $('#options-button').hide()
+  $('.expense-show ul')[0].innerHTML = ''
+  $('.person-show ul')[0].innerHTML = ''
 }
 
 const changePasswordSuccess = function (data) {
@@ -54,8 +58,16 @@ const changePasswordSuccess = function (data) {
 
 const failure = function () {
   $('#feedbackOnAction').html(' ')
+  $('#up-message').html('')
+  $('#up-message').show().text('Error !!!')
+  $('#up-message').removeClass()
+  $('#out-message').html('')
+  $('#out-message').show().text('Error !!!')
+  $('#out-message').removeClass()
   $('#feedbackOnAction').show().text('Error!!!')
   $('#feedbackOnAction').fadeOut(5000)
+  $('#up-message').fadeOut(5000)
+  $('#out-message').fadeOut(5000)
 }
 
 module.exports = {
