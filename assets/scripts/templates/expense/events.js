@@ -47,10 +47,10 @@ const onAddExpenseForm = function (event) {
   }
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
+    .then(() => show(event))
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
-  show(event)
 }
 
 const onAddExpenseTop = function (event) {
@@ -103,15 +103,9 @@ const show = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  // console.log(data)
-  // const temp = []
-  // api.getAllPerson(data)
-  //   .then((data) => fieldVal(data))
 
-  // data = fieldVal(data)
   // $('#listPeople')[0].innerHTML = ''
   // add the person object selected in Add Expense option
-
   data.expense.payments = []
   data.expense.payments.pay = 0
   // data.expense.payments.person
@@ -128,12 +122,12 @@ const onAddExpenseFormSave = function (event) {
   console.log(data)
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
+    .then(() => show(event))
     .catch(ui.updateExpenseFailure)
   // console.log(data)
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
-  show(event)
   // document.getElementById('expense-amount').reset()
 }
 
