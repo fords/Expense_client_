@@ -115,59 +115,63 @@ const getAllExpenseSuccess = data => {
   // $('.expense-show ul')[0].HTML = ''
   // console.log(data)
   // console.log('show')
+
   for (let i = 0; i < data.expenses.length; i++) {
+    if (data.expenses[i].owner !== store.user._id) {
+    } else {
     // console.log("i", i)
     // console.log(store.listpeople_with_index[i])
-    const listElement2 = document.createElement('LI')
-    // const description = document.createElement('span')
-    const div4 = document.createElement('div')
-    const name2 = document.createElement('span')
-    // const div5 = document.createElement('div')
-    name2.append(document.createTextNode(data.expenses[i].description))
-    // console.log(data.expenses[i].description)
-    const h3 = document.createElement('h3')
-    // store.people.forEach(function (entry) {
-    //   console.log(entry)
-    // })
-    // console.log(store.people[i]._id)
-    const editExpense = document.createElement('a')
-    editExpense.href = 'javascript:;'
-    editExpense.addEventListener('click', onEditExpense)
-    editExpense.appendChild(document.createTextNode('Edit'))
-    const deleteExpense = document.createElement('a')
-    deleteExpense.href = 'javascript:;'
-    deleteExpense.addEventListener('click', onDeleteExpense)
-    deleteExpense.appendChild(document.createTextNode('Delete'))
-    h3.append(name2)
-    listElement2.append(h3)
-    listElement2.append(div4)
-    for (let j = 0; j < data.expenses[i].payments.length; j++) {
-      store.people.forEach(function (entry) {
-        // console.log(' in entry')
-        // console.log(entry._id)
-        // console.log('in db')
-        // console.log(data.expenses[i].payments[j].person)
-        if (entry._id === data.expenses[i].payments[j].person) {
-          listElement2.append(entry.name)
-          // console.log(data.expenses[i].payments)
-          const owe = Math.max(0, (data.expenses[i].amount / data.expenses[i].payments.length) -
-                   data.expenses[i].payments[j].pay)
-          listElement2.append(' would pay ', owe)
-          listElement2.setAttribute('data-indx-j', j)
-          const div3 = document.createElement('div')
-          listElement2.append(div3)
-        }
-      })
-      // console.log(store.listpeople_with_index[i][j])
+      const listElement2 = document.createElement('LI')
+      // const description = document.createElement('span')
+      const div4 = document.createElement('div')
+      const name2 = document.createElement('span')
+      // const div5 = document.createElement('div')
+      name2.append(document.createTextNode(data.expenses[i].description))
+      // console.log(data.expenses[i].description)
+      const h3 = document.createElement('h3')
+      // store.people.forEach(function (entry) {
+      //   console.log(entry)
+      // })
+      // console.log(store.people[i]._id)
+      const editExpense = document.createElement('a')
+      editExpense.href = 'javascript:;'
+      editExpense.addEventListener('click', onEditExpense)
+      editExpense.appendChild(document.createTextNode('Edit'))
+      const deleteExpense = document.createElement('a')
+      deleteExpense.href = 'javascript:;'
+      deleteExpense.addEventListener('click', onDeleteExpense)
+      deleteExpense.appendChild(document.createTextNode('Delete'))
+      h3.append(name2)
+      listElement2.append(h3)
+      listElement2.append(div4)
+      for (let j = 0; j < data.expenses[i].payments.length; j++) {
+        store.people.forEach(function (entry) {
+          // console.log(' in entry')
+          // console.log(entry._id)
+          // console.log('in db')
+          // console.log(data.expenses[i].payments[j].person)
+          if (entry._id === data.expenses[i].payments[j].person) {
+            listElement2.append(entry.name)
+            // console.log(data.expenses[i].payments)
+            const owe = Math.max(0, (data.expenses[i].amount / data.expenses[i].payments.length) -
+                     data.expenses[i].payments[j].pay)
+            listElement2.append(' would pay ', owe)
+            listElement2.setAttribute('data-indx-j', j)
+            const div3 = document.createElement('div')
+            listElement2.append(div3)
+          }
+        })
+        // console.log(store.listpeople_with_index[i][j])
+      }
+      listElement2.append(editExpense)
+      listElement2.append(div4)
+      listElement2.append(deleteExpense)
+      listElement2.setAttribute('data-description', data.expenses[i].description)
+      listElement2.setAttribute('data-amount', data.expenses[i].amount)
+      listElement2.setAttribute('data-indx-i', i)
+      listElement2.setAttribute('data-attr', data.expenses[i]._id)
+      $('.expense-show  ul')[0].appendChild(listElement2)
     }
-    listElement2.append(editExpense)
-    listElement2.append(div4)
-    listElement2.append(deleteExpense)
-    listElement2.setAttribute('data-description', data.expenses[i].description)
-    listElement2.setAttribute('data-amount', data.expenses[i].amount)
-    listElement2.setAttribute('data-indx-i', i)
-    listElement2.setAttribute('data-attr', data.expenses[i]._id)
-    $('.expense-show  ul')[0].appendChild(listElement2)
   }
 }
 
@@ -209,7 +213,7 @@ const onDeleteExpense = function (event) {
   i = i.getAttribute('data-attr')
   api.deleteExpense(i)
     .then(deleteExpenseSuccess)
-    // .then(() => showExpense(event))
+    .then(() => showExpense(event))
     .catch(deleteExpenseFailure)
 }
 const deleteExpenseSuccess = () => {
@@ -220,6 +224,14 @@ const deleteExpenseSuccess = () => {
 const deleteExpenseFailure = () => {
   $('#feedbackOnAction').show().text('Could not delete an expense')
   $('#feedbackOnAction').fadeOut(5000)
+}
+
+const showExpense = function (event) {
+  // show person name
+  const data = getFormFields(event.target)
+  api.getAllExpense(data)
+    .then(getAllExpenseSuccess)
+    .catch(getAllExpenseFailure)
 }
 
 const show = function (event) {

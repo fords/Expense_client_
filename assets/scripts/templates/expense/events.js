@@ -15,7 +15,7 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  console.log(data)
+  // console.log(data)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
