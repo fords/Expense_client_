@@ -67,6 +67,18 @@ const deleteExpense = function (expenseId) {
   })
 }
 
+const updateExpense = function (expId, data) {
+  const id = expId
+  return $.ajax({
+    url: config.apiUrl + '/expenses/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   createPerson,
   getAllPerson,
@@ -74,5 +86,6 @@ module.exports = {
   updatePerson,
   createExpense,
   getAllExpense,
-  deleteExpense
+  deleteExpense,
+  updateExpense
 }

@@ -83,6 +83,7 @@ const onDeleteName = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
+  // store.id_expense = i.getAttribute('data-attr')
   api.deletePerson(i)
     .then(deletePersonSuccess)
     .then(() => show(event))
@@ -211,6 +212,7 @@ const onDeleteExpense = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
+  // store.id_expense = i.getAttribute('data-attr')
   api.deleteExpense(i)
     .then(deleteExpenseSuccess)
     .then(() => showExpense(event))
@@ -223,6 +225,16 @@ const deleteExpenseSuccess = () => {
 
 const deleteExpenseFailure = () => {
   $('#feedbackOnAction').show().text('Could not delete an expense')
+  $('#feedbackOnAction').fadeOut(5000)
+}
+
+const updateExpenseSuccess = () => {
+  $('#feedbackOnAction').show().text('Updated an expense')
+  $('#feedbackOnAction').fadeOut(5000)
+}
+
+const updateExpenseFailure = () => {
+  $('#feedbackOnAction').show().text('Could not update an expense')
   $('#feedbackOnAction').fadeOut(5000)
 }
 
@@ -254,5 +266,7 @@ module.exports = {
   createExpenseSuccess,
   createExpenseFailure,
   getAllExpenseSuccess,
-  getAllExpenseFailure
+  getAllExpenseFailure,
+  updateExpenseSuccess,
+  updateExpenseFailure
 }

@@ -97,15 +97,22 @@ const show = function (event) {
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  store.description[store.index_expense] = data.expense.description
-  store.totalAmount[store.index_expense] = data.expense.amount
+
   const temp = []
-  for (const i in $('#listPeople2')[0].selectedOptions) {
-    if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
-      temp.push($('#listPeople2')[0].selectedOptions[i].value)
+  data.expense.payments = []
+  data.expense.payments.pay = 0
+  // add the person object selected in Add Expense option
+  for (const i in $('#listPeople')[0].selectedOptions) {
+    if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
+      temp.push($('#listPeople')[0].selectedOptions[i].value)
+      const payment = {pay: 0.00, person: store.people[i]}
+      data.expense.payments.push(payment)
     }
   }
-  store.listpeople_with_index[store.index_expense] = temp
+  api.updateExpense(store.id_expense, data)
+    .then(ui.updateExpenseSuccess)
+    .catch(ui.updateExpenseFailure)
+
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
