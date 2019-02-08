@@ -41,25 +41,11 @@ const onAddExpenseForm = function (event) {
       // console.log(data.expense.payments)
     }
   }
-  // console.log('temp')
-  // console.log(temp)
-  // for each in options
-  // data.expense.person = store.people
-  // console.log(data.expense.person)
-  // console.log(data)
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
-  // document.getElementById('expense-amount2').reset()
-
-  // store.selectedPeople = temp
-  // store.description.push(data.expense.description)
-  // store.totalAmount.push(data.expense.amount)
-  // store.listpeople_with_index.push(temp)
-
-  // console.log(store.description)
   show(event)
 }
 
@@ -108,33 +94,6 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
-// const onEditExpense = function (event) {
-//   const data = getFormFields(event.target)
-//   // api.updatePerson(data)
-//   //   .then(ui.updatePersonSuccess)
-//   //   .catch(ui.updatePersonFailure)
-//
-//   event.preventDefault()
-//   $('.addExpense').hide()
-//   $('.addExpense-save').show()
-//   $('#listPeople2')[0].innerHTML = ''
-//   for (let i = 0; i < store.people.length; i++) {
-//     const options = document.createElement('option')
-//     options.value = store.people[i]
-//     options.text = store.people[i].name
-//     $('#listPeople2')[0].appendChild(options)
-//   }
-//   // const data = getFormFields(this)
-//   let i = event.target.parentNode
-//   i = i.getAttribute('data-attr')
-//   // console.log(i)
-//   store.index_expense = i
-//   $('#expense-name')[0].placeholder = store.description[store.index_expense]
-//   $('#expense-amount')[0].placeholder = store.totalAmount[store.index_expense]
-//   // console.log(store.people[i])
-//   // $('#person-form-save')[0].placeholder = store.people[i]
-// }
-
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -154,53 +113,13 @@ const onAddExpenseFormSave = function (event) {
   // document.getElementById('expense-amount').reset()
 }
 
-// const onDeleteExpense = function (event) {
-//   event.preventDefault()
-//   let i = event.target.parentNode
-//   i = i.getAttribute('data-attr')
-//   store.index_person = i
-//   store.description.splice(i, 1)
-//   store.totalAmount.splice(i, 1)
-//   store.listpeople_with_index.splice(i, 1)
-//   show(event)
-// }
-
-// const onDeleteName = function (event) {
-//   event.preventDefault()
-//   let i = event.target.parentNode
-//   i = i.getAttribute('data-attr')
-//   api.deletePerson(i)
-//     .then(ui.deletePersonSuccess)
-//     // .then(store.index_person = i)
-//     .then(() => store.people.splice(i, 1))
-//     .catch(ui.deletePersonFailure)
-//   show(event)
-// }
-
-// const onEditName = function (event) {
-//   event.preventDefault()
-//   // const data = getFormFields(this)
-//   let i = event.target.parentNode
-//   console.log(' i is ')
-//   console.log(i)
-//   i = i.getAttribute('data-attr')
-//   store.index_person = i
-//   $('.addPerson-panel').hide()
-//   $('.addPerson-panel-save').show()
-//   $('#person-form-save')[0].placeholder = store.people[i]
-// }
-
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  // console.log(data)
-  // let i = event.target.parentNode
-  // i = i.getAttribute('data-attr')
   api.updatePerson(store.id_person, data)
     .then(ui.updatePersonSuccess)
     .then(() => show(event))
     .catch(ui.updatePersonFailure)
-  // store.people[store.index_person] = data.person.name
 
   document.getElementById('add-person-form-save').reset()
   $('.addPerson-panel').show()
@@ -208,8 +127,6 @@ const onAddPersonFormSave = function (event) {
 }
 
 const addHandlers = () => {
-  // $('#sign-up').on('submit', onSignUp)
-
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
   $('#addExpense').on('submit', onAddExpenseForm)

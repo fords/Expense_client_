@@ -5,20 +5,8 @@ const store = require('../../store.js')
 const api = require('./api.js')
 
 const createPersonSuccess = data => {
-  // store.people.push(data.person.name)
-  // console.log(store.people)
-  // console.log(data)
   $('#feedbackOnAction').show().text('Added a person')
   $('#feedbackOnAction').fadeOut(5000)
-  // $('#listPeople')[0].innerHTML = ''
-  // for (let i = 0; i < data.persons.length; i++) {
-  //   const options = document.createElement('option')
-  //   console.log(data.persons[i].name)
-  //   options.value = data.persons[i].name
-  //   options.text = data.persons[i].name
-  //   console.log(options.text)
-  //   $('#listPeople')[0].appendChild(options)
-  // }
   document.getElementById('addPerson-form-add').reset()
 }
 
@@ -97,8 +85,6 @@ const onDeleteName = function (event) {
   i = i.getAttribute('data-attr')
   api.deletePerson(i)
     .then(deletePersonSuccess)
-    // .then(store.index_person = i)
-    // .then(() => store.people.splice(i, 1))  // MODIFY
     .then(() => show(event))
     .catch(deletePersonFailure)
 }
