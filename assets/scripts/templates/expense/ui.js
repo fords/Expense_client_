@@ -131,10 +131,10 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-  console.log(totalPeople)
+  // console.log(totalPeople)
   // console.log(arr)
   const uniquePeople = [...new Set(arr)]
-  console.log(uniquePeople)
+
   for (let i = 0; i < data.expenses.length; i++) {
     // var hash = new Object();
     let uniqueLoop = []
@@ -232,11 +232,13 @@ const onEditExpense = function (event) {
     const options = document.createElement('option')
     options.value = store.people[i]._id
     options.text = store.people[i].name
+
     $('#listPeople2')[0].appendChild(options)
   }
   // const data = getFormFields(this)
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
+  // store.index_editExpense = id
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
   // console.log(i)
