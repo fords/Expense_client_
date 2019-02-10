@@ -72,10 +72,12 @@ const onEditName = function (event) {
   const i = event.target.parentNode
   const name = i.getAttribute('data-name')
   store.id_person = i.getAttribute('data-attr')
-  $('.addExpense').hide()
+  // $('.addExpense').hide()
   $('.addPerson').show()
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').show()
+  $('.addExpense').hide()
+  $('.addExpense-save').hide()
   $('#person-form-save')[0].placeholder = name
 }
 
@@ -139,7 +141,7 @@ const getAllExpenseSuccess = data => {
       // const description = document.createElement('span')
       const div4 = document.createElement('div')
       const name2 = document.createElement('span')
-      // const div5 = document.createElement('div')
+      const div5 = document.createElement('div')
       name2.append(document.createTextNode(data.expenses[i].description))
       // console.log(data.expenses[i].description)
       const h3 = document.createElement('h3')
@@ -147,6 +149,12 @@ const getAllExpenseSuccess = data => {
       editExpense.href = 'javascript:;'
       editExpense.addEventListener('click', onEditExpense)
       editExpense.appendChild(document.createTextNode('Edit'))
+
+      const payExpense = document.createElement('a')
+      payExpense.href = 'javascript:;'
+      payExpense.addEventListener('click', onEditExpense)
+      payExpense.appendChild(document.createTextNode('Make Payment'))
+
       const deleteExpense = document.createElement('a')
       deleteExpense.href = 'javascript:;'
       deleteExpense.addEventListener('click', onDeleteExpense)
@@ -169,8 +177,10 @@ const getAllExpenseSuccess = data => {
         })
         // console.log(store.listpeople_with_index[i][j])
       }
-      listElement2.append(editExpense)
+      listElement2.append(payExpense)
       listElement2.append(div4)
+      listElement2.append(editExpense)
+      listElement2.append(div5)
       listElement2.append(deleteExpense)
       listElement2.setAttribute('data-description', data.expenses[i].description)
       listElement2.setAttribute('data-amount', data.expenses[i].amount)
@@ -195,6 +205,8 @@ const onEditExpense = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').show()
+  $('.addPerson').hide()
+  $('.addPerson-panel').hide()
   $('#listPeople2')[0].innerHTML = ''
   for (let i = 0; i < store.people.length; i++) {
     const options = document.createElement('option')
