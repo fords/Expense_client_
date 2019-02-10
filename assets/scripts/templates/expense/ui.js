@@ -113,9 +113,42 @@ const getAllExpenseSuccess = data => {
   // $('#feedbackOnAction').show().text('Get all expense')
   // $('#feedbackOnAction').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
-  // $('.expense-show ul')[0].HTML = ''
-  // console.log(data)
-  // console.log('show')
+
+  const arr = []
+  let totalPeople = []
+  for (let i = 0; i < data.expenses.length; i++) {
+    totalPeople[i] = 0
+    if (data.expenses[i].owner !== store.user._id) {
+    } else {
+      for (let j = 0; j < data.expenses[i].payments.length; j++) {
+        store.people.forEach(function (entry) {
+          if (entry._id === data.expenses[i].payments[j].person) {
+            // find total number of unique people in expense schema
+            // if (data.expenses[i].payments[j].person !== undefined)
+            arr.push(data.expenses[i].payments[j].person)
+          }
+        })
+      }
+    }
+  }
+  console.log(totalPeople)
+  // console.log(arr)
+  const uniquePeople = [...new Set(arr)]
+  console.log(uniquePeople)
+  for (let i = 0; i < data.expenses.length; i++) {
+    // var hash = new Object();
+    let uniqueLoop = []
+    if (data.expenses[i].owner !== store.user._id) {
+    } else {
+      for (let j = 0; j < data.expenses[i].payments.length; j++) {
+        if (uniqueLoop.indexOf(data.expenses[i].payments[j].person) === -1) {
+          totalPeople[i] += 1
+          uniqueLoop.push(data.expenses[i].payments[j].person)
+        }
+      }
+    }
+  }
+  // console.log(totalPeople)
 
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
@@ -152,9 +185,13 @@ const getAllExpenseSuccess = data => {
           // console.log('in db')
           // console.log(data.expenses[i].payments[j].person)
           if (entry._id === data.expenses[i].payments[j].person) {
+
+
+
             listElement2.append(entry.name)
-            // console.log(data.expenses[i].payments)
-            const owe = Math.max(0, (data.expenses[i].amount / data.expenses[i].payments.length) -
+
+            const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
+
                      data.expenses[i].payments[j].pay)
             listElement2.append(' would pay ', owe.toFixed(2))
             listElement2.setAttribute('data-indx-j', j)
