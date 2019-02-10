@@ -131,8 +131,7 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-  // console.log(totalPeople)
-  // console.log(arr)
+
   const uniquePeople = [...new Set(arr)]
 
   for (let i = 0; i < data.expenses.length; i++) {
@@ -153,8 +152,6 @@ const getAllExpenseSuccess = data => {
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
     } else {
-    // console.log("i", i)
-    // console.log(store.listpeople_with_index[i])
       const listElement2 = document.createElement('LI')
       // const description = document.createElement('span')
       const div4 = document.createElement('div')

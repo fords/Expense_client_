@@ -95,14 +95,13 @@ const onAddExpenseFormSave = function (event) {
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
-    // debugger
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
       // for (let j = 0; j < data.expenses[i].payments.length; j++) {
       const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
   }
-  // console.log(data)
+
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
     .then(() => show(event))
