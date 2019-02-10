@@ -128,10 +128,8 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-  console.log(totalPeople)
-  // console.log(arr)
+
   const uniquePeople = [...new Set(arr)]
-  console.log(uniquePeople)
   for (let i = 0; i < data.expenses.length; i++) {
     // var hash = new Object();
     let uniqueLoop = []
@@ -145,7 +143,7 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-  // console.log(totalPeople)
+
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
     } else {
