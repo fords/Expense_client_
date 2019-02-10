@@ -36,6 +36,7 @@ const onAddExpenseForm = function (event) {
       data.expense.payments.push(payment)
     }
   }
+  debugger
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
