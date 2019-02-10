@@ -116,27 +116,28 @@ const getAllExpenseSuccess = data => {
 
   const arr = []
   let totalPeople = []
-  for (let i = 0; i < data.expenses.length; i++) {
-    totalPeople[i] = 0
-    if (data.expenses[i].owner !== store.user._id) {
-    } else {
-      for (let j = 0; j < data.expenses[i].payments.length; j++) {
-        store.people.forEach(function (entry) {
-          if (entry._id === data.expenses[i].payments[j].person) {
-            // find total number of unique people in expense schema
-            // if (data.expenses[i].payments[j].person !== undefined)
-            arr.push(data.expenses[i].payments[j].person)
-          }
-        })
-      }
-    }
-  }
-  console.log(totalPeople)
+  // for (let i = 0; i < data.expenses.length; i++) {
+  //   totalPeople[i] = 0
+  //   if (data.expenses[i].owner !== store.user._id) {
+  //   } else {
+  //     for (let j = 0; j < data.expenses[i].payments.length; j++) {
+  //       store.people.forEach(function (entry) {
+  //         if (entry._id === data.expenses[i].payments[j].person) {
+  //           // find total number of unique people in expense schema
+  //           // if (data.expenses[i].payments[j].person !== undefined)
+  //           arr.push(data.expenses[i].payments[j].person)
+  //         }
+  //       })
+  //     }
+  //   }
+  // }
+  // console.log(totalPeople)
   // console.log(arr)
   const uniquePeople = [...new Set(arr)]
   console.log(uniquePeople)
   for (let i = 0; i < data.expenses.length; i++) {
     // var hash = new Object();
+    totalPeople[i] = 0
     let uniqueLoop = []
     if (data.expenses[i].owner !== store.user._id) {
     } else {
