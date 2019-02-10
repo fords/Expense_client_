@@ -152,7 +152,7 @@ const getAllExpenseSuccess = data => {
 
       const payExpense = document.createElement('a')
       payExpense.href = 'javascript:;'
-      payExpense.addEventListener('click', onEditExpense)
+      payExpense.addEventListener('click', onPayExpense)
       payExpense.appendChild(document.createTextNode('Make Payment'))
 
       const deleteExpense = document.createElement('a')
@@ -194,6 +194,23 @@ const getAllExpenseSuccess = data => {
 const getAllExpenseFailure = data => {
   $('#feedbackOnAction').show().text('Could not get/show expense')
   $('#feedbackOnAction').fadeOut(5000)
+}
+const onPayExpense = function (event) {
+  const i = event.target.parentNode
+  // const idExpense = i.getAttribute('data-attr')
+  store.i = i.getAttribute('data-indx-i')
+  const data = getFormFields(event.target)
+  api.getAllExpense(data)
+    .then(storeData)
+  // store.data can't be here
+}
+
+const storeData = (data, i) => {
+  // console.log(data)
+  console.log(data.expenses[0].payments.length)
+  for (let j = 0; j < data.expenses[store.i].payments.length; j++) {
+    console.log(data.expenses[store.i].payments[j].person)
+  }
 }
 
 const onEditExpense = function (event) {

@@ -39,8 +39,10 @@ const onAddExpenseForm = function (event) {
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
+    .then(() => onAddExpenseTop(event))
     .catch(ui.createExpenseFailure)
-
+  // store.data = data
+  // console.log(store.data)
   document.getElementById('addExpense').reset()
 }
 
@@ -50,6 +52,8 @@ const onAddExpenseTop = function (event) {
   $('.addExpense-save').hide()
   event.preventDefault()
   const data = getFormFields(this)
+  // store.data = data
+  // console.log(data.expenses)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
   show(event)
@@ -84,8 +88,6 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
-// NEED TO FIX expense table (total payment)update when person is removed
-
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -112,6 +114,7 @@ const onAddExpenseFormSave = function (event) {
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
+  store.data = data
   // document.getElementById('expense-amount').reset()
 }
 
