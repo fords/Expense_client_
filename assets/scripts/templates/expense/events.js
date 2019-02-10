@@ -103,12 +103,9 @@ const onAddExpenseFormSave = function (event) {
   console.log(data)
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
-
     .then(() => show(event))
     .catch(ui.updateExpenseFailure)
-  api.getAllPerson(data)
-    .then((data) => fieldVal(data))
-  show(event)
+
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
@@ -120,7 +117,6 @@ const onAddPersonFormSave = function (event) {
   const data = getFormFields(this)
   api.updatePerson(store.id_person, data)
     .then(ui.updatePersonSuccess)
-    // .then((data) => fieldVal(data))
     .then(() => show(event))
     .catch(ui.updatePersonFailure)
 
