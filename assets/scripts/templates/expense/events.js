@@ -8,6 +8,7 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
+  // ui.getAllPersonSuccess()
   const data = getFormFields(this)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
@@ -17,32 +18,38 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  // console.log(data)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
+    // .then(() => fieldVal(data))
     .catch(ui.createPersonFailure)
 }
 
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+
+  // const temp = []
+  // data.expense.person = []
+  console.log(data)
   data.expense.payments = []
   data.expense.payments.pay = 0
+  // data.expense.payments.person
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
       const payment = {pay: 0.00, person: store.people[i]}
       data.expense.payments.push(payment)
+      // console.log(data.expense.payments)
     }
   }
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
-    .then(() => onAddExpenseTop(event))
     .catch(ui.createExpenseFailure)
-  // store.data = data
-  // console.log(store.data)
+
   document.getElementById('addExpense').reset()
 }
 
@@ -52,8 +59,6 @@ const onAddExpenseTop = function (event) {
   $('.addExpense-save').hide()
   event.preventDefault()
   const data = getFormFields(this)
-  // store.data = data
-  // console.log(data.expenses)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
   show(event)
@@ -66,11 +71,16 @@ const fieldVal = data => {
     if (data.persons[i].owner !== store.user._id) {
     } else {
       const options = document.createElement('option')
-      options.value = data.persons[i]._id
+      // console.log(data.persons[i])
+      // const object = data.persons[i]
+      options.value = data.persons[i]._id // options.value = data.persons[i]._id
       store.people.push(data.persons[i])
       options.value = i
+      // store.people_indx.append(i)
       options.text = data.persons[i].name
+      // console.log(options)
       $('#listPeople')[0].appendChild(options)
+      // $('#listPeople')[0].appendChild(object)
     }
   }
 }
@@ -88,33 +98,36 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
+// NEED TO FIX expense table (total payment)update when person is removed
+
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+
+  // $('#listPeople')[0].innerHTML = ''
+  // add the person object selected in Add Expense option
   data.expense.payments = []
   data.expense.payments.pay = 0
-  // debugger
+  // data.expense.payments.person
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     // debugger
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
+      // temp.push($('#listPeople')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: store.people[i]}
       data.expense.payments.push(payment)
+      // console.log(data.expense.payments)
     }
   }
-  // console.log(data)
+  console.log(data)
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
-
     .then(() => show(event))
     .catch(ui.updateExpenseFailure)
-  api.getAllPerson(data)
-    .then((data) => fieldVal(data))
-  show(event)
+  // console.log(data)
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
-  store.data = data
   // document.getElementById('expense-amount').reset()
 }
 
@@ -123,7 +136,6 @@ const onAddPersonFormSave = function (event) {
   const data = getFormFields(this)
   api.updatePerson(store.id_person, data)
     .then(ui.updatePersonSuccess)
-    // .then((data) => fieldVal(data))
     .then(() => show(event))
     .catch(ui.updatePersonFailure)
 

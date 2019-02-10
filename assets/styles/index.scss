@@ -36,11 +36,7 @@ form {
   margin: 10px;
 }
 
-.addPerson {
-  margin-left: 42px;
-  margin-right: 5px;
-}
-
+.addPerson,
 .addExpenseClass {
   margin-left: 50px;
   margin-right: 50px;
@@ -55,22 +51,6 @@ form {
 .person-show li,
 .expense-show li {
   padding: 10px;
-}
-
-.payment,
-.Expense,
-.person {
-  float: left;
-}
-
-.row:after{
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.payment-form {
-  width: 450px;
 }
 
 #listPeople {
@@ -118,6 +98,6 @@ body {
   text-align: center;
 }
 
-// .person {
-//   padding: 20px;
-// }
+.person {
+  padding: 20px;
+}
