@@ -220,12 +220,12 @@ const storeData = (data, indx) => {
     $('.payment-field').append(personName)
     store.person_id = data.expenses[store.i].payments[j].person
     const i = document.createElement('input') // input element, text
-    i.setAttribute('type', 'required text')
+    i.setAttribute('type', 'required number')
     i.setAttribute('name', 'payment')
     i.setAttribute('id', 'input' + j)
     const s = document.createElement('input') // input element, Submit button
     s.setAttribute('type', 'submit')
-    s.setAttribute('value', 'Pay')
+    s.setAttribute('value', 'Make Payment')
     s.href = 'javascript:;'
     s.setAttribute('class', 'formDiv')
     s.addEventListener('click', onPay)
@@ -236,40 +236,45 @@ const storeData = (data, indx) => {
     $('.payment-field').append(s)
     $('.payment-field').append('</br>')
   }
-  // $('.payment-field').append("<input type='submit' class='pay-save' value='Submit'>")
+  $('.payment-field').append("<input type='submit' class='pay-save' value='Submit'>")
 }
 const onPay = function (event) {
   event.preventDefault()
   const data4 = getFormFields(event.target.parentNode)
-  // debugger
-  // let i = event.target.parentNode
-  // const id = i.getAttribute('field-id')
-  store.value = data4.payment
-  const data = getFormFields(this)
   debugger
-  data.expense.payments = []
-  data.expense.payments.pay = 0
-  // debugger
-  // add the person object selected in Add Expense option
+  let i = event.target.parentNode
+   // const id = i.getAttribute('field-id')
+  store.value = data4.payment
 
-      const payment = {pay: Number(store.value), person: store.person_id}
-      data.expense.payments.push(payment)
-      api.updateExpense(store.expense_id, data)
-        .then(updateExpenseSuccess)
-        .catch(updateExpenseFailure)
-  // api.getAllExpense(data2)
-  //   .then(onPaySaved)
+  store.j = event.target.getAttribute('data-indx-j')
+  // store.j = j.getAttribute('data-indx-j')
+  // debugger
+  // data.expense.payments = []
+  // data.expense.payments.pay = 0
+  // // debugger
+  // // add the person object selected in Add Expense option
+  //
+  //     const payment = {pay: Number(store.value), person: store.person_id}
+  //     data.expense.payments.push(payment)
+  //     api.updateExpense(store.expense_id, data)
+  //       .then(updateExpenseSuccess)
+  //       .catch(updateExpenseFailure)
+  // api.getAllExpense(data4)
+// .then(onPaySaved)
   // console.log(data2)
 }
 const onPaySaved = data => {
   // console.log(data)
   // const data2 = getFormFields(this)
-  const payments2 = []
+  // const payments2 = []
   // = []
+    debugger
   const payment = {pay: Number(store.value), person: store.person_id}
   // payments2.push(payment)
-  data.expenses[store.i].payments.push(payment)
-  debugger
+  data.expenses[store.i].payments[store.j].pay = store.value
+  // data.expenses[store.i].payments[store.j].person = Number(store.value)
+
+
   api.updateExpense(store.expense_id, data)
     .then(updateExpenseSuccess)
     .catch(updateExpenseFailure)

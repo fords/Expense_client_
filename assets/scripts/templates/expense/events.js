@@ -118,6 +118,9 @@ const onAddExpenseFormSave = function (event) {
   // document.getElementById('expense-amount').reset()
 }
 
+const onPaySave = function (event) {
+
+}
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -136,6 +139,8 @@ const addHandlers = () => {
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
   $('#addExpense').on('submit', onAddExpenseForm)
+  $('.pay-save').on('submit', onPaySave)
+
   $('#add-expense-form-save').on('submit', onAddExpenseFormSave)
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
