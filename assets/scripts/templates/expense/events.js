@@ -65,7 +65,6 @@ const fieldVal = data => {
       const options = document.createElement('option')
       options.value = data.persons[i]._id
       store.people.push(data.persons[i])
-      // options.value = i
       options.text = data.persons[i].name
       $('#listPeople')[0].appendChild(options)
     }
@@ -85,8 +84,6 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
-// NEED TO FIX expense table (total payment)update when person is removed
-
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -97,12 +94,11 @@ const onAddExpenseFormSave = function (event) {
   for (const i in $('#listPeople2')[0].selectedOptions) {
     // debugger
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
-      // for (let j = 0; j < data.expenses[i].payments.length; j++) {
       const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
   }
-  // console.log(data)
+
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
     .then(() => show(event))
@@ -111,7 +107,6 @@ const onAddExpenseFormSave = function (event) {
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
-  // document.getElementById('expense-amount').reset()
 }
 
 const onAddPersonFormSave = function (event) {
@@ -147,6 +142,4 @@ const addHandlers = () => {
 
 module.exports = {
   addHandlers
-  // onDeleteName,
-  // onEditName
 }

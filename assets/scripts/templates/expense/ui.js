@@ -83,7 +83,6 @@ const onDeleteName = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
-  // store.id_expense = i.getAttribute('data-attr')
   api.deletePerson(i)
     .then(deletePersonSuccess)
     .then(() => show(event))
@@ -153,8 +152,6 @@ const getAllExpenseSuccess = data => {
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
     } else {
-    // console.log("i", i)
-    // console.log(store.listpeople_with_index[i])
       const listElement2 = document.createElement('LI')
       // const description = document.createElement('span')
       const div4 = document.createElement('div')
@@ -163,10 +160,6 @@ const getAllExpenseSuccess = data => {
       name2.append(document.createTextNode(data.expenses[i].description))
       // console.log(data.expenses[i].description)
       const h3 = document.createElement('h3')
-      // store.people.forEach(function (entry) {
-      //   console.log(entry)
-      // })
-      // console.log(store.people[i]._id)
       const editExpense = document.createElement('a')
       editExpense.href = 'javascript:;'
       editExpense.addEventListener('click', onEditExpense)
@@ -180,14 +173,7 @@ const getAllExpenseSuccess = data => {
       listElement2.append(div4)
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
         store.people.forEach(function (entry) {
-          // console.log(' in entry')
-          // console.log(entry._id)
-          // console.log('in db')
-          // console.log(data.expenses[i].payments[j].person)
           if (entry._id === data.expenses[i].payments[j].person) {
-
-
-
             listElement2.append(entry.name)
 
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
@@ -219,11 +205,6 @@ const getAllExpenseFailure = data => {
 }
 
 const onEditExpense = function (event) {
-  // const data = getFormFields(event.target)
-  // api.updatePerson(data)
-  //   .then(ui.updatePersonSuccess)
-  //   .catch(ui.updatePersonFailure)
-
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').show()
@@ -241,7 +222,6 @@ const onEditExpense = function (event) {
   // store.index_editExpense = id
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
-  // console.log(i)
   store.id_expense = id
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount

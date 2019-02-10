@@ -7,7 +7,6 @@ const signUpSuccess = function (data) {
   $('#sign-up')[0].reset()
   $('#feedbackOnAction').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
-  // console.log(' sign up success')
 }
 
 const signInSuccess = function (data) {
@@ -74,10 +73,7 @@ module.exports = {
   signUpSuccess,
   // signUpFailure,
   signInSuccess,
-  // signInFailure,
   changePasswordSuccess,
-  // changePasswordFailure,
   signOutSuccess,
-  // signOutFailure
   failure
 }
