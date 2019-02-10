@@ -31,8 +31,9 @@ const onAddExpenseForm = function (event) {
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
+    // debugger
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
-      const payment = {pay: 0.00, person: store.people[i]}
+      const payment = {pay: 0.00, person: $('#listPeople')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
   }
@@ -64,7 +65,7 @@ const fieldVal = data => {
       const options = document.createElement('option')
       options.value = data.persons[i]._id
       store.people.push(data.persons[i])
-      options.value = i
+      // options.value = i
       options.text = data.persons[i].name
       $('#listPeople')[0].appendChild(options)
     }
@@ -96,11 +97,12 @@ const onAddExpenseFormSave = function (event) {
   for (const i in $('#listPeople2')[0].selectedOptions) {
     // debugger
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
-      const payment = {pay: 0.00, person: store.people[i]}
+      // for (let j = 0; j < data.expenses[i].payments.length; j++) {
+      const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
   }
-  console.log(data)
+  // console.log(data)
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
     .then(() => show(event))
