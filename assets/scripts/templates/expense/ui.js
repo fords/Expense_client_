@@ -112,8 +112,9 @@ const createExpenseFailure = data => {
 const getAllExpenseSuccess = data => {
   $('.expense-show ul')[0].innerHTML = ''
   const arr = []
-  let totalPeople = 0
+  let totalPeople = []
   for (let i = 0; i < data.expenses.length; i++) {
+    totalPeople[i] = 0
     if (data.expenses[i].owner !== store.user._id) {
     } else {
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
@@ -127,8 +128,23 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
+  console.log(totalPeople)
   // console.log(arr)
-  totalPeople = [...new Set(arr)].length
+  const uniquePeople = [...new Set(arr)]
+  console.log(uniquePeople)
+  for (let i = 0; i < data.expenses.length; i++) {
+    // var hash = new Object();
+    let uniqueLoop = []
+    if (data.expenses[i].owner !== store.user._id) {
+    } else {
+      for (let j = 0; j < data.expenses[i].payments.length; j++) {
+        if (uniqueLoop.indexOf(data.expenses[i].payments[j].person) === -1) {
+          totalPeople[i] += 1
+          uniqueLoop.push(data.expenses[i].payments[j].person)
+        }
+      }
+    }
+  }
   // console.log(totalPeople)
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
@@ -157,8 +173,11 @@ const getAllExpenseSuccess = data => {
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
         store.people.forEach(function (entry) {
           if (entry._id === data.expenses[i].payments[j].person) {
+
+
+
             listElement2.append(entry.name)
-            const owe = Math.max(0, (data.expenses[i].amount / totalPeople) -
+            const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
                      data.expenses[i].payments[j].pay)
 
             listElement2.append(' would pay ', owe.toFixed(2))
