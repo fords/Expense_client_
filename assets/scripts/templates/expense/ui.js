@@ -247,13 +247,13 @@ const onPay = function (event) {
   store.value = data4.payment
   const data = getFormFields(this)
   debugger
-  data.expense.payments = []
-  data.expense.payments.pay = 0
+  data.expenses[store.person_id].payments = []
+  data.expenses[store.person_id].payments.pay = 0
   // debugger
   // add the person object selected in Add Expense option
 
       const payment = {pay: Number(store.value), person: store.person_id}
-      data.expense.payments.push(payment)
+      data.expenses[store.person_id].payments.push(payment)
       api.updateExpense(store.expense_id, data)
         .then(updateExpenseSuccess)
         .catch(updateExpenseFailure)
