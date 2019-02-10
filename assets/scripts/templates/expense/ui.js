@@ -211,40 +211,37 @@ const storeData = (data, i) => {
   $('.payment-field').html('')
   for (let j = 0; j < data.expenses[store.i].payments.length; j++) {
     console.log(data.expenses[store.i].payments[j].person)
-    // const input = document.createElement('input')
-    // input.type = 'required text'
-    // input.name = 'member' + j
-    // const button = document.createElement('submit')
-    // button.id = 'button' + j
-    // input.setAttribute('data-indx-j', j)
-    // $('.payment-field').append("<span class='btn'>")
-    // var btn = document.createElement("BUTTON")
-    //
-    // btn.value = 'Pay'
-    // btn.class = ($('.btn'))
-    // btn.setAttribute("style","color:red;font-size:23px;width: 20px;")
-    // // $('.payment-field').append(btn) //input
-    // $('.payment-field').append(" <input required  class='pay-textfield' type=text name='pay' placeholder=' name+$(j)'><input type='submit' class='pay-save'+$j value='PAY'> ")
-    // $('.payment-field').append('</span>')
-    const i = document.createElement('input') // input element, text
-    i.setAttribute('type', 'text')
-    i.setAttribute('name', 'username')
 
+    const i = document.createElement('input') // input element, text
+    i.setAttribute('type', 'required text')
+    i.setAttribute('name', 'payment')
+    i.setAttribute('id', 'input' + j)
     const s = document.createElement('input') // input element, Submit button
     s.setAttribute('type', 'submit')
     s.setAttribute('value', 'Submit')
-    s.addEventListener('submit', myFunction())
+    s.href = 'javascript:;'
+    s.addEventListener('click', onPay)
+    i.appendChild(document.createTextNode('Make Payment'))
+    s.appendChild(document.createTextNode('Make Payment'))
+    // s.appendChild("onclick", alert("clicked"))
+    // s.addEventListener('submit', myFunction(event))
     // s.setAttribute('onclick', myFunction())
     s.setAttribute('data-indx-j', j)
+    s.setAttribute('field-id', 'input' + j)
     $('.payment-field').append(i)
     $('.payment-field').append(s)
   }
 }
 
-const myFunction = function (event) {
-  // event.preventDefault()
-  console.log('event happens')
-  alert('event')
+const onPay = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target.parentNode)
+  debugger
+  // let i = event.target.parentNode
+  // const id = i.getAttribute('field-id')
+  const value = data.payment
+  console.log(value)
+  console.log(data)
 }
 
 const onEditExpense = function (event) {
