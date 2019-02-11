@@ -26,7 +26,7 @@ The user can create expense </br>
 The user can update expense </br>
 The user can get expense </br>
 The user can delete expense </br>
-Only the user can have control of the data he created </br>
+Only the user has control of the data that he created </br>
 
 
 ## Wireframe
@@ -35,4 +35,4 @@ Only the user can have control of the data he created </br>
 
 ## Future Work
 Have the option of sending email to friends when the expense is created, updated or deleted </br>
-Has the optin of expense view history with payment date</br>
+Have the option of expense view history with payment date</br>
