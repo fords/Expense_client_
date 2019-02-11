@@ -103,7 +103,7 @@ const onSelectPeopleForPayment = function (event) {
       $('.payment_people_list').append(j)
       $('.payment_people_list').append('</br>')
     }
-  }
+  } // add the rest of people in the expense with 0 or previous payment as default
   store.people_payments = payments
 }
 
@@ -114,6 +114,8 @@ const onAddPayment = function (event) {
     const a = document.getElementById(entry.person)
     if (a.value !== undefined) {
       entry.pay = a.value
+    } else {
+      entry.pay = 0
     }
   })
 

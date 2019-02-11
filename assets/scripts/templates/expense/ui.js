@@ -148,7 +148,7 @@ const getAllExpenseSuccess = data => {
     }
   }
   // console.log(totalPeople)
-
+  store.payments = []
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
     } else {
@@ -173,7 +173,7 @@ const getAllExpenseSuccess = data => {
       payExpense.href = 'javascript:;'
       payExpense.addEventListener('click', onPayExpense)
       payExpense.appendChild(document.createTextNode('Make Payment'))
-
+      let payment = []
       h3.append(name2)
       listElement2.append(h3)
       listElement2.append(div4)
@@ -181,6 +181,8 @@ const getAllExpenseSuccess = data => {
         store.people.forEach(function (entry) {
           if (entry._id === data.expenses[i].payments[j].person) {
             listElement2.append(entry.name)
+            payment = [{'person': data.expenses[i].payments[j].person}, {'pay': data.expenses[i].payments[j].pay}]
+            store.payments.push(payment)
             // store.payments
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
 
@@ -193,6 +195,7 @@ const getAllExpenseSuccess = data => {
         })
         // console.log(store.listpeople_with_index[i][j])
       }
+
       listElement2.append(editExpense)
       listElement2.append(div4)
       listElement2.append(deleteExpense)
@@ -205,7 +208,7 @@ const getAllExpenseSuccess = data => {
       listElement2.setAttribute('data-attr', data.expenses[i]._id)
       $('.expense-show  ul')[0].appendChild(listElement2)
     }
-  }
+  }console.log(store.payments)
 }
 
 const getAllExpenseFailure = data => {
