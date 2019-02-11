@@ -173,7 +173,7 @@ const getAllExpenseSuccess = data => {
       payExpense.href = 'javascript:;'
       payExpense.addEventListener('click', onPayExpense)
       payExpense.appendChild(document.createTextNode('Make Payment'))
-      let payment = []
+      const payment = []
       h3.append(name2)
       listElement2.append(h3)
       listElement2.append(div4)
@@ -181,8 +181,8 @@ const getAllExpenseSuccess = data => {
         store.people.forEach(function (entry) {
           if (entry._id === data.expenses[i].payments[j].person) {
             listElement2.append(entry.name)
-            payment = [{'person': data.expenses[i].payments[j].person}, {'pay': data.expenses[i].payments[j].pay}]
-            store.payments.push(payment)
+            const paymentDic = {'person': data.expenses[i].payments[j].person, 'pay': data.expenses[i].payments[j].pay}
+            payment.push(payment_dic)
             // store.payments
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
 
@@ -195,7 +195,7 @@ const getAllExpenseSuccess = data => {
         })
         // console.log(store.listpeople_with_index[i][j])
       }
-
+      store.payments.push(payment)
       listElement2.append(editExpense)
       listElement2.append(div4)
       listElement2.append(deleteExpense)
