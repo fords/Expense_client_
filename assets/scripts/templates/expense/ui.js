@@ -114,7 +114,7 @@ const getAllExpenseSuccess = data => {
   $('.expense-show ul')[0].innerHTML = ''
 
   const arr = []
-  let totalPeople = []
+  const totalPeople = []
   for (let i = 0; i < data.expenses.length; i++) {
     totalPeople[i] = 0
     if (data.expenses[i].owner !== store.user._id) {
@@ -181,7 +181,7 @@ const getAllExpenseSuccess = data => {
         store.people.forEach(function (entry) {
           if (entry._id === data.expenses[i].payments[j].person) {
             listElement2.append(entry.name)
-
+            // store.payments
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
 
                      data.expenses[i].payments[j].pay)
@@ -201,6 +201,7 @@ const getAllExpenseSuccess = data => {
       listElement2.setAttribute('data-description', data.expenses[i].description)
       listElement2.setAttribute('data-amount', data.expenses[i].amount)
       listElement2.setAttribute('data-indx-i', i)
+      // listElement2.setAttribute('data', data.expenses[i].payments.person)
       listElement2.setAttribute('data-attr', data.expenses[i]._id)
       $('.expense-show  ul')[0].appendChild(listElement2)
     }
@@ -237,16 +238,21 @@ const onEditExpense = function (event) {
 
 const onPayExpense = function (event) {
   event.preventDefault()
+  const i = event.target.parentNode
+  const id = i.getAttribute('data-attr')
+  // const data = i.getAttribute('data')
   $('#listPeople3')[0].innerHTML = ''
   for (let i = 0; i < store.people.length; i++) {
     // if ( store.people[i]._id in event.target.parentNode.getAttribute('payments'))
+    // store.people.forEach(function (entry) {
+    //   if (entry._id === data.payments[id].person) {
     const options = document.createElement('option')
     options.value = store.people[i]._id
     options.text = store.people[i].name
     $('#listPeople3')[0].appendChild(options)
+    //   }
+    // })
   }
-  const i = event.target.parentNode
-  const id = i.getAttribute('data-attr')
   store.description = i.getAttribute('data-description')
   store.amount = i.getAttribute('data-amount')
   store.id_expense = id

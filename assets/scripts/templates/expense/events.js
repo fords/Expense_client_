@@ -88,40 +88,66 @@ const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   // const data = getFormFields(this)
   const payments = []
-  store.people = []
-  $('.payment_pepole_list')[0].innerHTML = ''
+  // store.people = []
+  $('.payment_people_list')[0].innerHTML = ''
   for (const i in $('#listPeople3')[0].selectedOptions) {
     // debugger
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
+      // store.people.forEach(function (entry) {
+      //   if (entry._id === $('#listPeople3')[0].selectedOptions[i].value) {
+
       store.people.push($('#listPeople3')[0].selectedOptions[i].text)
       const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
-      $('.payment_pepole_list').append($('#listPeople3')[0].selectedOptions[i].text)
+      $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       payments.push(payment)
       const j = document.createElement('input') // input element, text
       j.setAttribute('type', 'required number')
-      j.setAttribute('name', 'payment' + i)
-      j.setAttribute('id', 'input' + i)
-      $('.payment_pepole_list').append(' pay  ')
-      $('.payment_pepole_list').append(j)
-      $('.payment_pepole_list').append('</br>')
+      j.setAttribute('name', 'payment' + i)   // 'payment' + i)
+      j.setAttribute('id', $('#listPeople3')[0].selectedOptions[i].value)
+      // j.setAttribute('value', $('#listPeople3')[0].selectedOptions[i].value)
+      store.payments_person_id.push($('#listPeople3')[0].selectedOptions[i].value)
+      $('.payment_people_list').append(' pay  ')
+      $('.payment_people_list').append(j)
+      $('.payment_people_list').append('</br>')
     }
+    // })
   }
+  // }
   store.people_payments = payments
 }
 
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  // debugger
+  store.people_payments.forEach(function (entry) {
+    console.log(entry.person)
+    const a = document.getElementById(entry.person)
+    console.log(a.value)
+    if (a.value !== undefined) {
+     entry.pay = a.value
+   }
+ })
+
+
+  // store.people_payments.forEach(function (entry) {
+  //   if (event.target.parentNode.getAttribute('id') === entry.person) {
+  //     console.log('match')
+  //   }
+  // })
+  // for (let i = 1; i < Object.keys(data).length; i++) {
+  //   store.people_payments.forEach(function (entry) {
+  //     if (entry.person === Object.keys(data)[i]) {
+  //       entry.pay = data.i
+  //       console.log('inside')
+  //     }
+  //   })
+  // }
   console.log(store.people_payments)
-  console.log(data)
   data.expense.payments = store.people_payments
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
     .then(() => show(event))
     .catch(ui.updateExpenseFailure)
-  document.getElementById('addPayment-people-save').reset()
-  debugger
 }
 
 const onAddExpenseFormSave = function (event) {
