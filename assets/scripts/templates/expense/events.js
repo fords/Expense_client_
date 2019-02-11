@@ -124,25 +124,10 @@ const onAddPayment = function (event) {
     const a = document.getElementById(entry.person)
     console.log(a.value)
     if (a.value !== undefined) {
-     entry.pay = a.value
-   }
- })
+      entry.pay = a.value
+    }
+  })
 
-
-  // store.people_payments.forEach(function (entry) {
-  //   if (event.target.parentNode.getAttribute('id') === entry.person) {
-  //     console.log('match')
-  //   }
-  // })
-  // for (let i = 1; i < Object.keys(data).length; i++) {
-  //   store.people_payments.forEach(function (entry) {
-  //     if (entry.person === Object.keys(data)[i]) {
-  //       entry.pay = data.i
-  //       console.log('inside')
-  //     }
-  //   })
-  // }
-  console.log(store.people_payments)
   data.expense.payments = store.people_payments
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
@@ -158,7 +143,6 @@ const onAddExpenseFormSave = function (event) {
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
-    // debugger
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
       const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
