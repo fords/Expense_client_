@@ -3,6 +3,7 @@
 const store = {
   people: [],
   payments: [],
+  people_ID_payments: [],
   payments_person_id: [],
   selectedPeople: [],
   listpeople_with_index: [],

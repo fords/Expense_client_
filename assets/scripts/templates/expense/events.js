@@ -89,7 +89,7 @@ const onSelectPeopleForPayment = function (event) {
   $('.payment_people_list')[0].innerHTML = ''
   for (const i in $('#listPeople3')[0].selectedOptions) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
-      store.people.push($('#listPeople3')[0].selectedOptions[i].text)
+      store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
       $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       payments.push(payment)
@@ -103,7 +103,11 @@ const onSelectPeopleForPayment = function (event) {
       $('.payment_people_list').append(j)
       $('.payment_people_list').append('</br>')
     }
-  } // add the rest of people in the expense with 0 or previous payment as default
+  }
+  // add the rest of people in the expense with 0 or previous payment as default
+  // if store.payments[store.id_expense].person not in store.people_ID_payments:
+  // payments.push({ pay: 0.0, person: store.payments[store.id_expense].person })
+
   store.people_payments = payments
 }
 
@@ -113,9 +117,9 @@ const onAddPayment = function (event) {
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a.value !== undefined) {
-      entry.pay = a.value
+      entry.pay = entry.pay + a.value
     } else {
-      entry.pay = 0
+      entry.pay = 0 // reset if person doesn't exist
     }
   })
 

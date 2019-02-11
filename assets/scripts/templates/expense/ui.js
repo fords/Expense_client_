@@ -182,7 +182,7 @@ const getAllExpenseSuccess = data => {
           if (entry._id === data.expenses[i].payments[j].person) {
             listElement2.append(entry.name)
             const paymentDic = {'person': data.expenses[i].payments[j].person, 'pay': data.expenses[i].payments[j].pay}
-            payment.push(payment_dic)
+            payment.push(paymentDic)
             // store.payments
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
 
@@ -209,6 +209,7 @@ const getAllExpenseSuccess = data => {
       $('.expense-show  ul')[0].appendChild(listElement2)
     }
   }console.log(store.payments)
+  debugger
 }
 
 const getAllExpenseFailure = data => {
@@ -234,6 +235,7 @@ const onEditExpense = function (event) {
   // store.index_editExpense = id
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
+  store.index_i = i.getAttribute('data-indx-i')
   store.id_expense = id
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount
@@ -243,6 +245,7 @@ const onPayExpense = function (event) {
   event.preventDefault()
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
+  store.index_i = i.getAttribute('data-indx-i')
   // const data = i.getAttribute('data')
   $('#listPeople3')[0].innerHTML = ''
   for (let i = 0; i < store.people.length; i++) {
