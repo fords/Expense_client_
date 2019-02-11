@@ -31,7 +31,6 @@ const onAddExpenseForm = function (event) {
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
-    // debugger
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
       const payment = {pay: 0.00, person: $('#listPeople')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
@@ -86,33 +85,25 @@ const show = function (event) {
 
 const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
-  // const data = getFormFields(this)
   const payments = []
-  // store.people = []
   $('.payment_people_list')[0].innerHTML = ''
   for (const i in $('#listPeople3')[0].selectedOptions) {
-    // debugger
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
-      // store.people.forEach(function (entry) {
-      //   if (entry._id === $('#listPeople3')[0].selectedOptions[i].value) {
-
       store.people.push($('#listPeople3')[0].selectedOptions[i].text)
       const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
       $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       payments.push(payment)
       const j = document.createElement('input') // input element, text
       j.setAttribute('type', 'required number')
-      j.setAttribute('name', 'payment' + i)   // 'payment' + i)
+      j.setAttribute('name', 'payment' + i)
       j.setAttribute('id', $('#listPeople3')[0].selectedOptions[i].value)
-      // j.setAttribute('value', $('#listPeople3')[0].selectedOptions[i].value)
+
       store.payments_person_id.push($('#listPeople3')[0].selectedOptions[i].value)
       $('.payment_people_list').append(' pay  ')
       $('.payment_people_list').append(j)
       $('.payment_people_list').append('</br>')
     }
-    // })
   }
-  // }
   store.people_payments = payments
 }
 
@@ -120,9 +111,7 @@ const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
   store.people_payments.forEach(function (entry) {
-    console.log(entry.person)
     const a = document.getElementById(entry.person)
-    console.log(a.value)
     if (a.value !== undefined) {
       entry.pay = a.value
     }
