@@ -156,7 +156,7 @@ const getAllExpenseSuccess = data => {
       // const description = document.createElement('span')
       const div4 = document.createElement('div')
       const name2 = document.createElement('span')
-      // const div5 = document.createElement('div')
+      const div5 = document.createElement('div')
       name2.append(document.createTextNode(data.expenses[i].description))
       // console.log(data.expenses[i].description)
       const h3 = document.createElement('h3')
@@ -168,6 +168,12 @@ const getAllExpenseSuccess = data => {
       deleteExpense.href = 'javascript:;'
       deleteExpense.addEventListener('click', onDeleteExpense)
       deleteExpense.appendChild(document.createTextNode('Delete'))
+
+      const payExpense = document.createElement('a')
+      payExpense.href = 'javascript:;'
+      payExpense.addEventListener('click', onPayExpense)
+      payExpense.appendChild(document.createTextNode('Make Payment'))
+
       h3.append(name2)
       listElement2.append(h3)
       listElement2.append(div4)
@@ -190,6 +196,8 @@ const getAllExpenseSuccess = data => {
       listElement2.append(editExpense)
       listElement2.append(div4)
       listElement2.append(deleteExpense)
+      listElement2.append(div5)
+      listElement2.append(payExpense)
       listElement2.setAttribute('data-description', data.expenses[i].description)
       listElement2.setAttribute('data-amount', data.expenses[i].amount)
       listElement2.setAttribute('data-indx-i', i)
@@ -225,6 +233,25 @@ const onEditExpense = function (event) {
   store.id_expense = id
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount
+}
+
+const onPayExpense = function (event) {
+  event.preventDefault()
+  $('#listPeople3')[0].innerHTML = ''
+  for (let i = 0; i < store.people.length; i++) {
+    // if ( store.people[i]._id in event.target.parentNode.getAttribute('payments'))
+    const options = document.createElement('option')
+    options.value = store.people[i]._id
+    options.text = store.people[i].name
+    $('#listPeople3')[0].appendChild(options)
+  }
+  const i = event.target.parentNode
+  const id = i.getAttribute('data-attr')
+  store.description = i.getAttribute('data-description')
+  store.amount = i.getAttribute('data-amount')
+  store.id_expense = id
+  $('#expense-name3')[0].placeholder = store.description
+  $('#expense-amount3')[0].placeholder = store.amount
 }
 
 const onDeleteExpense = function (event) {

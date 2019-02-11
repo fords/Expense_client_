@@ -36,14 +36,30 @@ form {
   margin: 10px;
 }
 
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
 .addPerson {
   margin-left: 42px;
-  margin-right: 50px;
+  margin-right: 3px;
 }
 
 .addExpenseClass {
-  margin-left: 50px;
+  margin-left: 55px;
   margin-right: 50px;
+}
+
+.addPayment-save-class {
+  // margin-right: 50px;
+}
+
+.addPerson,
+.addExpenseClass,
+.addPayment-save-class {
+  float: left;
 }
 
 .formDiv {
@@ -64,7 +80,8 @@ form {
   border: 1px solid brown;
 }
 
-#listPeople2 {
+#listPeople2,
+#listPeople3 {
   max-height: 150px;
   min-height: 50px;
   width: 250px;
@@ -103,5 +120,5 @@ body {
 }
 
 .person {
-  padding: 20px;
+  padding: 2px;
 }

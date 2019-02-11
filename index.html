@@ -123,6 +123,7 @@
         </div>
       </div>
 
+      <div class="row">
       <div class="addPerson person" >
         <form id="addPerson-form-add" class="addPerson-panel">
           <fieldset>
@@ -180,15 +181,51 @@
               <!-- required multiple -->
             </div>
               <input class="formDiv" id="expense-submit-save" type="submit" class="expense-name-btn" value="SAVE">
+              <div id="paymentPer" class="formDiv">
+
+                <!-- required multiple -->
+              </div>
+                <!-- <input class="formDiv" id="payment-submit" type="submit" class="expense-name-btn" value="PAY SUBMIT"> -->
           </fieldset>
         </form>
+        </div>
+
+      <div class="addPayment-save-class">
+        <form name="addPayment-people" id="addPayment-people-save" class="addPayment-save">
+          <fieldset>
+              <div class="formDiv">
+                <div> <span> Select People Who Made Payment</span> </div>
+                <select required multiple id="listPeople3"></select>
+              <!-- required multiple -->
+              </div>
+              <input class="formDiv" id="payment-select" type="submit" class="btn" value="SELECT">
+          </fieldset>
+        </form>
+      </div>
+      <div class="addPayment-save-class">
+        <form name="addPayment-save" id="addPayment-save" class="addPayment-save">
+          <fieldset>
+            <div class="formDiv">
+                <span> Enter Expense Description </span>
+                <input required type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
+            </div>
+            <div class="formDiv">
+                <span> Enter Total Bill Amount </span>
+                <input required type="float" id="expense-amount3" class="expense-amount"  name="expense[amount]" placeholder="Enter Amount">
+            </div>
+            <div id="payment_pepole_list" class="formDiv payment_pepole_list">
 
 
+            </div>
+              <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
+          </fieldset>
+        </form>
+      </div>
 
       </div>
 
       <div class="show">
-        <div style="float: left ; margin-left: 3%; margin-right: 20px;" class="expense-show">
+        <div style="float: left ; margin-left: 1%; margin-right: 20px;" class="expense-show">
           <h1>Expense</h1>
           <ul> </ul>
         </div>

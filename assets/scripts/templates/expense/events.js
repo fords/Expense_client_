@@ -84,6 +84,46 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
+const onSelectPeopleForPayment = function (event) {
+  event.preventDefault()
+  // const data = getFormFields(this)
+  const payments = []
+  store.people = []
+  $('.payment_pepole_list')[0].innerHTML = ''
+  for (const i in $('#listPeople3')[0].selectedOptions) {
+    // debugger
+    if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
+      store.people.push($('#listPeople3')[0].selectedOptions[i].text)
+      const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
+      $('.payment_pepole_list').append($('#listPeople3')[0].selectedOptions[i].text)
+      payments.push(payment)
+      const j = document.createElement('input') // input element, text
+      j.setAttribute('type', 'required number')
+      j.setAttribute('name', 'payment' + i)
+      j.setAttribute('id', 'input' + i)
+      $('.payment_pepole_list').append(' pay  ')
+      $('.payment_pepole_list').append(j)
+      $('.payment_pepole_list').append('</br>')
+    }
+  }
+  store.people_payments = payments
+}
+
+const onAddPayment = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  // debugger
+  console.log(store.people_payments)
+  console.log(data)
+  data.expense.payments = store.people_payments
+  api.updateExpense(store.id_expense, data)
+    .then(ui.updateExpenseSuccess)
+    .then(() => show(event))
+    .catch(ui.updateExpenseFailure)
+  document.getElementById('addPayment-people-save').reset()
+  debugger
+}
+
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -127,6 +167,8 @@ const addHandlers = () => {
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
   $('#addExpense').on('submit', onAddExpenseForm)
   $('#add-expense-form-save').on('submit', onAddExpenseFormSave)
+  $('#addPayment-people-save').on('submit', onSelectPeopleForPayment)
+  $('#addPayment-save').on('submit', onAddPayment)
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
 
