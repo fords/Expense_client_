@@ -8,10 +8,17 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
+  // const x = document.getElementById('expense-show')
+  // $('.expense-show').display = 'none'
+  // x.style.display = 'none'
   const data = getFormFields(this)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
-  show(event)
+    // .then($('.show').display = 'none')
+    .then($('.expense-show').hide())
+  // show(event)
+  // $('.expense-show').display = 'none'
+  // $('.show').display = 'none'
 }
 
 const onAddPersonForm = function (event) {
@@ -26,6 +33,7 @@ const onAddPersonForm = function (event) {
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  $('.expense-show').show()
   data.expense.payments = []
   data.expense.payments.pay = 0
 
@@ -39,6 +47,7 @@ const onAddExpenseForm = function (event) {
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
+    // .then($('.expense-show').show())
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
@@ -48,6 +57,7 @@ const onAddExpenseTop = function (event) {
   $('.addExpense').show()
   $('.addPerson').hide()
   $('.addExpense-save').hide()
+  $('.expense-show').show()
   event.preventDefault()
   const data = getFormFields(this)
   api.getAllPerson(data)
