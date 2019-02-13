@@ -251,6 +251,8 @@ const onEditExpense = function (event) {
 
 const onPayExpense = function (event) {
   event.preventDefault()
+  $('.addPayment-select').show()
+  // $('.addPayment-submit').hide()
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')

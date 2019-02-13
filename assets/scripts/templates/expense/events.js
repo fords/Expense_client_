@@ -115,6 +115,8 @@ const onSelectPeopleForPayment = function (event) {
   // payments.push({ pay: 0.0, person: store.payments[store.id_expense].person })
 
   store.people_payments = payments
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').show()
 }
 
 const onAddPayment = function (event) {
@@ -135,6 +137,7 @@ const onAddPayment = function (event) {
     // .then(onAddExpenseTop(event))
     // .then(() => show(event))
     .then(ui.refreshMessage)
+    .then($('.addPayment-submit').hide())
     .catch(ui.updateExpenseFailure)
 }
 
@@ -193,6 +196,8 @@ const addHandlers = () => {
   $('.buttons').hide()
   $('.show').hide()
   $('#options-button').hide()
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').hide()
 }
 
 module.exports = {
