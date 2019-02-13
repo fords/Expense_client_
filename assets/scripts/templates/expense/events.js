@@ -8,10 +8,13 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
+
   const data = getFormFields(this)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
-  show(event)
+    .then(show(event))
+    .then($('.expense-show').hide())
+  // show(event)
 }
 
 const onAddPersonForm = function (event) {
@@ -26,6 +29,7 @@ const onAddPersonForm = function (event) {
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  $('.expense-show').show()
   data.expense.payments = []
   data.expense.payments.pay = 0
 
@@ -39,6 +43,7 @@ const onAddExpenseForm = function (event) {
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
+    // .then($('.expense-show').show())
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
@@ -48,6 +53,7 @@ const onAddExpenseTop = function (event) {
   $('.addExpense').show()
   $('.addPerson').hide()
   $('.addExpense-save').hide()
+  $('.expense-show').show()
   event.preventDefault()
   const data = getFormFields(this)
   api.getAllPerson(data)
@@ -91,7 +97,6 @@ const onSelectPeopleForPayment = function (event) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
       store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
-      $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       payments.push(payment)
       const j = document.createElement('input') // input element, text
       j.setAttribute('type', 'required number')
@@ -99,8 +104,9 @@ const onSelectPeopleForPayment = function (event) {
       j.setAttribute('id', $('#listPeople3')[0].selectedOptions[i].value)
 
       store.payments_person_id.push($('#listPeople3')[0].selectedOptions[i].value)
-      $('.payment_people_list').append(' pay  ')
       $('.payment_people_list').append(j)
+      $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
+      $('.payment_people_list').append('\'s payment  ')
       $('.payment_people_list').append('</br>')
     }
   }
@@ -109,6 +115,8 @@ const onSelectPeopleForPayment = function (event) {
   // payments.push({ pay: 0.0, person: store.payments[store.id_expense].person })
 
   store.people_payments = payments
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').show()
 }
 
 const onAddPayment = function (event) {
@@ -126,7 +134,10 @@ const onAddPayment = function (event) {
   data.expense.payments = store.people_payments
   api.updateExpense(store.id_expense, data)
     .then(ui.updateExpenseSuccess)
-    .then(() => show(event))
+    // .then(onAddExpenseTop(event))
+    // .then(() => show(event))
+    .then(ui.refreshMessage)
+    .then($('.addPayment-submit').hide())
     .catch(ui.updateExpenseFailure)
 }
 
@@ -185,6 +196,8 @@ const addHandlers = () => {
   $('.buttons').hide()
   $('.show').hide()
   $('#options-button').hide()
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').hide()
 }
 
 module.exports = {
