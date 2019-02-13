@@ -18,6 +18,13 @@ const getAllPerson = function () {
   })
 }
 
+const getOnePerson = function (personId) {
+  return $.ajax({
+    url: config.apiUrl + '/persons/' + personId,
+    method: 'GET'
+  })
+}
+
 const deletePerson = function (personId) {
   return $.ajax({
     url: config.apiUrl + '/persons/' + personId,
@@ -89,6 +96,7 @@ const updateExpense = function (expId, data) {
 module.exports = {
   createPerson,
   getAllPerson,
+  getOnePerson,
   deletePerson,
   updatePerson,
   createExpense,
