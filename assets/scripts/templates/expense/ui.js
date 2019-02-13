@@ -217,7 +217,7 @@ const getAllExpenseSuccess = data => {
       $('.expense-show  ul')[0].appendChild(listElement2)
     }
   }console.log(store.payments)
-  debugger
+  // debugger
 }
 
 const getAllExpenseFailure = data => {
