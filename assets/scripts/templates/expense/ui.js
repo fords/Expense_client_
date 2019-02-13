@@ -108,6 +108,13 @@ const createExpenseFailure = data => {
   $('#feedbackOnAction').fadeOut(5000)
 }
 
+
+const refreshMessage = data => {
+  $('#refresh').show().text('Please click Show Expense button to see updated info')
+  $('#refresh').fadeOut(5000)
+  console.log('refrehs')
+}
+
 const getAllExpenseSuccess = data => {
   // $('#feedbackOnAction').show().text('Get all expense')
   // $('#feedbackOnAction').fadeOut(5000)
@@ -327,5 +334,6 @@ module.exports = {
   getAllExpenseSuccess,
   getAllExpenseFailure,
   updateExpenseSuccess,
-  updateExpenseFailure
+  updateExpenseFailure,
+  refreshMessage
 }
