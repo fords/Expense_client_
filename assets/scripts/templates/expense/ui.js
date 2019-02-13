@@ -187,7 +187,7 @@ const getAllExpenseSuccess = data => {
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
 
                      data.expenses[i].payments[j].pay)
-            listElement2.append(' would pay ', owe.toFixed(2))
+            listElement2.append(' owes ', owe.toFixed(2))
             listElement2.setAttribute('data-indx-j', j)
             const div3 = document.createElement('div')
             listElement2.append(div3)
@@ -201,6 +201,7 @@ const getAllExpenseSuccess = data => {
       listElement2.append(deleteExpense)
       listElement2.append(div5)
       listElement2.append(payExpense)
+      listElement2.append()
       listElement2.setAttribute('data-description', data.expenses[i].description)
       listElement2.setAttribute('data-amount', data.expenses[i].amount)
       listElement2.setAttribute('data-indx-i', i)

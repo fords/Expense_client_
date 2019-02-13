@@ -91,7 +91,6 @@ const onSelectPeopleForPayment = function (event) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
       store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
-      $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       payments.push(payment)
       const j = document.createElement('input') // input element, text
       j.setAttribute('type', 'required number')
@@ -99,8 +98,9 @@ const onSelectPeopleForPayment = function (event) {
       j.setAttribute('id', $('#listPeople3')[0].selectedOptions[i].value)
 
       store.payments_person_id.push($('#listPeople3')[0].selectedOptions[i].value)
-      $('.payment_people_list').append(' pay  ')
       $('.payment_people_list').append(j)
+      $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
+      $('.payment_people_list').append('\'s payment  ')
       $('.payment_people_list').append('</br>')
     }
   }
