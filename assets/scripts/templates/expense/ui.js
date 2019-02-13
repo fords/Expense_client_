@@ -112,7 +112,10 @@ const createExpenseFailure = data => {
 const refreshMessage = data => {
   $('#refresh').show().text('Please click Show Expense button to see updated info')
   $('#refresh').fadeOut(5000)
-  console.log('refrehs')
+  // console.log('refrehs')
+  $('#feedbackOnAction').html(' ')
+  $('#feedbackOnAction').show().text('Please click Show Expense button to see updated info!!')
+  $('#feedbackOnAction').fadeOut(5000)
 }
 
 const getAllExpenseSuccess = data => {

@@ -133,7 +133,7 @@ const onAddPayment = function (event) {
 
   data.expense.payments = store.people_payments
   api.updateExpense(store.id_expense, data)
-    .then(ui.updateExpenseSuccess)
+    // .then(ui.updateExpenseSuccess)
     // .then(onAddExpenseTop(event))
     // .then(() => show(event))
     .then(ui.refreshMessage)
