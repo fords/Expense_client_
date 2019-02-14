@@ -49,20 +49,24 @@ ul {
 .addPerson {
   margin-left: 42px;
   margin-right: 3px;
+  margin-top: 40px;
 }
 
 .addExpenseClass {
   margin-left: 55px;
   margin-right: 50px;
+  margin-top: 40px;
 }
 
-.addPayment-save-class {
+.addPayment-save {
   // margin-right: 50px;
+  margin-top: 50px;
 }
 
 .addPerson,
 .addExpenseClass,
-.addPayment-save-class {
+.addPayment-save {
+  // margin-top: 43px;
   float: left;
 }
 
