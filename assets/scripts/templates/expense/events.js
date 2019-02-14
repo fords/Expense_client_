@@ -149,6 +149,9 @@ const onSelectPeopleForPayment = function (event) {
   $('.addPayment-submit').show()
 }
 
+/*
+  Action when Make Payment button is clicked
+*/
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -171,6 +174,10 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
 }
 
+
+/*
+  Save button action after Edit Expense button is clicked
+*/
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -207,6 +214,9 @@ const onAddExpenseFormSave = function (event) {
   $('.addExpense-save').hide()
 }
 
+/*
+  Action when the Save Person submit button is clicked
+*/
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -220,6 +230,9 @@ const onAddPersonFormSave = function (event) {
   $('.addPerson-panel-save').hide()
 }
 
+/*
+  Event Handler for button actions
+*/
 const addHandlers = () => {
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)
