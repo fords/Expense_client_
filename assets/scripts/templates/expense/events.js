@@ -3,6 +3,9 @@ const api = require('./api.js')
 const ui = require('./ui.js')
 const store = require('../../store.js')
 
+/*
+  Action when the Show Person button is clicked
+*/
 const onAddPersonTop = function (event) {
   $('.addPerson').show()
   event.preventDefault()
@@ -19,6 +22,9 @@ const onAddPersonTop = function (event) {
   // show(event)
 }
 
+/*
+  Action when the Add Person submit button is clicked
+*/
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -29,6 +35,9 @@ const onAddPersonForm = function (event) {
     .catch(ui.createPersonFailure)
 }
 
+/*
+  Action when the Add Expense submit button is clicked
+*/
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -58,6 +67,9 @@ const onAddExpenseForm = function (event) {
   document.getElementById('addExpense').reset()
 }
 
+/*
+  Action when the Show Expense button is clicked
+*/
 const onAddExpenseTop = function (event) {
   $('.addExpense').show()
   $('.addPerson').hide()
@@ -70,6 +82,9 @@ const onAddExpenseTop = function (event) {
   show(event)
 }
 
+/*
+  Make a list of people that can be selected by user
+*/
 const fieldVal = data => {
   $('#listPeople')[0].innerHTML = ''
   store.people = []
@@ -85,6 +100,9 @@ const fieldVal = data => {
   }
 }
 
+/*
+  Show all list of people and expenses created by user
+*/
 const show = function (event) {
   // show person name
   const data = getFormFields(event.target)
@@ -98,6 +116,9 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
+/*
+  Create an expense with a list of people selected by user
+*/
 const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   const payments = []
@@ -155,25 +176,16 @@ const onAddExpenseFormSave = function (event) {
   const data = getFormFields(this)
   data.expense.payments = []
   data.expense.payments.pay = 0
-
-  // NEED to fix Pay being 0 as default whenever the edit is Made
   let payVar = 0
+
   // add the person object selected in Add Expense option
-  // Use store.index_i
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
       debugger
       // let j = 0
       store.payments[store.index_i].forEach(function (entry) {
-        // const a = document.getElementById(entry.person)
-        //
-        // if (a.value === $('#listPeople2')[0].selectedOptions[i].value ) {
-        //   payVar = entry.expense
-        // }
-        // console.log(entry.person)
-        if (entry.person === $('#listPeople2')[0].selectedOptions[i].value ) {
+        if (entry.person === $('#listPeople2')[0].selectedOptions[i].value) {
           payVar = entry.pay
-          // continue
         }
       })
       /*
