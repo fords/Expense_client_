@@ -157,16 +157,30 @@ const onAddExpenseFormSave = function (event) {
   data.expense.payments.pay = 0
 
   // NEED to fix Pay being 0 as default whenever the edit is Made
-  const pay = 0
+  let payVar = 0
   // add the person object selected in Add Expense option
+  // Use store.index_i
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
       debugger
+      // let j = 0
+      store.payments[store.index_i].forEach(function (entry) {
+        // const a = document.getElementById(entry.person)
+        //
+        // if (a.value === $('#listPeople2')[0].selectedOptions[i].value ) {
+        //   payVar = entry.expense
+        // }
+        // console.log(entry.person)
+        if (entry.person === $('#listPeople2')[0].selectedOptions[i].value ) {
+          payVar = entry.pay
+          // continue
+        }
+      })
       /*
       store.index_i = i.getAttribute('data-indx-i')  // save index of expense in front end
       store.id_expense = id
       */
-      const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
+      const payment = {pay: payVar, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
   }
