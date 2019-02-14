@@ -247,8 +247,8 @@ const onEditExpense = function (event) {
   // store.index_editExpense = id
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
-  store.index_i = i.getAttribute('data-indx-i')
-  store.id_expense = id
+  store.index_i = i.getAttribute('data-indx-i')  // save index of expense in front end
+  store.id_expense = id    // save id in front end
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount
 }

@@ -161,6 +161,11 @@ const onAddExpenseFormSave = function (event) {
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
+      debugger
+      /*
+      store.index_i = i.getAttribute('data-indx-i')  // save index of expense in front end
+      store.id_expense = id
+      */
       const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
