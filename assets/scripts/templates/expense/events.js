@@ -174,7 +174,6 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
 }
 
-
 /*
   Save button action after Edit Expense button is clicked
 */
