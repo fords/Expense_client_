@@ -76,6 +76,7 @@ const onEditName = function (event) {
   $('.addPerson').show()
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').show()
+  $('.expense-show').hide()
   $('#person-form-save')[0].placeholder = name
 }
 
