@@ -30,6 +30,20 @@ h1 {
 form {
   display: inline-block;
   border: 10px solid black;
+  width: 550px;
+  padding: 10px;
+  background: blue;
+  margin: 10px;
+}
+
+#sign-up,
+#sign-in,
+#sign-out,
+#change-password,
+.addPerson-panel,
+.addPerson-panel-save {
+  display: inline-block;
+  border: 10px solid black;
   width: 400px;
   padding: 10px;
   background: blue;
@@ -56,6 +70,7 @@ ul {
   margin-left: 55px;
   margin-right: 50px;
   margin-top: 40px;
+  width: 600px;
 }
 
 .addPayment-save {
