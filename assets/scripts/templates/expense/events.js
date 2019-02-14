@@ -8,6 +8,8 @@ const onAddPersonTop = function (event) {
   event.preventDefault()
   $('.addExpense').hide()
   $('.addExpense-save').hide()
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').hide()
 
   const data = getFormFields(this)
   api.getAllPerson(data)
@@ -23,6 +25,7 @@ const onAddPersonForm = function (event) {
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
+    // .then($('.expense-show').hide())
     .catch(ui.createPersonFailure)
 }
 
@@ -30,12 +33,18 @@ const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
   $('.expense-show').show()
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').hide()
+  $('.addExpense').show()
+  $('.addExpense-save').hide()
+
   data.expense.payments = []
   data.expense.payments.pay = 0
 
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople')[0].selectedOptions) {
     if ($('#listPeople')[0].selectedOptions[i].value !== undefined) {
+      // find the person payment in store.people_payments
       const payment = {pay: 0.00, person: $('#listPeople')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
@@ -43,7 +52,7 @@ const onAddExpenseForm = function (event) {
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
-    // .then($('.expense-show').show())
+    // .then($('.expense-show').hide())
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
@@ -147,6 +156,8 @@ const onAddExpenseFormSave = function (event) {
   data.expense.payments = []
   data.expense.payments.pay = 0
 
+  // NEED to fix Pay being 0 as default whenever the edit is Made
+  const pay = 0
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {

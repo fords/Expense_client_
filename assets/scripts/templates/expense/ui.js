@@ -76,6 +76,7 @@ const onEditName = function (event) {
   $('.addPerson').show()
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').show()
+  $('.expense-show').hide()
   $('#person-form-save')[0].placeholder = name
 }
 
@@ -255,19 +256,35 @@ const onEditExpense = function (event) {
 const onPayExpense = function (event) {
   event.preventDefault()
   $('.addPayment-select').show()
+  // data =
   // $('.addPayment-submit').hide()
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')
-  // const data = i.getAttribute('data')
+
+  // const data = getFormFields(event.target)
+
+  // debugger
+
   $('#listPeople3')[0].innerHTML = ''
-  for (let i = 0; i < store.people.length; i++) {
+  const peopleSelectedList = []
+  for (let a = 0; a < store.payments[store.index_i].length; a++) {
+    // Get person name from list of all people in  the specific expense schema
+    for (let j = 0; j < store.people.length; j++) {
+      if (store.people[j]._id === store.payments[store.index_i][a].person) {
+        peopleSelectedList.push(store.people[j])
+        // console.log(store.people[j].name)
+      }
+    }
+  }
+
+  for (let i = 0; i < peopleSelectedList.length; i++) {
     // if ( store.people[i]._id in event.target.parentNode.getAttribute('payments'))
     // store.people.forEach(function (entry) {
     //   if (entry._id === data.payments[id].person) {
     const options = document.createElement('option')
-    options.value = store.people[i]._id
-    options.text = store.people[i].name
+    options.value = peopleSelectedList[i]._id
+    options.text = peopleSelectedList[i].name
     $('#listPeople3')[0].appendChild(options)
     //   }
     // })
