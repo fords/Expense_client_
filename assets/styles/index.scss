@@ -36,6 +36,10 @@ form {
   margin: 10px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .row:after {
   content: '';
   display: table;
@@ -71,6 +75,8 @@ form {
 .person-show li,
 .expense-show li {
   padding: 10px;
+  border: 10px solid black;
+  background-color: #bee1df;
 }
 
 #listPeople {

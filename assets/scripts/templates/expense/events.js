@@ -147,6 +147,8 @@ const onAddExpenseFormSave = function (event) {
   data.expense.payments = []
   data.expense.payments.pay = 0
 
+  // NEED to fix Pay being 0 as default whenever the edit is Made
+  const pay = 0
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
