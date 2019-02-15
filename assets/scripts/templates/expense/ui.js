@@ -133,7 +133,6 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-
   // find total number of unique people
   const uniquePeople = [...new Set(arr)]
 
@@ -272,8 +271,8 @@ const onPayExpense = function (event) {
   store.description = i.getAttribute('data-description')
   store.amount = i.getAttribute('data-amount')
   store.id_expense = id
-  $('#expense-name3')[0].placeholder = store.description
-  $('#expense-amount3')[0].placeholder = store.amount
+  // $('#expense-name3')[0].placeholder = store.description
+  // $('#expense-amount3')[0].placeholder = store.amount
 }
 
 const onDeleteExpense = function (event) {

@@ -169,6 +169,7 @@ const onSelectPeopleForPayment = function (event) {
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a !== null) {
@@ -179,6 +180,8 @@ const onAddPayment = function (event) {
   })
   // if people in data.expense[store.index_i] not in this updated array, add the people
   data.expense.payments = store.people_payments
+  data.expense.description = store.description
+  data.expense.amount = store.amount
   api.updateExpense(store.id_expense, data)
     .then(ui.refreshMessage)
     .then($('.addPayment-submit').hide())
