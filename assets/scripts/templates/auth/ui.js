@@ -45,6 +45,8 @@ const signOutSuccess = function () {
   $('#options-button').hide()
   $('.expense-show ul')[0].innerHTML = ''
   $('.person-show ul')[0].innerHTML = ''
+  $('.addPayment-select').hide()
+  $('.addPayment-submit').hide()
 }
 
 const changePasswordSuccess = function (data) {
