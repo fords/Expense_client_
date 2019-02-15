@@ -153,7 +153,9 @@ const getAllExpenseSuccess = data => {
 
   // Shows only users' belonged expenses and handlebars for CRUD actions.
   store.payments = []
+  let k = 0
   for (let i = 0; i < data.expenses.length; i++) {
+    debugger
     if (data.expenses[i].owner !== store.user._id) {
     } else {
       const listElement2 = document.createElement('LI')
@@ -205,9 +207,10 @@ const getAllExpenseSuccess = data => {
       listElement2.append()
       listElement2.setAttribute('data-description', data.expenses[i].description)
       listElement2.setAttribute('data-amount', data.expenses[i].amount)
-      listElement2.setAttribute('data-indx-i', i)
+      listElement2.setAttribute('data-indx-i', k)
       listElement2.setAttribute('data-attr', data.expenses[i]._id)
       $('.expense-show  ul')[0].appendChild(listElement2)
+      k += 1c
     }
   } // console.log(store.payments)
 }
@@ -222,6 +225,8 @@ const onEditExpense = function (event) {
   $('.addExpense').hide()
   $('.addExpense-save').show()
   $('#listPeople2')[0].innerHTML = ''
+
+  // debugger
   for (let i = 0; i < store.people.length; i++) {
     const options = document.createElement('option')
     options.value = store.people[i]._id
@@ -235,6 +240,7 @@ const onEditExpense = function (event) {
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
   store.index_i = i.getAttribute('data-indx-i') // save index of expense in front end
+  console.log(store.index_i)
   store.id_expense = id // save id in front end
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount
