@@ -155,7 +155,6 @@ const getAllExpenseSuccess = data => {
   store.payments = []
   let k = 0 // current owner index for data expense
   for (let i = 0; i < data.expenses.length; i++) {
-    // debugger
     if (data.expenses[i].owner !== store.user._id) {
     } else {
       const listElement2 = document.createElement('LI')
@@ -226,7 +225,6 @@ const onEditExpense = function (event) {
   $('.addExpense-save').show()
   $('#listPeople2')[0].innerHTML = ''
 
-  // debugger
   for (let i = 0; i < store.people.length; i++) {
     const options = document.createElement('option')
     options.value = store.people[i]._id
@@ -240,7 +238,7 @@ const onEditExpense = function (event) {
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
   store.index_i = i.getAttribute('data-indx-i') // save index of expense in front end
-  // console.log(store.index_i)
+
   store.id_expense = id // save id in front end
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount
