@@ -1,7 +1,6 @@
 'use strict'
 const getFormFields = require('../../../../lib/get-form-fields')
 const store = require('../../store.js')
-// const events = require('./events.js')
 const api = require('./api.js')
 
 const createPersonSuccess = data => {
@@ -109,7 +108,6 @@ const createExpenseFailure = data => {
   $('#feedbackOnAction').fadeOut(5000)
 }
 
-
 const refreshMessage = data => {
   $('#refresh').show().text('Please click Show Expense button to see updated info')
   $('#refresh').fadeOut(5000)
@@ -133,16 +131,12 @@ const getAllExpenseSuccess = data => {
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
         store.people.forEach(function (entry) {
           if (entry._id === data.expenses[i].payments[j].person) {
-            // find total number of unique people in expense schema
-            // if (data.expenses[i].payments[j].person !== undefined)
             arr.push(data.expenses[i].payments[j].person)
           }
         })
       }
     }
   }
-  // console.log(totalPeople)
-  // console.log(arr)
   const uniquePeople = [...new Set(arr)]
 
   for (let i = 0; i < data.expenses.length; i++) {
@@ -247,8 +241,8 @@ const onEditExpense = function (event) {
   // store.index_editExpense = id
   const description = i.getAttribute('data-description')
   const amount = i.getAttribute('data-amount')
-  store.index_i = i.getAttribute('data-indx-i')  // save index of expense in front end
-  store.id_expense = id    // save id in front end
+  store.index_i = i.getAttribute('data-indx-i') // save index of expense in front end
+  store.id_expense = id // save id in front end
   $('#expense-name')[0].placeholder = description
   $('#expense-amount')[0].placeholder = amount
 }
@@ -256,8 +250,7 @@ const onEditExpense = function (event) {
 const onPayExpense = function (event) {
   event.preventDefault()
   $('.addPayment-select').show()
-  // data =
-  // $('.addPayment-submit').hide()
+
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')
@@ -327,7 +320,7 @@ const updateExpenseFailure = () => {
 }
 
 const showExpense = function (event) {
-  // show person name
+  // show all expense
   const data = getFormFields(event.target)
   api.getAllExpense(data)
     .then(getAllExpenseSuccess)
@@ -335,7 +328,7 @@ const showExpense = function (event) {
 }
 
 const show = function (event) {
-  // show person name
+  // show  all people
   const data = getFormFields(event.target)
   api.getAllPerson(data)
     .then(getAllPersonSuccess)

@@ -19,7 +19,6 @@ const onAddPersonTop = function (event) {
     .then((data) => fieldVal(data))
     .then(show(event))
     .then($('.expense-show').hide())
-  // show(event)
 }
 
 /*
@@ -61,7 +60,6 @@ const onAddExpenseForm = function (event) {
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
-    // .then($('.expense-show').hide())
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
@@ -125,6 +123,8 @@ const onSelectPeopleForPayment = function (event) {
   $('.payment_people_list')[0].innerHTML = ''
   for (const i in $('#listPeople3')[0].selectedOptions) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
+
+    // NEED TO FIX O being hardcoded for payment
       store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
       const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
       payments.push(payment)
@@ -155,6 +155,7 @@ const onSelectPeopleForPayment = function (event) {
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  debugger
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a.value !== undefined) {
@@ -163,12 +164,9 @@ const onAddPayment = function (event) {
       entry.pay = 0 // reset if person doesn't exist
     }
   })
-
+  // if people in data.expense[store.index_i] not in this updated array, add the people
   data.expense.payments = store.people_payments
   api.updateExpense(store.id_expense, data)
-    // .then(ui.updateExpenseSuccess)
-    // .then(onAddExpenseTop(event))
-    // .then(() => show(event))
     .then(ui.refreshMessage)
     .then($('.addPayment-submit').hide())
     .catch(ui.updateExpenseFailure)
@@ -187,17 +185,11 @@ const onAddExpenseFormSave = function (event) {
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
-      debugger
-      // let j = 0
       store.payments[store.index_i].forEach(function (entry) {
         if (entry.person === $('#listPeople2')[0].selectedOptions[i].value) {
           payVar = entry.pay
         }
       })
-      /*
-      store.index_i = i.getAttribute('data-indx-i')  // save index of expense in front end
-      store.id_expense = id
-      */
       const payment = {pay: payVar, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
