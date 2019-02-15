@@ -32,6 +32,7 @@ const onAddPersonForm = function (event) {
     .then(() => show(event))
     // .then($('.expense-show').hide())
     .catch(ui.createPersonFailure)
+  $('#addPerson-form-add')[0].reset()
 }
 
 /*
@@ -63,6 +64,7 @@ const onAddExpenseForm = function (event) {
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
+  $('#addExpense')[0].reset()
 }
 
 /*
@@ -181,6 +183,8 @@ const onAddPayment = function (event) {
     .then(ui.refreshMessage)
     .then($('.addPayment-submit').hide())
     .catch(ui.updateExpenseFailure)
+  $('#addPayment-save')[0].reset()
+  $('#addPayment-people-save')[0].reset()
 }
 
 /*
@@ -214,6 +218,8 @@ const onAddExpenseFormSave = function (event) {
   document.getElementById('add-expense-form-save').reset()
   $('.addExpense').show()
   $('.addExpense-save').hide()
+  // $('#expense-amount')[0].reset()
+  $('#add-expense-form-save')[0].reset()
 }
 
 /*
@@ -230,6 +236,7 @@ const onAddPersonFormSave = function (event) {
   document.getElementById('add-person-form-save').reset()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
+  $('#add-person-form-save')[0].reset()
 }
 
 /*
