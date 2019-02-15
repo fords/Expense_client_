@@ -121,28 +121,42 @@ const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   const payments = []
   $('.payment_people_list')[0].innerHTML = ''
+  let payTemp = 0
+  store.payments_person_id = []
   for (const i in $('#listPeople3')[0].selectedOptions) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
+      // debugger
 
-    // NEED TO FIX O being hardcoded for payment
+      store.payments[store.index_i].forEach(function (entry) {
+        if (entry.person === $('#listPeople3')[0].selectedOptions[i].value) {
+          payTemp = entry.pay
+        }
+      })
       store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
-      const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
+      const payment = {pay: payTemp, person: $('#listPeople3')[0].selectedOptions[i].value}
       payments.push(payment)
       const j = document.createElement('input') // input element, text
-      j.setAttribute('type', 'required number')
+      j.setAttribute('type', 'required float')
       j.setAttribute('name', 'payment' + i)
       j.setAttribute('id', $('#listPeople3')[0].selectedOptions[i].value)
 
       store.payments_person_id.push($('#listPeople3')[0].selectedOptions[i].value)
+      store.payments_person_name.push($('#listPeople3')[0].selectedOptions[i].text)
       $('.payment_people_list').append(j)
       $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       $('.payment_people_list').append('\'s payment  ')
       $('.payment_people_list').append('</br>')
     }
   }
+
+  store.payments[store.index_i].forEach(function (entry) {
+    if (store.payments_person_id.indexOf(entry.person) === -1) {
+      const payment = {pay: entry.pay, person: entry.person}
+      payments.push(payment)
+    }
+  })
   // add the rest of people in the expense with 0 or previous payment as default
   // if store.payments[store.id_expense].person not in store.people_ID_payments:
-  // payments.push({ pay: 0.0, person: store.payments[store.id_expense].person })
 
   store.people_payments = payments
   $('.addPayment-select').hide()
@@ -155,13 +169,12 @@ const onSelectPeopleForPayment = function (event) {
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  debugger
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
-    if (a.value !== undefined) {
-      entry.pay = entry.pay + a.value
+    if (a !== null) {
+      entry.pay = (parseFloat(entry.pay) + parseFloat(a.value)).toString()
     } else {
-      entry.pay = 0 // reset if person doesn't exist
+      entry.pay = entry.pay
     }
   })
   // if people in data.expense[store.index_i] not in this updated array, add the people

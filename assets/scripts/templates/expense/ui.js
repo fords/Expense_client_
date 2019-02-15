@@ -28,7 +28,6 @@ const getAllPersonSuccess = data => {
   $('.person-show ul')[0].innerHTML = ''
 
   for (let i = 0; i < data.persons.length; i++) {
-    // console.log(data)
     if (data.persons[i].owner !== store.user._id) {
     } else {
       const listElement = document.createElement('LI')
@@ -36,7 +35,6 @@ const getAllPersonSuccess = data => {
       const div = document.createElement('div')
       const div2 = document.createElement('div')
       name.append(document.createTextNode(data.persons[i].name))
-      // console.log(store.people[i])
       const editName = document.createElement('a')
       editName.href = 'javascript:;'
       editName.addEventListener('click', onEditName)
@@ -111,17 +109,15 @@ const createExpenseFailure = data => {
 const refreshMessage = data => {
   $('#refresh').show().text('Please click Show Expense button to see updated info')
   $('#refresh').fadeOut(5000)
-  // console.log('refrehs')
   $('#feedbackOnAction').html(' ')
   $('#feedbackOnAction').show().text('Please click Show Expense button to see updated info!!')
   $('#feedbackOnAction').fadeOut(5000)
 }
 
 const getAllExpenseSuccess = data => {
-  // $('#feedbackOnAction').show().text('Get all expense')
-  // $('#feedbackOnAction').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
 
+  // find totale number list of people in expenses
   const arr = []
   const totalPeople = []
   for (let i = 0; i < data.expenses.length; i++) {
@@ -137,6 +133,8 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
+
+  // find total number of unique people
   const uniquePeople = [...new Set(arr)]
 
   for (let i = 0; i < data.expenses.length; i++) {
@@ -152,18 +150,17 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-  // console.log(totalPeople)
+
+  // Shows only users' belonged expenses and handlebars for CRUD actions.
   store.payments = []
   for (let i = 0; i < data.expenses.length; i++) {
     if (data.expenses[i].owner !== store.user._id) {
     } else {
       const listElement2 = document.createElement('LI')
-      // const description = document.createElement('span')
       const div4 = document.createElement('div')
       const name2 = document.createElement('span')
       const div5 = document.createElement('div')
       name2.append(document.createTextNode(data.expenses[i].description))
-      // console.log(data.expenses[i].description)
       const h3 = document.createElement('h3')
       const editExpense = document.createElement('a')
       editExpense.href = 'javascript:;'
@@ -188,7 +185,6 @@ const getAllExpenseSuccess = data => {
             listElement2.append(entry.name)
             const paymentDic = {'person': data.expenses[i].payments[j].person, 'pay': data.expenses[i].payments[j].pay}
             payment.push(paymentDic)
-            // store.payments
             const owe = Math.max(0, (data.expenses[i].amount / totalPeople[i]) -
 
                      data.expenses[i].payments[j].pay)
@@ -210,12 +206,10 @@ const getAllExpenseSuccess = data => {
       listElement2.setAttribute('data-description', data.expenses[i].description)
       listElement2.setAttribute('data-amount', data.expenses[i].amount)
       listElement2.setAttribute('data-indx-i', i)
-      // listElement2.setAttribute('data', data.expenses[i].payments.person)
       listElement2.setAttribute('data-attr', data.expenses[i]._id)
       $('.expense-show  ul')[0].appendChild(listElement2)
     }
-  }console.log(store.payments)
-  // debugger
+  } // console.log(store.payments)
 }
 
 const getAllExpenseFailure = data => {
@@ -235,7 +229,6 @@ const onEditExpense = function (event) {
 
     $('#listPeople2')[0].appendChild(options)
   }
-  // const data = getFormFields(this)
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   // store.index_editExpense = id
@@ -255,10 +248,6 @@ const onPayExpense = function (event) {
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')
 
-  // const data = getFormFields(event.target)
-
-  // debugger
-
   $('#listPeople3')[0].innerHTML = ''
   const peopleSelectedList = []
   for (let a = 0; a < store.payments[store.index_i].length; a++) {
@@ -266,21 +255,15 @@ const onPayExpense = function (event) {
     for (let j = 0; j < store.people.length; j++) {
       if (store.people[j]._id === store.payments[store.index_i][a].person) {
         peopleSelectedList.push(store.people[j])
-        // console.log(store.people[j].name)
       }
     }
   }
 
   for (let i = 0; i < peopleSelectedList.length; i++) {
-    // if ( store.people[i]._id in event.target.parentNode.getAttribute('payments'))
-    // store.people.forEach(function (entry) {
-    //   if (entry._id === data.payments[id].person) {
     const options = document.createElement('option')
     options.value = peopleSelectedList[i]._id
     options.text = peopleSelectedList[i].name
     $('#listPeople3')[0].appendChild(options)
-    //   }
-    // })
   }
   store.description = i.getAttribute('data-description')
   store.amount = i.getAttribute('data-amount')
@@ -293,7 +276,6 @@ const onDeleteExpense = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
   i = i.getAttribute('data-attr')
-  // store.id_expense = i.getAttribute('data-attr')
   api.deleteExpense(i)
     .then(deleteExpenseSuccess)
     .then(() => showExpense(event))
