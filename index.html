@@ -1,241 +1,236 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Expense Track</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<head>
+  <title>Expense Track</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-
-    <body>
-
-      <h1>Expense Track</h1>
-
-    <div class="btn-toolbar justify-content-between" role="toolbar">
+<body>
+  <h1>Expense Track</h1>
+  <div class="btn-toolbar justify-content-between" role="toolbar">
     <div class='table'>
       <div class='cell'>
         <div class="btn-group" role="group" aria-label="auth-group">
-        <!-- Sign Up Modal-->
-          <button type="button" id="sign-up-button" class="btn btn-primary" data-toggle="modal"
-            data-target="#authorizationModal">Sign In</button>
-
-            <div class="modal fade" id="authorizationModal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header text-center">
-                    <h5 class="modal-title" id="authorizationModalLabel">Sign Up</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <p id="up-message"></p>
-
-                    <form id="sign-up">
-                      <div class="form-group">
-                        <input class="form-control" type="email" name="credentials[email]" placeholder="Email">
-                      </div>
-                      <div class="form-group">
-                        <input class="form-control" type="password" name="credentials[password]"
-                         placeholder="Password">
-                      </div>
-                      <div class="form-group">
-                        <input class="form-control" type="password" name="credentials[password_confirmation]"
-                         placeholder="Confirm Password">
-                      </div>
-                      <button type="submit" class="btn btn-primary">Sign Up!</button>
-                    </form>
-                    <hr><hr>
-
-                    <h5 class="modal-title" id="authorizationModalLabel">Sign In</h5>
-                    <hr><br>
-                    <form id="sign-in">
-                      <div class="form-group">
-                        <input class="form-control" type="email" name="credentials[email]" placeholder="a@gmail.com">
-                      </div>
-                      <div class="form-group">
-                        <input class="form-control" type="password" name="credentials[password]"
-                       placeholder="12">
-                     </div>
-                      <button type="submit" class="btn btn-primary">Sign In</button>
-                    </form>
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
+          <!-- Sign Up Modal-->
+          <button type="button" id="sign-up-button" class="btn btn-primary" data-toggle="modal" data-target="#authorizationModal">Sign In</button>
+          <div class="modal fade" id="authorizationModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h5 class="modal-title" id="authorizationModalLabel">Sign Up</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="up-message"></p>
+                  <form id="sign-up">
+                    <div class="form-group">
+                      <input class="form-control" type="email" name="credentials[email]" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="password" name="credentials[password]" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up!</button>
+                  </form>
+                  <hr>
+                  <hr>
+                  <h5 class="modal-title" id="authorizationModalLabel">Sign In</h5>
+                  <hr>
+                  <br>
+                  <form id="sign-in">
+                    <div class="form-group">
+                      <input class="form-control" type="email" name="credentials[email]" placeholder="a@gmail.com">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="password" name="credentials[password]" placeholder="12">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
-
-      </div>
+          </div>
+          <!-- Sign Up Modal-->
+        </div>
       </div>
     </div>
-
-
   </div>
-      <div  id='feedbackOnAction'> <br> </div>
-
-      <div class = buttons>
-        <button type="button" id="addPersonTop" class="btn">Show Person</button>
-        <button type="button" id="addExpenseTop" class="btn">Show Expense</button>
-        <button type="button" id="options-button" class="btn btn-primary" data-toggle="modal"
-        data-target="#optionsModal">Options</button>
-
-        <div class="modal fade" id="optionsModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="optionsModalLabel">Options</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+  <div id='feedbackOnAction'>
+    <br>
+  </div>
+  <!-- Buttons and sign up/sign in options  -->
+  <div class=buttons>
+    <button type="button" id="addPersonTop" class="btn">Show Person</button>
+    <button type="button" id="addExpenseTop" class="btn">Show Expense</button>
+    <button type="button" id="options-button" class="btn btn-primary" data-toggle="modal" data-target="#optionsModal">Options</button>
+    <div class="modal fade" id="optionsModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="optionsModalLabel">Options</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="out-message"></p>
+            <form id="change-password" class="form-inline">
+              <div class="form-group">
+                <input class="form-control" type="password" name="passwords[old]" placeholder="OldPassword">
               </div>
-              <div class="modal-body">
-
-                <p id="out-message"></p>
-
-                <form id="change-password" class="form-inline">
-                  <div class="form-group">
-                    <input class="form-control" type="password" name="passwords[old]"
-                     placeholder="OldPassword">
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" type="password" name="passwords[new]"
-                     placeholder="New Password">
-                  </div>
-                  <button type="submit" class='change-btn' class="btn btn-primary">Change password</button>
-                </form>
-                <br>
-
-                <form id="sign-out" >
-                  <button type="submit" class='change-btn' class="btn btn-danger">Sign Out</button>
-                </form>
-
+              <div class="form-group">
+                <input class="form-control" type="password" name="passwords[new]" placeholder="New Password">
               </div>
-              <div class="modal-footer">
-                <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-            </div>
+              <button type="submit" class='change-btn' class="btn btn-primary">Change password</button>
+            </form>
+            <br>
+            <form id="sign-out">
+              <button type="submit" class='change-btn' class="btn btn-danger">Sign Out</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
-
-      <div class="row">
-      <div class="addPerson person" >
-        <form id="addPerson-form-add" class="addPerson-panel">
-          <fieldset>
-            <p>
-            <span> Enter Person's Name </span></p>
-            <p><input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name"></p> <!--person[name]* -->
-            <p><input type="submit"class="add-person-form-button" value="ADD"></p>
-            <!-- <input type="submit"class="add-person-form-save" value="SAVE"> -->
-          </fieldset>
-        </form>
-        <form id="add-person-form-save" class="addPerson-panel-save">
-          <fieldset>
-            <p>
-            <span> Enter Person's Name </span> </p>
-            <p><input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name"> </p><!--person[name]* -->
-            <!-- <input type="submit"class="add-person-form-button" value="ADD"> -->
-            <p><input type="submit"class="add-person-form-save" value="SAVE"></p>
-          </fieldset>
-        </form>
-      </div>
-
-      <div class="addExpenseClass Expense" >
-        <form name="addExpense" id="addExpense" class="addExpense addExpense-panel">
-          <fieldset>
-            <div class="formDiv">
-                <span> Enter Expense Description </span>
-                <input required type="text" id="expense-name2" class="expense-name" name="expense[description]" placeholder="Expense Description">
-            </div>
-            <div class="formDiv">
-                <span> Enter Total Bill Amount </span>
-                <input required type="float" id="expense-amount2" class="expense-amount"  name="expense[amount]" placeholder="Enter Amount">
-            </div>
-            <div class="formDiv">
-              <div> <span> Select People</span> </div>
-              <select required multiple id="listPeople"></select>
-              <!-- required multiple -->
-            </div>
-              <input class="formDiv" id="expense-submit" type="submit" class="expense-name-btn" value="ADD">
-          </fieldset>
-        </form>
-
-        <form name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
-          <fieldset>
-            <div class="formDiv">
-                <span> Enter Expense Description </span>
-                <input required type="text" id="expense-name" class="expense-name" name="expense[description]" placeholder="Expense Description">
-            </div>
-            <div class="formDiv">
-                <span> Enter Total Bill Amount </span>
-                <input required type="float" id="expense-amount" class="expense-amount"  name="expense[amount]" placeholder="Enter Amount">
-            </div>
-            <div class="formDiv">
-              <div> <span> Select People</span> </div>
-              <select required multiple id="listPeople2"></select>
-              <!-- required multiple -->
-            </div>
-              <input class="formDiv" id="expense-submit-save" type="submit" class="expense-name-btn" value="SAVE">
-              <div id="paymentPer" class="formDiv">
-
-                <!-- required multiple -->
-              </div>
-                <!-- <input class="formDiv" id="payment-submit" type="submit" class="expense-name-btn" value="PAY SUBMIT"> -->
-          </fieldset>
-        </form>
-        </div>
-
-      <div class="addPayment-select">
-        <form name="addPayment-people" id="addPayment-people-save" class="addPayment-save">
-          <fieldset>
-              <div class="formDiv">
-                <div> <span> Select People Who Made Payment</span> </div>
-                <select required multiple id="listPeople3"></select>
-              <!-- required multiple -->
-              </div>
-              <input class="formDiv" id="payment-select" type="submit" class="btn" value="SELECT">
-          </fieldset>
-        </form>
-      </div>
-      <div class="addPayment-submit">
-        <form name="addPayment-save" id="addPayment-save" class="addPayment-save">
-          <div  id='refresh'> <br> </div>
-          <fieldset>
-
-            <div class="formDiv">
-                <span> Enter Expense Description </span>
-                <input required type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
-            </div>
-            <div class="formDiv">
-                <span> Enter Total Bill Amount </span>
-                <input required type="float" id="expense-amount3" class="expense-amount"  name="expense[amount]" placeholder="Enter Amount">
-            </div>
-            <div id="payment_people_list" class="formDiv payment_people_list">
-
-
-            </div>
-              <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
-          </fieldset>
-        </form>
-      </div>
-
-      </div>
-
-      <div class="show">
-        <div style="float: left ; margin-left: 3%; margin-right: 20px;" class="person-show">
-          <h1>Person</h1>
-          <ul> </ul>
-        </div>
-        <div style="float: left ; margin-left: 10px;" class="expense-show">
-          <h1>Expense</h1>
-          <ul> </ul>
-        </div>
     </div>
+  </div>
+  <!-- Buttons and sign up/sign in options  -->
+  <div class="row">
+    <!-- Add Person Form and Save Person Form  -->
+    <div class="addPerson person">
+      <form id="addPerson-form-add" class="addPerson-panel">
+        <fieldset>
+          <p>
+            <span> Enter Person's Name </span>
+          </p>
+          <p>
+            <input required id="person-form-add" class="person-form" type="text" name="person[name]" placeholder="Person's name">
+          </p>
+          <p>
+            <input type="submit" class="add-person-form-button" value="ADD">
+          </p>
+        </fieldset>
+      </form>
+      <form id="add-person-form-save" class="addPerson-panel-save">
+        <fieldset>
+          <p>
+            <span> Enter Person's Name </span>
+          </p>
+          <p>
+            <input required id="person-form-save" class="person-form" type="text" name="person[name]" placeholder="Person's name">
+          </p>
+          <p>
+            <input type="submit" class="add-person-form-save" value="SAVE">
+          </p>
+        </fieldset>
+      </form>
+    </div>
+    <!-- Add Person Form and Save Person Form  -->
+    <!-- Add Expense Form and Save Expense Form  -->
+    <div class="addExpenseClass Expense">
+      <form name="addExpense" id="addExpense" class="addExpense addExpense-panel">
+        <fieldset>
+          <div class="formDiv">
+            <span> Enter Expense Description </span>
+            <input required type="text" id="expense-name2" class="expense-name" name="expense[description]" placeholder="Expense Description">
+          </div>
+          <div class="formDiv">
+            <span> Enter Total Bill Amount </span>
+            <input required type="float" id="expense-amount2" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
+          </div>
+          <div class="formDiv">
+            <div>
+              <span> Select People</span>
+            </div>
+            <select required multiple id="listPeople"></select>
+          </div>
+          <input class="formDiv" id="expense-submit" type="submit" class="expense-name-btn" value="ADD">
+        </fieldset>
+      </form>
+      <form name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
+        <fieldset>
+          <div class="formDiv">
+            <span> Enter Expense Description </span>
+            <input required type="text" id="expense-name" class="expense-name" name="expense[description]" placeholder="Expense Description">
+          </div>
+          <div class="formDiv">
+            <span> Enter Total Bill Amount </span>
+            <input required type="float" id="expense-amount" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
+          </div>
+          <div class="formDiv">
+            <div>
+              <span> Select People</span>
+            </div>
+            <select required multiple id="listPeople2"></select>
+          </div>
+          <input class="formDiv" id="expense-submit-save" type="submit" class="expense-name-btn" value="SAVE">
+          <div id="paymentPer" class="formDiv">
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <!-- Add Expense Form and Save Expense Form  -->
+    <!-- Add Payment Form  -->
+    <div class="addPayment-select">
+      <form name="addPayment-people" id="addPayment-people-save" class="addPayment-save">
+        <fieldset>
+          <div class="formDiv">
+            <div>
+              <span> Select People Who Made Payment</span>
+            </div>
+            <select required multiple id="listPeople3"></select>
+          </div>
+          <input class="formDiv" id="payment-select" type="submit" class="btn" value="SELECT">
+        </fieldset>
+      </form>
+    </div>
+    <div class="addPayment-submit">
+      <form name="addPayment-save" id="addPayment-save" class="addPayment-save">
+        <div id='refresh'>
+          <br>
+        </div>
+        <fieldset>
+          <div class="formDiv">
+            <span> Enter Expense Description </span>
+            <input required type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
+          </div>
+          <div class="formDiv">
+            <span> Enter Total Bill Amount </span>
+            <input required type="float" id="expense-amount3" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
+          </div>
+          <div id="payment_people_list" class="formDiv payment_people_list"></div>
+          <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
+        </fieldset>
+      </form>
+    </div>
+    <!-- Add Payment Form  -->
+  </div>
+  <!-- Show list of people and expenses  -->
+  <div class="show">
+    <div style="float: left ; margin-left: 3%; margin-right: 20px;" class="person-show">
+      <h1>Person</h1>
+      <ul></ul>
+    </div>
+    <div style="float: left ; margin-left: 10px;" class="expense-show">
+      <h1>Expense</h1>
+      <ul></ul>
+    </div>
+  </div>
+  <!-- Show list of people and expenses  -->
+</body>
 
-    </body>
 </html>

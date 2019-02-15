@@ -3,6 +3,9 @@ const api = require('./api.js')
 const ui = require('./ui.js')
 const store = require('../../store.js')
 
+/*
+  Action when the Show Person button is clicked
+*/
 const onAddPersonTop = function (event) {
   $('.addPerson').show()
   event.preventDefault()
@@ -16,9 +19,11 @@ const onAddPersonTop = function (event) {
     .then((data) => fieldVal(data))
     .then(show(event))
     .then($('.expense-show').hide())
-  // show(event)
 }
 
+/*
+  Action when the Add Person submit button is clicked
+*/
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -29,6 +34,9 @@ const onAddPersonForm = function (event) {
     .catch(ui.createPersonFailure)
 }
 
+/*
+  Action when the Add Expense submit button is clicked
+*/
 const onAddExpenseForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -52,12 +60,14 @@ const onAddExpenseForm = function (event) {
   api.createExpense(data)
     .then(ui.createExpenseSuccess)
     .then(() => show(event))
-    // .then($('.expense-show').hide())
     .catch(ui.createExpenseFailure)
 
   document.getElementById('addExpense').reset()
 }
 
+/*
+  Action when the Show Expense button is clicked
+*/
 const onAddExpenseTop = function (event) {
   $('.addExpense').show()
   $('.addPerson').hide()
@@ -70,6 +80,9 @@ const onAddExpenseTop = function (event) {
   show(event)
 }
 
+/*
+  Make a list of people that can be selected by user
+*/
 const fieldVal = data => {
   $('#listPeople')[0].innerHTML = ''
   store.people = []
@@ -85,6 +98,9 @@ const fieldVal = data => {
   }
 }
 
+/*
+  Show all list of people and expenses created by user
+*/
 const show = function (event) {
   // show person name
   const data = getFormFields(event.target)
@@ -98,70 +114,96 @@ const show = function (event) {
     .catch(ui.getAllExpenseFailure)
 }
 
+/*
+  Create an expense with a list of people selected by user
+*/
 const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   const payments = []
   $('.payment_people_list')[0].innerHTML = ''
+  let payTemp = 0
+  store.payments_person_id = []
   for (const i in $('#listPeople3')[0].selectedOptions) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
+      // debugger
+
+      store.payments[store.index_i].forEach(function (entry) {
+        if (entry.person === $('#listPeople3')[0].selectedOptions[i].value) {
+          payTemp = entry.pay
+        }
+      })
       store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
-      const payment = {pay: 0.00, person: $('#listPeople3')[0].selectedOptions[i].value}
+      const payment = {pay: payTemp, person: $('#listPeople3')[0].selectedOptions[i].value}
       payments.push(payment)
       const j = document.createElement('input') // input element, text
-      j.setAttribute('type', 'required number')
+      j.setAttribute('type', 'required float')
       j.setAttribute('name', 'payment' + i)
       j.setAttribute('id', $('#listPeople3')[0].selectedOptions[i].value)
 
       store.payments_person_id.push($('#listPeople3')[0].selectedOptions[i].value)
+      store.payments_person_name.push($('#listPeople3')[0].selectedOptions[i].text)
       $('.payment_people_list').append(j)
       $('.payment_people_list').append($('#listPeople3')[0].selectedOptions[i].text)
       $('.payment_people_list').append('\'s payment  ')
       $('.payment_people_list').append('</br>')
     }
   }
+
+  store.payments[store.index_i].forEach(function (entry) {
+    if (store.payments_person_id.indexOf(entry.person) === -1) {
+      const payment = {pay: entry.pay, person: entry.person}
+      payments.push(payment)
+    }
+  })
   // add the rest of people in the expense with 0 or previous payment as default
   // if store.payments[store.id_expense].person not in store.people_ID_payments:
-  // payments.push({ pay: 0.0, person: store.payments[store.id_expense].person })
 
   store.people_payments = payments
   $('.addPayment-select').hide()
   $('.addPayment-submit').show()
 }
 
+/*
+  Action when Make Payment button is clicked
+*/
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
-    if (a.value !== undefined) {
-      entry.pay = entry.pay + a.value
+    if (a !== null) {
+      entry.pay = (parseFloat(entry.pay) + parseFloat(a.value)).toString()
     } else {
-      entry.pay = 0 // reset if person doesn't exist
+      entry.pay = entry.pay
     }
   })
-
+  // if people in data.expense[store.index_i] not in this updated array, add the people
   data.expense.payments = store.people_payments
   api.updateExpense(store.id_expense, data)
-    // .then(ui.updateExpenseSuccess)
-    // .then(onAddExpenseTop(event))
-    // .then(() => show(event))
     .then(ui.refreshMessage)
     .then($('.addPayment-submit').hide())
     .catch(ui.updateExpenseFailure)
 }
 
+/*
+  Save button action after Edit Expense button is clicked
+*/
 const onAddExpenseFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
   data.expense.payments = []
   data.expense.payments.pay = 0
+  let payVar = 0
 
-  // NEED to fix Pay being 0 as default whenever the edit is Made
-  const pay = 0
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
-      const payment = {pay: 0.00, person: $('#listPeople2')[0].selectedOptions[i].value}
+      store.payments[store.index_i].forEach(function (entry) {
+        if (entry.person === $('#listPeople2')[0].selectedOptions[i].value) {
+          payVar = entry.pay
+        }
+      })
+      const payment = {pay: payVar, person: $('#listPeople2')[0].selectedOptions[i].value}
       data.expense.payments.push(payment)
     }
   }
@@ -176,6 +218,9 @@ const onAddExpenseFormSave = function (event) {
   $('.addExpense-save').hide()
 }
 
+/*
+  Action when the Save Person submit button is clicked
+*/
 const onAddPersonFormSave = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -189,6 +234,9 @@ const onAddPersonFormSave = function (event) {
   $('.addPerson-panel-save').hide()
 }
 
+/*
+  Event Handler for button actions
+*/
 const addHandlers = () => {
   $('#addPerson-form-add').on('submit', onAddPersonForm)
   $('#add-person-form-save').on('submit', onAddPersonFormSave)

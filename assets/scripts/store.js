@@ -5,6 +5,7 @@ const store = {
   payments: [],
   people_ID_payments: [],
   payments_person_id: [],
+  payments_person_name: [],
   selectedPeople: [],
   listpeople_with_index: [],
   description: [],

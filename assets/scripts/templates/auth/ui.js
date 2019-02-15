@@ -25,14 +25,13 @@ const signInSuccess = function (data) {
   $('#authorizationModal').modal('hide')
   $('#sign-up-button').hide()
   $('#options-button').show()
-  // $('h1').hide()
-  // $('.').hide()
 }
 
 const signOutSuccess = function () {
   $('#feedbackOnAction').html(' ')
   $('#feedbackOnAction').show().text('Signed out successfully!!')
   $('#feedbackOnAction').fadeOut(5000)
+
   // hide actions
   $('.buttons').hide()
   $('.show').hide()
@@ -71,7 +70,6 @@ const failure = function () {
 
 module.exports = {
   signUpSuccess,
-  // signUpFailure,
   signInSuccess,
   changePasswordSuccess,
   signOutSuccess,
