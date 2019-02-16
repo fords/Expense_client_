@@ -262,7 +262,10 @@ const onHideShow = function (event) {
     document.getElementById('hide').innerHTML = 'Show All'
   } else {
     document.getElementById('hide').innerHTML = 'Hide All'
+    show(event)
     $('.show').show()
+    $('.person-show').show()
+    $('.expense-show').show()
   }
   store.flag = !store.flag
 }
