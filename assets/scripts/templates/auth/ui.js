@@ -34,9 +34,9 @@ const signOutSuccess = function () {
   $('#feedbackOnAction').html(' ')
   $('#feedbackOnAction').show().text('Signed out successfully!!')
   $('#feedbackOnAction').fadeOut(5000)
-  $('#up-message').html('')
-  $('#up-message').show().text('Signed out successfully!!')
-  $('#up-message').fadeOut(5000)
+  $('#out-message').html('')
+  $('#out-message').show().text('Signed out successfully!!')
+  $('#out-message').fadeOut(5000)
   // hide actions
   $('.buttons').hide()
   $('.show').hide()
