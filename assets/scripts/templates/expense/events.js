@@ -134,7 +134,7 @@ const onSelectPeopleForPayment = function (event) {
           payTemp = entry.pay
         }
       })
-      store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
+      // store.people_ID_payments.push($('#listPeople3')[0].selectedOptions[i].value)
       const payment = {pay: payTemp, person: $('#listPeople3')[0].selectedOptions[i].value}
       payments.push(payment)
       const j = document.createElement('input') // input element, text
