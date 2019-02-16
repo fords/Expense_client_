@@ -13,7 +13,8 @@ const onAddPersonTop = function (event) {
   $('.addExpense-save').hide()
   $('.addPayment-select').hide()
   $('.addPayment-submit').hide()
-
+  $('.show').show()
+  $('.addPerson-panel').show()
   const data = getFormFields(this)
   api.getAllPerson(data)
     .then((data) => fieldVal(data))
@@ -75,6 +76,7 @@ const onAddExpenseTop = function (event) {
   $('.addPerson').hide()
   $('.addExpense-save').hide()
   $('.expense-show').show()
+  $('.show').show()
   event.preventDefault()
   const data = getFormFields(this)
   api.getAllPerson(data)
@@ -241,6 +243,29 @@ const onAddPersonFormSave = function (event) {
   $('.addPerson-panel-save').hide()
   $('#add-person-form-save')[0].reset()
 }
+/*
+  When Hide/Show button is clicked hide or show accordingly
+*/
+const onHideShow = function (event) {
+  event.preventDefault()
+  if (store.flag === true) {
+    $('.addPerson').hide()
+    $('.addPerson-panel').hide()
+    $('.addPerson-panel-save').hide()
+    $('.addExpense').hide()
+    $('.addExpense-save').hide()
+    // $('.buttons').hide()
+    $('.show').hide()
+    // $('#options-button').hide()
+    $('.addPayment-select').hide()
+    $('.addPayment-submit').hide()
+    document.getElementById('hide').innerHTML = 'Show All'
+  } else {
+    document.getElementById('hide').innerHTML = 'Hide All'
+    $('.show').show()
+  }
+  store.flag = !store.flag
+}
 
 /*
   Event Handler for button actions
@@ -254,6 +279,7 @@ const addHandlers = () => {
   $('#addPayment-save').on('submit', onAddPayment)
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
+  $('#hide').on('click', onHideShow)
 
   $('.addPerson').hide()
   $('.addPerson-panel').hide()

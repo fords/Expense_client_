@@ -3,13 +3,14 @@
 const store = {
   people: [],
   payments: [],
-  people_ID_payments: [],
-  payments_person_id: [],
-  payments_person_name: [],
+  // people_ID_payments: [],
+  // payments_person_id: [],
+  // payments_person_name: [],
   selectedPeople: [],
-  listpeople_with_index: [],
+  // listpeople_with_index: [],
   description: [],
-  totalAmount: []
+  totalAmount: [],
+  flag: true
   // index_person: 0,
   // index_expense: 0
 }
