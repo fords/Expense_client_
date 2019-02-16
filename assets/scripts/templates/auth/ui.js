@@ -2,10 +2,10 @@
 const store = require('../../store.js')
 
 const signUpSuccess = function (data) {
-  $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').show().text('Signed up successfully!!')
+  $('#up-message').html('')
+  $('#up-message').show().text('Signed up successfully!!')
   $('#sign-up')[0].reset()
-  $('#feedbackOnAction').fadeOut(5000)
+  $('#up-message').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
 }
 
@@ -13,8 +13,11 @@ const signInSuccess = function (data) {
   store.user = data.user
   $('#feedbackOnAction').html(' ')
   $('#feedbackOnAction').show().text('Signed in successfully!!')
+  $('#up-message').html('')
+  $('#up-message').show().text('Signed in successfully!!')
   $('#sign-in')[0].reset()
   $('#feedbackOnAction').fadeOut(5000)
+  $('#up-message').fadeOut(5000)
   $('.addPerson').show()
   $('.addPerson-panel').show()
   $('.addPerson-panel-save').hide()
@@ -31,7 +34,9 @@ const signOutSuccess = function () {
   $('#feedbackOnAction').html(' ')
   $('#feedbackOnAction').show().text('Signed out successfully!!')
   $('#feedbackOnAction').fadeOut(5000)
-
+  $('#up-message').html('')
+  $('#up-message').show().text('Signed out successfully!!')
+  $('#up-message').fadeOut(5000)
   // hide actions
   $('.buttons').hide()
   $('.show').hide()
