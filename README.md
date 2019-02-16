@@ -16,7 +16,7 @@ Inspired by Splitwise app created in Rhode Island, the app that keeps track of b
 </ul>
 
 ## Repository
-The link for front end source code https://github.com/fords/Expense_client_ </br>
+The link for front end source code https://github.com/fords/Expense_client_/ </br>
 The link for back end source code https://github.com/fords/Expense_server </br>
 
 ## User Stories
