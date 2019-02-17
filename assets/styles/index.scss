@@ -22,6 +22,14 @@ h1 {
   margin: 10px;
 }
 
+#ui-message {
+  display: none;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 100;
+}
+
 .cell {
   display: table-cell;
   vertical-align: middle;

@@ -17,6 +17,10 @@ const createPersonFailure = () => {
 const deletePersonSuccess = () => {
   $('#feedbackOnAction').show().text('Deleted a person')
   $('#feedbackOnAction').fadeOut(5000)
+  $('#ui-message').html(' ')
+  $('#ui-message').fadeIn(500)
+  $('#ui-message').text('A person is deleted! Click Show Expense button to see updated info!!')
+  $('#ui-message').fadeOut(5000)
 }
 
 const deletePersonFailure = () => {
@@ -109,9 +113,9 @@ const createExpenseFailure = data => {
 const refreshMessage = data => {
   $('#refresh').show().text('Please click Show Expense button to see updated info')
   $('#refresh').fadeOut(5000)
-  $('#feedbackOnAction').html(' ')
-  $('#feedbackOnAction').show().text('Please click Show Expense button to see updated info!!')
-  $('#feedbackOnAction').fadeOut(5000)
+  $('#ui-message').html(' ')
+  $('#ui-message').show().text('Please click Show Expense button to see updated info!!')
+  $('#ui-message').fadeOut(5000)
 }
 
 const getAllExpenseSuccess = data => {
