@@ -80,6 +80,7 @@ const onAddExpenseTop = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
   api.getAllPerson(data)
+    // .then((data) => ui.getAllExpenseSuccess(data))
     .then((data) => fieldVal(data))
   show(event)
 }
