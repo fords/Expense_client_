@@ -129,7 +129,6 @@ const onSelectPeopleForPayment = function (event) {
   let payTemp = 0
   store.payments_person_id = []
   for (const i in $('#listPeople3')[0].selectedOptions) {
-
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
       payTemp = 0
       store.payments[store.index_i].forEach(function (entry) {

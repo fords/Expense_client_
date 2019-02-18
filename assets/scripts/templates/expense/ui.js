@@ -61,7 +61,7 @@ const getAllPersonSuccess = data => {
       $('.person-show  ul')[0].appendChild(listElement)
     }
   }
-  console.log(store.allPeople)
+  // console.log(store.allPeople)
 }
 
 const getAllPersonFailure = () => {
@@ -86,7 +86,7 @@ const onEditName = function (event) {
 const onDeleteName = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
-  const index = i.getAttribute('data-indx')
+  // const index = i.getAttribute('data-indx')
   i = i.getAttribute('data-attr')
   store.allPeople.slice(i, 1)
   // store.payments[]
@@ -95,7 +95,6 @@ const onDeleteName = function (event) {
     .then(deletePersonSuccess)
     .then(() => show(event))
     .catch(deletePersonFailure)
-  console.log(store.allPeople)
 }
 const updatePersonSuccess = () => {
   $('#feedbackOnAction').show().text('Updated a person')
