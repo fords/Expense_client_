@@ -8,7 +8,8 @@ const store = {
   selectedPeople: [],
   description: [],
   totalAmount: [],
-  flag: true
+  flag: true,
+  allPeople: []
 }
 
 module.exports = store

@@ -30,7 +30,7 @@ const deletePersonFailure = () => {
 
 const getAllPersonSuccess = data => {
   $('.person-show ul')[0].innerHTML = ''
-
+  store.allPeople = []
   for (let i = 0; i < data.persons.length; i++) {
     if (data.persons[i].owner !== store.user._id) {
     } else {
@@ -57,9 +57,11 @@ const getAllPersonSuccess = data => {
       listElement.setAttribute('data-attr', data.persons[i]._id)
       listElement.setAttribute('data-indx', i)
       listElement.setAttribute('data-name', data.persons[i].name)
+      store.allPeople.push(data.persons[i]._id)
       $('.person-show  ul')[0].appendChild(listElement)
     }
   }
+  // console.log(store.allPeople)
 }
 
 const getAllPersonFailure = () => {
@@ -84,7 +86,11 @@ const onEditName = function (event) {
 const onDeleteName = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
+  // const index = i.getAttribute('data-indx')
   i = i.getAttribute('data-attr')
+  store.allPeople.slice(i, 1)
+  // store.payments[]
+
   api.deletePerson(i)
     .then(deletePersonSuccess)
     .then(() => show(event))
@@ -137,8 +143,9 @@ const getAllExpenseSuccess = data => {
       }
     }
   }
-  // find total number of unique people
-  const uniquePeople = [...new Set(arr)]
+  // const uniquePeople = [...new Set(arr)]
+
+  // find total number of unique people and consider the person deleted from personSchema for edge cases
 
   for (let i = 0; i < data.expenses.length; i++) {
     // var hash = new Object();
@@ -147,8 +154,14 @@ const getAllExpenseSuccess = data => {
     } else {
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
         if (uniqueLoop.indexOf(data.expenses[i].payments[j].person) === -1) {
-          totalPeople[i] += 1
-          uniqueLoop.push(data.expenses[i].payments[j].person)
+          // if (data.expenses[i].payments[j].pay === null || data.expenses[i].payments[j].pay === undefined) {
+          // } else {
+          // if find the person in data.person
+          if (store.allPeople.indexOf(data.expenses[i].payments[j].person) !== -1) {
+            totalPeople[i] += 1
+            uniqueLoop.push(data.expenses[i].payments[j].person)
+          }
+          // }
         }
       }
     }
@@ -215,6 +228,18 @@ const getAllExpenseSuccess = data => {
       k += 1
     }
   } // console.log(store.payments)
+  // $('#listPeople')[0].innerHTML = ''
+  // store.people = []
+  // for (let i = 0; i < data.persons.length; i++) {
+  //   if (data.persons[i].owner !== store.user._id) {
+  //   } else {
+  //     const options = document.createElement('option')
+  //     options.value = data.persons[i]._id
+  //     store.people.push(data.persons[i])
+  //     options.text = data.persons[i].name
+  //     $('#listPeople')[0].appendChild(options)
+  //   }
+  // }
 }
 
 const getAllExpenseFailure = data => {
