@@ -147,8 +147,11 @@ const getAllExpenseSuccess = data => {
     } else {
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
         if (uniqueLoop.indexOf(data.expenses[i].payments[j].person) === -1) {
-          totalPeople[i] += 1
-          uniqueLoop.push(data.expenses[i].payments[j].person)
+          if (data.expenses[i].payments[j].person === null || data.expenses[i].payments[j].person === undefined) {
+          } else {
+            totalPeople[i] += 1
+            uniqueLoop.push(data.expenses[i].payments[j].person)
+          }
         }
       }
     }
