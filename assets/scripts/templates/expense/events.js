@@ -129,7 +129,9 @@ const onSelectPeopleForPayment = function (event) {
   let payTemp = 0
   store.payments_person_id = []
   for (const i in $('#listPeople3')[0].selectedOptions) {
+
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
+      payTemp = 0
       store.payments[store.index_i].forEach(function (entry) {
         if (entry.person === $('#listPeople3')[0].selectedOptions[i].value) {
           payTemp = entry.pay
@@ -206,6 +208,7 @@ const onAddExpenseFormSave = function (event) {
   // add the person object selected in Add Expense option
   for (const i in $('#listPeople2')[0].selectedOptions) {
     if ($('#listPeople2')[0].selectedOptions[i].value !== undefined) {
+      payVar = 0
       store.payments[store.index_i].forEach(function (entry) {
         if (entry.person === $('#listPeople2')[0].selectedOptions[i].value) {
           payVar = entry.pay
