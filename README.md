@@ -34,8 +34,9 @@ Only the user has control of the data that he created </br>
 
 
 ## Wireframe
-![Alt Wireframe 1](part1.png?raw=true)
-![Alt Wireframe 2](part2.png?raw=true)
+![Alt Wireframe 1](part0.png?raw=true)
+![Alt Wireframe 2](part1.png?raw=true)
+![Alt Wireframe 3](part2.png?raw=true)
 
 ## Future Work
 Have the option of sending email to friends when the expense is created, updated or deleted </br>
