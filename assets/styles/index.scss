@@ -75,6 +75,13 @@ h1 {
   z-index: 100;
 }
 
+#ui-message2 {
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 90;
+}
+
 .cell {
   display: table-cell;
   vertical-align: middle;
