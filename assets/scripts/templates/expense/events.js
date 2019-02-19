@@ -77,12 +77,19 @@ const onAddExpenseTop = function (event) {
   $('.addExpense-save').hide()
   $('.expense-show').show()
   $('.show').show()
+  $('.cog').show()
+  // $('#ui-message').text('')
+  $('#ui-message2').show()
   event.preventDefault()
   const data = getFormFields(this)
   api.getAllPerson(data)
     // .then((data) => ui.getAllExpenseSuccess(data))
     .then((data) => fieldVal(data))
-  show(event)
+  setTimeout(function () {
+    $('.cog').hide()
+    $('#ui-message2').hide()
+    show(event)
+  }, 1500)
 }
 
 /*
@@ -287,6 +294,7 @@ const addHandlers = () => {
   $('#addExpenseTop').on('click', onAddExpenseTop)
   $('#hide').on('click', onHideShow)
   $('.cog').hide()
+  $('#ui-message2').hide()
   $('.addPerson').hide()
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').hide()
