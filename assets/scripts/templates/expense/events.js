@@ -286,7 +286,7 @@ const addHandlers = () => {
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
   $('#hide').on('click', onHideShow)
-
+  $('.cog').hide()
   $('.addPerson').hide()
   $('.addPerson-panel').hide()
   $('.addPerson-panel-save').hide()

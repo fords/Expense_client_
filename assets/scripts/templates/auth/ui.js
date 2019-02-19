@@ -7,6 +7,7 @@ const signUpSuccess = function (data) {
   $('#sign-up')[0].reset()
   $('#up-message').fadeOut(5000)
   $('.expense-show ul')[0].innerHTML = ''
+  $('.cog').hide()
 }
 
 const signInSuccess = function (data) {
@@ -28,6 +29,7 @@ const signInSuccess = function (data) {
   $('#authorizationModal').modal('hide')
   $('#sign-up-button').hide()
   $('#options-button').show()
+  $('.cog').hide()
 }
 
 const signOutSuccess = function () {
@@ -52,6 +54,7 @@ const signOutSuccess = function () {
   $('.person-show ul')[0].innerHTML = ''
   $('.addPayment-select').hide()
   $('.addPayment-submit').hide()
+  $('.cog').hide()
 }
 
 const changePasswordSuccess = function (data) {
@@ -73,6 +76,7 @@ const failure = function () {
   $('#feedbackOnAction').fadeOut(5000)
   $('#up-message').fadeOut(5000)
   $('#out-message').fadeOut(5000)
+  $('.cog').hide()
 }
 
 module.exports = {

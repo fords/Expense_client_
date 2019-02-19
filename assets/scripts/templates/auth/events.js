@@ -4,6 +4,7 @@ const getFormFields = require('../../../../lib/get-form-fields')
 
 const onSignUp = function (event) {
   event.preventDefault()
+  $('.cog').show()
   $('#up-message').show().text('Signing up ....')
   const data = getFormFields(this)
   api.signUp(data)
@@ -13,6 +14,7 @@ const onSignUp = function (event) {
 
 const onSignIn = function (event) {
   event.preventDefault()
+  $('.cog').show()
   $('#up-message').show().text('Signing in ....')
   const data = getFormFields(this)
   api.signIn(data)
@@ -22,7 +24,9 @@ const onSignIn = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault()
+  $('.cog').show()
   $('#out-message').show().text('Signing out ....')
+  $('#up-message').hide()
   api.signOut()
     .then(ui.signOutSuccess)
     .catch(ui.failure)
