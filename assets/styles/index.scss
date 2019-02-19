@@ -127,10 +127,39 @@ body {
   animation-duration: 3s;
   background-image: url('https://i.imgur.com/PiSqAHl.jpg');
   // background-repeat: repeat-y;
-  background-position: auto;
-  background-repeat: no-repeat;
+  // background-position: fixed;
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
+  // background-position: 0 0;
+  // background-size: 1450px 1000px;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
   background-size: cover;
+  // width: 100%;
+  // z-index: 10;
+  background-repeat: no-repeat;
+background-attachment: scroll;
+background-position: 0% 0%;
+// background-size: contain;
+
 }
+
+// #fadeout {
+//     display: none;
+// }
+//
+// @media all and (min-height: 529px) {
+//     #fadeout {
+//         display: block;
+//         width: 100%;
+//         height: 100px;
+//         position: absolute;
+//         top: 439px;
+//         background: #333;
+//         background: -webkit-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,1));
+//     }
+// }
 
 .btn {
   background: orange;
