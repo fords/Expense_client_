@@ -89,7 +89,7 @@ const onAddExpenseTop = function (event) {
     $('.cog').hide()
     $('#ui-message2').hide()
     show(event)
-  }, 1500)
+  }, 1000)
 }
 
 /*
