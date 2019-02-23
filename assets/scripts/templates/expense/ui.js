@@ -279,7 +279,9 @@ const onPayExpense = function (event) {
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')
-
+  $('html, body').animate({
+    scrollTop: $('#feedbackOnAction').offset().top
+  }, 500)
   $('#listPeople3')[0].innerHTML = ''
   const peopleSelectedList = []
   for (let a = 0; a < store.payments[store.index_i].length; a++) {
