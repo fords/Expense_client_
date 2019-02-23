@@ -132,8 +132,7 @@ const show = function (event) {
 const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   const payments = []
-  document.getElementById('addPayment-people-save').style.display = 'none'
-  document.getElementById('addPayment-save').style.display = 'block'
+
   $('.payment_people_list')[0].innerHTML = ''
   let payTemp = 0
   store.payments_person_id = []
@@ -170,7 +169,8 @@ const onSelectPeopleForPayment = function (event) {
   })
   // add the rest of people in the expense with 0 or previous payment as default
   // if store.payments[store.id_expense].person not in store.people_ID_payments:
-
+  // document.getElementById('addPayment-people-save').style.display = 'none'
+  // document.getElementById('addPayment-save').style.display = 'block'
   store.people_payments = payments
   $('.addPayment-select').hide()
   $('.addPayment-submit').show()
@@ -201,7 +201,7 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
-  document.getElementById('addPayment-people-save').style.display = 'none'
+  // document.getElementById('addPayment-people-save').style.display = 'none'
 }
 
 /*

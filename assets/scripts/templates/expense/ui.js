@@ -278,8 +278,8 @@ const onPayExpense = function (event) {
 
   const modal = document.getElementById('myModal')
   modal.style.display = 'block'
-  document.getElementById('addPayment-save').style.display = 'none'
-  document.getElementById('addPayment-people-save').style.display = 'block'
+  // document.getElementById('addPayment-save').style.display = 'none'
+  // document.getElementById('addPayment-people-save').style.display = 'block'
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')
