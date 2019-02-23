@@ -132,6 +132,7 @@ const show = function (event) {
 const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   const payments = []
+  document.getElementById('addPayment-people-save').style.display = 'none'
   document.getElementById('addPayment-save').style.display = 'block'
   $('.payment_people_list')[0].innerHTML = ''
   let payTemp = 0
@@ -181,7 +182,7 @@ const onSelectPeopleForPayment = function (event) {
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  document.getElementById('addPayment-people-save').style.display = 'none'
+
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a !== null) {
@@ -200,6 +201,7 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
+  document.getElementById('addPayment-people-save').style.display = 'none'
 }
 
 /*
