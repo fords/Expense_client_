@@ -44,12 +44,12 @@
                 </div>
                 <div class="modal-body">
                   <p id="up-message">
-                  <div style="position: center" class="cog">
-                    <span id="cog-0"></span>
-                    <span id="cog-45"></span>
-                    <span id="cog-90"></span>
-                    <span id="cog-135"></span>
-                  </div>
+                    <div style="position: center" class="cog">
+                      <span id="cog-0"></span>
+                      <span id="cog-45"></span>
+                      <span id="cog-90"></span>
+                      <span id="cog-135"></span>
+                    </div>
                   </p>
                   <form id="sign-up">
                     <div class="form-group">
@@ -98,6 +98,8 @@
     <button type="button" id="addExpenseTop" class="btn">Show Expense</button>
     <button type="button" id="hide" class="btn">Hide All</button>
     <button type="button" id="options-button" class="btn btn-primary" data-toggle="modal" data-target="#optionsModal">Options</button>
+    <button type="button" id="pay-button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal">Payment</button>
+
     <div class="modal fade" id="optionsModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -190,7 +192,7 @@
           <input class="formDiv" id="expense-submit" type="submit" class="expense-name-btn" value="ADD">
         </fieldset>
       </form>
-      <form style="background-color: #DCC75B;"name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
+      <form style="background-color: #DCC75B;" name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
         <fieldset>
           <div class="formDiv">
             <span> Enter Expense Description </span>
@@ -214,7 +216,65 @@
     </div>
     <!-- Add Expense Form and Save Expense Form  -->
     <!-- Add Payment Form  -->
-    <div class="addPayment-select">
+    <!-- <div class="addPayment-select"> -->
+    <!-- <div id="" class="modal"> -->
+
+      <!-- Modal content -->
+      <!-- <div  class="modal-dialog" class="modal-content">
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+        <div class="modal-body">
+        <p>Some text in the Modal..</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
+      </div> -->
+
+      <div id="myModal" class="modal2">
+
+  <!-- Modal content -->
+  <div class="modal-content2">
+    <button type="button" id='close' class="close" data-dismiss="modal">
+      <span>&times;</span>
+    </button>
+    <p>
+    <form style="background-color: #A9DEF4;" name="addPayment-people" id="addPayment-people-save" class="addPayment-save">
+      <fieldset>
+        <div class="formDiv">
+          <div>
+            <span> Select People Who Made Payment</span>
+          </div>
+          <select required multiple id="listPeople3"></select>
+        </div>
+        <input class="formDiv" id="payment-select" type="submit" class="btn" value="SELECT">
+      </fieldset>
+    </form>
+    <form style="background-color: #A9DEF4;" name="addPayment-save" id="addPayment-save" class="addPayment-save">
+      <div id='refresh'>
+        <br>
+      </div>
+      <fieldset>
+        <div id="payment_people_list" class="formDiv payment_people_list"></div>
+        <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
+      </fieldset>
+    </form>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="close-modal btn btn-secondary"  id='close' data-dismiss="modal">Close</button>
+  </div>
+</div>
+
+    <!-- </div> -->
+
+      <div class="modal fade" id="paymentModal" class="addPayment-select">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
       <form style="background-color: #A9DEF4;" name="addPayment-people" id="addPayment-people-save" class="addPayment-save">
         <fieldset>
           <div class="formDiv">
@@ -226,25 +286,40 @@
           <input class="formDiv" id="payment-select" type="submit" class="btn" value="SELECT">
         </fieldset>
       </form>
+      <div class="modal-footer">
+        <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
+</div>
+    <!-- </div> -->
     <div class="addPayment-submit">
-      <form style="background-color: #A9DEF4;" name="addPayment-save" id="addPayment-save" class="addPayment-save">
-        <div id='refresh'>
-          <br>
+      <div class="modal fade" id="paymentModal2">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form style="background-color: #A9DEF4;" name="addPayment-save" id="addPayment-save" class="addPayment-save">
+              <div id='refresh'>
+                <br>
+              </div>
+              <fieldset>
+                <div style="display:none;" class="formDiv">
+                  <span> Enter Expense Description </span>
+                  <input type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
+                </div>
+                <div style="display:none;" class="formDiv">
+                  <span> Enter Total Bill Amount </span>
+                  <input type="float" id="expense-amount3" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
+                </div>
+                <div id="payment_people_list" class="formDiv payment_people_list"></div>
+                <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
+              </fieldset>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
-        <fieldset>
-          <div style="display:none;" class="formDiv">
-            <span> Enter Expense Description </span>
-            <input  type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
-          </div>
-          <div style="display:none;" class="formDiv">
-            <span> Enter Total Bill Amount </span>
-            <input  type="float" id="expense-amount3" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
-          </div>
-          <div id="payment_people_list" class="formDiv payment_people_list"></div>
-          <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
-        </fieldset>
-      </form>
+      </div>
     </div>
     <!-- Add Payment Form  -->
   </div>

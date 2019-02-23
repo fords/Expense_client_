@@ -275,7 +275,10 @@ const onEditExpense = function (event) {
 const onPayExpense = function (event) {
   event.preventDefault()
   $('.addPayment-select').show()
-
+  //$('#paymentModal').show()  // pay-button
+  const modal = document.getElementById('myModal')
+  modal.style.display = 'block'
+  document.getElementById('addPayment-save').style.display = 'none'
   const i = event.target.parentNode
   const id = i.getAttribute('data-attr')
   store.index_i = i.getAttribute('data-indx-i')

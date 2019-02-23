@@ -132,6 +132,7 @@ const show = function (event) {
 const onSelectPeopleForPayment = function (event) {
   event.preventDefault()
   const payments = []
+  document.getElementById('addPayment-save').style.display = 'block'
   $('.payment_people_list')[0].innerHTML = ''
   let payTemp = 0
   store.payments_person_id = []
@@ -180,7 +181,7 @@ const onSelectPeopleForPayment = function (event) {
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-
+  document.getElementById('addPayment-people-save').style.display = 'none'
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a !== null) {
@@ -253,6 +254,16 @@ const onAddPersonFormSave = function (event) {
   $('.addPerson-panel-save').hide()
   $('#add-person-form-save')[0].reset()
 }
+
+/*
+  Close modal when close button is clicked
+*/
+const onClose = function (event) {
+  event.preventDefault()
+  const modal = document.getElementById('myModal')
+  modal.style.display = 'none'
+}
+
 /*
   When Hide/Show button is clicked hide or show accordingly
 */
@@ -293,6 +304,7 @@ const addHandlers = () => {
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
   $('#hide').on('click', onHideShow)
+  $('#close').on('click', onClose)
   $('.cog').hide()
   $('#ui-message2').hide()
   $('.addPerson').hide()
