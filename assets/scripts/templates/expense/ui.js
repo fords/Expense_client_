@@ -149,17 +149,17 @@ const getAllExpenseSuccess = data => {
 
   for (let i = 0; i < data.expenses.length; i++) {
     // var hash = new Object();
-    let uniqueLoop = []
+    const uniquePeeps = []
     if (data.expenses[i].owner !== store.user._id) {
     } else {
       for (let j = 0; j < data.expenses[i].payments.length; j++) {
-        if (uniqueLoop.indexOf(data.expenses[i].payments[j].person) === -1) {
+        if (uniquePeeps.indexOf(data.expenses[i].payments[j].person) === -1) {
           // if (data.expenses[i].payments[j].pay === null || data.expenses[i].payments[j].pay === undefined) {
           // } else {
           // if find the person in data.person
           if (store.allPeople.indexOf(data.expenses[i].payments[j].person) !== -1) {
             totalPeople[i] += 1
-            uniqueLoop.push(data.expenses[i].payments[j].person)
+            uniquePeeps.push(data.expenses[i].payments[j].person)
           }
           // }
         }
@@ -191,7 +191,7 @@ const getAllExpenseSuccess = data => {
       const payExpense = document.createElement('a')
       payExpense.href = 'javascript:;'
       payExpense.addEventListener('click', onPayExpense)
-      payExpense.appendChild(document.createTextNode('Make Payment'))
+      payExpense.appendChild(document.createTextNode('Payment'))
       const payment = []
       h3.append(name2)
       listElement2.append(h3)
