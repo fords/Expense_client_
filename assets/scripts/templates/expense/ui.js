@@ -352,6 +352,15 @@ const show = function (event) {
     .catch(getAllPersonFailure)
 }
 
+const createTSuccess = () => {
+  $('#feedbackOnAction').show().text('create a transaction')
+  $('#feedbackOnAction').fadeOut(5000)
+}
+
+const failure = () => {
+  $('#feedbackOnAction').show().text('  FAIL !!')
+  $('#feedbackOnAction').fadeOut(5000)
+}
 module.exports = {
   createPersonSuccess,
   createPersonFailure,
@@ -367,5 +376,7 @@ module.exports = {
   getAllExpenseFailure,
   updateExpenseSuccess,
   updateExpenseFailure,
-  refreshMessage
+  refreshMessage,
+  createTSuccess,
+  failure
 }

@@ -28,6 +28,8 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  console.log(data)
+  // console.log(store.user)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
@@ -179,13 +181,13 @@ const onSelectPeopleForPayment = function (event) {
 */
 const onAddPayment = function (event) {
   event.preventDefault()
-  const data = getFormFields(this)
+  let data = getFormFields(this)
   const currentPay = []
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a !== null) {
       entry.pay = (parseFloat(entry.pay) + parseFloat(a.value)).toString()
-      currentPay.push(entry.pay)
+      currentPay.push(a.value)
     } else {
       entry.pay = entry.pay
     }
@@ -200,14 +202,20 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
+  // console.log(store.user)
   const data1 = {}
-  data1.expense_name = store.description
-  data1.person_name = store.payments_person_name
-  data1.payment = currentPay
-  data1.index_expense = store.index_i
-  api.createTransaction(data1)
-    .then(console.log('success'))
-    .catch(console.log('fail'))
+  data = getFormFields(this)
+  delete data.expense
+  delete data.payment0
+  data.transaction = {}
+  data.transaction.expense_name = store.description
+  data.transaction.person_name = store.payments_person_name  // wrong duplicate
+  data.transaction.payment = currentPay // right payment
+  data.transaction.index_expense = store.index_i
+  console.log(data)
+  api.createTransaction(data)
+    .then(ui.createTSuccess)
+    .catch(ui.failure)
 }
 
 /*

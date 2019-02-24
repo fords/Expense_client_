@@ -110,13 +110,6 @@ const getAllTransaction = function () {
   })
 }
 
-const getOneTransaction = function (transactionId) {
-  return $.ajax({
-    url: config.apiUrl + '/transactions/' + transactionId,
-    method: 'GET'
-  })
-}
-
 const deleteTransaction = function (transactionId) {
   return $.ajax({
     url: config.apiUrl + '/transactions/' + transactionId,
@@ -152,7 +145,6 @@ module.exports = {
   updateExpense,
   createTransaction,
   getAllTransaction,
-  getOneTransaction,
   deleteTransaction,
   updateTransaction
 }
