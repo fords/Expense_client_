@@ -28,6 +28,14 @@ const deletePersonFailure = () => {
   $('#feedbackOnAction').fadeOut(5000)
 }
 
+const getAllTransactionSuccess = data => {
+  $('.transaction-show ul')[0].innerHTML = ''
+  console.log(data)
+  for (let i = 0; i < data.transactions.length; i++) {
+    console.log(data)
+  }
+}
+
 const getAllPersonSuccess = data => {
   $('.person-show ul')[0].innerHTML = ''
   store.allPeople = []
@@ -378,5 +386,6 @@ module.exports = {
   updateExpenseFailure,
   refreshMessage,
   createTSuccess,
-  failure
+  failure,
+  getAllTransactionSuccess
 }
