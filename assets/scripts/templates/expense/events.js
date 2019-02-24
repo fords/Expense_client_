@@ -180,11 +180,12 @@ const onSelectPeopleForPayment = function (event) {
 const onAddPayment = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-
+  const currentPay = []
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a !== null) {
       entry.pay = (parseFloat(entry.pay) + parseFloat(a.value)).toString()
+      currentPay.push(entry.pay)
     } else {
       entry.pay = entry.pay
     }
@@ -199,6 +200,14 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
+  const data1 = {}
+  data1.expense_name = store.description
+  data1.person_name = store.payments_person_name
+  data1.payment = currentPay
+  data1.index_expense = store.index_i
+  api.createTransaction(data1)
+    .then(console.log('success'))
+    .catch(console.log('fail'))
 }
 
 /*

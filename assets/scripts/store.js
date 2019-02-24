@@ -9,7 +9,8 @@ const store = {
   description: [],
   totalAmount: [],
   flag: true,
-  allPeople: []
+  allPeople: [],
+  deletedExpenses: []
 }
 
 module.exports = store

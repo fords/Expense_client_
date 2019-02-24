@@ -309,6 +309,7 @@ const onPayExpense = function (event) {
 const onDeleteExpense = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
+  store.deletedExpenses.push(i.getAttribute('data-indx-i'))
   i = i.getAttribute('data-attr')
   api.deleteExpense(i)
     .then(deleteExpenseSuccess)
