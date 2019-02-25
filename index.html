@@ -19,6 +19,7 @@
 
   <h1>Expense Split App</h1>
 
+  <!-- Sign up modal -->
   <div style="margin: 0px;" class="alert alert-dark text-center" role="alert" id="ui-message2">
     <div style="position: center" class="cog">
       <span id="cog-0"></span>
@@ -31,7 +32,6 @@
     <div class='table'>
       <div class='cell'>
         <div class="btn-group" role="group" aria-label="auth-group">
-          <!-- Sign Up Modal-->
           <button type="button" id="sign-up-button" class="btn btn-primary" data-toggle="modal" data-target="#authorizationModal">Sign In</button>
           <div class="modal fade" id="authorizationModal">
             <div class="modal-dialog">
@@ -44,12 +44,12 @@
                 </div>
                 <div class="modal-body">
                   <p id="up-message">
-                  <div style="position: center" class="cog">
-                    <span id="cog-0"></span>
-                    <span id="cog-45"></span>
-                    <span id="cog-90"></span>
-                    <span id="cog-135"></span>
-                  </div>
+                    <div style="position: center" class="cog">
+                      <span id="cog-0"></span>
+                      <span id="cog-45"></span>
+                      <span id="cog-90"></span>
+                      <span id="cog-135"></span>
+                    </div>
                   </p>
                   <form id="sign-up">
                     <div class="form-group">
@@ -84,7 +84,6 @@
               </div>
             </div>
           </div>
-          <!-- Sign Up Modal-->
         </div>
       </div>
     </div>
@@ -92,7 +91,9 @@
   <div id='feedbackOnAction'>
     <br>
   </div>
-  <!-- Buttons and sign up/sign in options  -->
+  <!-- Sign up modal -->
+
+  <!-- Buttons and options in navigation toolbar -->
   <div class=buttons>
     <button type="button" id="addPersonTop" class="btn">Show Person</button>
     <button type="button" id="addExpenseTop" class="btn">Show Expense</button>
@@ -138,9 +139,10 @@
       </div>
     </div>
   </div>
-  <!-- Buttons and sign up/sign in options  -->
+  <!-- Buttons and options in navigation toolbar -->
+
+  <!-- Add Person Form and Save Person Form  -->
   <div class="row">
-    <!-- Add Person Form and Save Person Form  -->
     <div class="addPerson person">
       <form id="addPerson-form-add" class="addPerson-panel">
         <fieldset>
@@ -170,6 +172,7 @@
       </form>
     </div>
     <!-- Add Person Form and Save Person Form  -->
+
     <!-- Add Expense Form and Save Expense Form  -->
     <div class="addExpenseClass Expense">
       <form name="addExpense" id="addExpense" class="addExpense addExpense-panel">
@@ -191,7 +194,7 @@
           <input class="formDiv" id="expense-submit" type="submit" class="expense-name-btn" value="ADD">
         </fieldset>
       </form>
-      <form style="background-color: #DCC75B;"name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
+      <form style="background-color: #DCC75B;" name="addExpense-save" id="add-expense-form-save" class="addExpense-save">
         <fieldset>
           <div class="formDiv">
             <span> Enter Expense Description </span>
@@ -214,6 +217,7 @@
       </form>
     </div>
     <!-- Add Expense Form and Save Expense Form  -->
+
     <!-- Add Payment Form  -->
     <div class="addPayment-select">
       <form style="background-color: #A9DEF4;" name="addPayment-people" id="addPayment-people-save" class="addPayment-save">
@@ -236,11 +240,11 @@
         <fieldset>
           <div style="display:none;" class="formDiv">
             <span> Enter Expense Description </span>
-            <input  type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
+            <input type="text" id="expense-name3" class="expense-name" name="expense[description]" placeholder="Expense Description">
           </div>
           <div style="display:none;" class="formDiv">
             <span> Enter Total Bill Amount </span>
-            <input  type="float" id="expense-amount3" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
+            <input type="float" id="expense-amount3" class="expense-amount" name="expense[amount]" placeholder="Enter Amount">
           </div>
           <div id="payment_people_list" class="formDiv payment_people_list"></div>
           <input class="formDiv" id="payment-submit" type="submit" class="btn" value="PAY SUBMIT">
@@ -262,6 +266,8 @@
 
   </div>
   <!-- Show list of people and expenses  -->
+
+  <!-- Trasaction modal -->
   <div class="modal fade" id="historyModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -281,18 +287,38 @@
             </div>
           </p>
           <div style="float: left ; margin: 25px;" class="transaction-show">
-            <!-- <h1 style="color:#ffffff;">Transaction</h1> -->
             <ul style="color:#db9e85; "></ul>
           </div>
-
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="reset" >Reset</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" href="#lost">Reset</button>
+
           <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
+  <!-- Trasaction modal -->
+
+  <!-- Delete Transaction modal -->
+  <div class="modal fade" id="lost">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="resetModalLabel"> Are you sure to delete all transactions?</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="reset">Yes</button>
+          <button type="button" class="close-modal btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Delete Transaction modal -->
+
 </body>
 
 </html>
