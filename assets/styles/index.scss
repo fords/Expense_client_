@@ -152,10 +152,15 @@ ul {
 }
 // background-color: blue;
 .person-show li,
-.expense-show li {
+.expense-show li,
+.transaction-show li {
   padding: 10px;
   border: 10px solid black;
   background-color: #bee1df;
+}
+
+.modal-body {
+  background-color: #8b9099;
 }
 
 #listPeople {

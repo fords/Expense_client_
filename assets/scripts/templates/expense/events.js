@@ -28,6 +28,7 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
@@ -179,12 +180,13 @@ const onSelectPeopleForPayment = function (event) {
 */
 const onAddPayment = function (event) {
   event.preventDefault()
-  const data = getFormFields(this)
-
+  let data = getFormFields(this)
+  const currentPay = []
   store.people_payments.forEach(function (entry) {
     const a = document.getElementById(entry.person)
     if (a !== null) {
       entry.pay = (parseFloat(entry.pay) + parseFloat(a.value)).toString()
+      currentPay.push(a.value)
     } else {
       entry.pay = entry.pay
     }
@@ -199,6 +201,21 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
+
+  // keep a history of transaction
+  data = getFormFields(this)
+  delete data.expense
+  delete data.payment0
+  data.transaction = {}
+  data.transaction.expense_name = store.description
+  data.transaction.person_name = store.payments_person_name // wrong duplicate
+  data.transaction.payment = currentPay
+  data.transaction.index_expense = store.index_i
+  data.transaction.owner = store.user._id
+  store.data2 = data
+  api.createTransaction(data)
+    .then(ui.createTSuccess)
+    .catch(ui.failure)
 }
 
 /*
@@ -266,7 +283,6 @@ const onHideShow = function (event) {
     $('.addExpense-save').hide()
     // $('.buttons').hide()
     $('.show').hide()
-    // $('#options-button').hide()
     $('.addPayment-select').hide()
     $('.addPayment-submit').hide()
     document.getElementById('hide').innerHTML = 'Show All'
@@ -278,6 +294,18 @@ const onHideShow = function (event) {
     $('.expense-show').show()
   }
   store.flag = !store.flag
+}
+
+/*
+  Show transaction when Transaction button is clicked
+*/
+const onTransaction = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+
+  api.getAllTransaction(data)
+    .then(ui.getAllTransactionSuccess)
+    .catch(ui.failure)
 }
 
 /*
@@ -293,6 +321,7 @@ const addHandlers = () => {
   $('#addPersonTop').on('click', onAddPersonTop)
   $('#addExpenseTop').on('click', onAddExpenseTop)
   $('#hide').on('click', onHideShow)
+  $('#transaction').on('click', onTransaction)
   $('.cog').hide()
   $('#ui-message2').hide()
   $('.addPerson').hide()
