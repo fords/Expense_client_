@@ -405,9 +405,9 @@ const deleteAllTransactionSuccess = data => {
       api.deleteTransaction(data.transactions[i]._id)
     }
   }
-  $('#out-message3').html('')
-  $('#out-message3').show().text(' All transaction record is removed!!')
-  $('#out-message3').fadeOut(5000)
+  $('#ui-message').html('')
+  $('#ui-message').show().text(' All transaction record is removed!!')
+  $('#ui-message').fadeOut(5000)
   $('.transaction-show ul')[0].innerHTML = ''
 }
 
