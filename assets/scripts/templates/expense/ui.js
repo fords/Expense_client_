@@ -29,7 +29,6 @@ const deletePersonFailure = () => {
 }
 
 const getAllTransactionSuccess = data => {
-  console.log('here')
   $('.transaction-show ul')[0].innerHTML = ''
   console.log(data)
   // debugger
@@ -38,14 +37,36 @@ const getAllTransactionSuccess = data => {
     if (data.transactions[i].owner !== store.user._id) {
     } else {
       const listElement = document.createElement('LI')
-      const name = document.createElement('span')
+      const name = document.createElement('h3')
+      name.style.cssText = 'color: blue'
       const div = document.createElement('div')
-      const div2 = document.createElement('div')
       name.append(document.createTextNode(data.transactions[i].expense_name))
       listElement.append(name)
       listElement.append(div)
+
+      // date of payments
+      if ((data.transactions[i].createdAt) !== undefined) {
+        const payDoc = document.createElement('span')
+        const div2 = document.createElement('div')
+        payDoc.append(' Time :')
+        payDoc.append(document.createTextNode(data.transactions[i].createdAt.substring(0, data.transactions[i].createdAt.length - 2)))
+        listElement.append(payDoc)
+        listElement.append(div2)
+      }
+
+      for (let j = 0; j < data.transactions[i].person_name.length; j++) {
+        if (data.transactions[i].payment[j] !== undefined) {
+          const name2 = document.createElement('span')
+          const div3 = document.createElement('div')
+          name2.append(document.createTextNode(data.transactions[i].person_name[j]))
+          name2.append(' Paid $')
+          name2.append(document.createTextNode(data.transactions[i].payment[j]))
+          listElement.append(name2)
+          listElement.append(div3)
+        }
+      }
       $('.transaction-show  ul')[0].appendChild(listElement)
-    // console.log(data)
+    // console.log(data)    payment
     }
   }
 }
