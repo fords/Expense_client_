@@ -28,8 +28,8 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  console.log(data)
-  console.log(store.user)
+  // console.log(data)
+  // console.log(store.user)
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
@@ -203,7 +203,7 @@ const onAddPayment = function (event) {
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
   // console.log(store.user)
-  const data1 = {}
+  // const data1 = {}
 
   data = getFormFields(this)
   delete data.expense
@@ -215,7 +215,7 @@ const onAddPayment = function (event) {
   data.transaction.index_expense = store.index_i
   data.transaction.owner = store.user._id
   store.data2 = data
-  console.log(data)
+  // console.log(data)
   api.createTransaction(data)
     .then(ui.createTSuccess)
     .catch(ui.failure)
@@ -311,7 +311,8 @@ const onTransaction = function (event) {
   // // $('#ui-message').text('')
   // $('#ui-message2').show()
   event.preventDefault()
-  const data = getFormFields(this)
+  const data = getFormFields(event.target)
+
   api.getAllTransaction(data)
     // .then((data) => ui.getAllExpenseSuccess(data))
     .then(ui.getAllTransactionSuccess)

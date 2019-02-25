@@ -29,10 +29,24 @@ const deletePersonFailure = () => {
 }
 
 const getAllTransactionSuccess = data => {
+  console.log('here')
   $('.transaction-show ul')[0].innerHTML = ''
   console.log(data)
+  // debugger
+
   for (let i = 0; i < data.transactions.length; i++) {
-    console.log(data)
+    if (data.transactions[i].owner !== store.user._id) {
+    } else {
+      const listElement = document.createElement('LI')
+      const name = document.createElement('span')
+      const div = document.createElement('div')
+      const div2 = document.createElement('div')
+      name.append(document.createTextNode(data.transactions[i].expense_name))
+      listElement.append(name)
+      listElement.append(div)
+      $('.transaction-show  ul')[0].appendChild(listElement)
+    // console.log(data)
+    }
   }
 }
 
