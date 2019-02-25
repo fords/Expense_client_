@@ -28,59 +28,6 @@ const deletePersonFailure = () => {
   $('#feedbackOnAction').fadeOut(5000)
 }
 
-const getAllTransactionSuccess = data => {
-  $('.cog').show()
-  setTimeout(function () {
-    $('.transaction-show ul')[0].innerHTML = ''
-
-    for (let i = 0; i < data.transactions.length; i++) {
-      if (data.transactions[i].owner !== store.user._id) {
-      } else {
-        // if the expense store.deletedExpenses in data ( meaning expense doesn't exist anymore) dont't show here
-        const listElement = document.createElement('LI')
-        const name = document.createElement('h3')
-        name.style.cssText = 'color: blue'
-        const div = document.createElement('div')
-        name.append(document.createTextNode(data.transactions[i].expense_name))
-        listElement.append(name)
-        listElement.append(div)
-
-        // date of payments
-        if ((data.transactions[i].createdAtT) !== undefined) {
-          const payDoc = document.createElement('span')
-          const div2 = document.createElement('div')
-          payDoc.append(' Time :')
-          payDoc.append(document.createTextNode(data.transactions[i].createdAtT.substring(0, data.transactions[i].createdAtT.length - 2)))
-          listElement.append(payDoc)
-          listElement.append(div2)
-        }
-
-        for (let j = 0; j < data.transactions[i].person_name.length; j++) {
-          if (data.transactions[i].payment[j] !== undefined) {
-            const name2 = document.createElement('span')
-            const div3 = document.createElement('div')
-            name2.append(document.createTextNode(data.transactions[i].person_name[j]))
-            name2.append(' Paid $')
-            name2.append(document.createTextNode(data.transactions[i].payment[j]))
-            listElement.append(name2)
-            listElement.append(div3)
-          }
-        }
-        $('.transaction-show  ul')[0].appendChild(listElement)
-        const div4 = document.createElement('div')
-        div4.style.cssText = 'margin-bottom: 15px;'
-        // listElement.append(div4)
-        $('.transaction-show  ul')[0].appendChild(div4)
-      }
-    }
-    $('.cog').hide()
-    if ($('.transaction-show ul')[0].innerHTML === '') {
-      $('#out-message3').show().text('No transaction found yet. Add people,expense and payment to see one')
-      $('#out-message3').fadeOut(5000)
-    }
-  }, 1000)
-}
-
 const getAllPersonSuccess = data => {
   $('.person-show ul')[0].innerHTML = ''
   store.allPeople = []
@@ -397,6 +344,73 @@ const createTSuccess = () => {
   $('#feedbackOnAction').fadeOut(5000)
 }
 
+const getAllTransactionSuccess = data => {
+  // console.log(data)
+  $('.cog').show()
+  setTimeout(function () {
+    $('.transaction-show ul')[0].innerHTML = ''
+
+    for (let i = 0; i < data.transactions.length; i++) {
+      if (data.transactions[i].owner !== store.user._id) {
+      } else {
+        // if the expense store.deletedExpenses in data ( meaning expense doesn't exist anymore) dont't show here
+        const listElement = document.createElement('LI')
+        const name = document.createElement('h3')
+        name.style.cssText = 'color: blue'
+        const div = document.createElement('div')
+        name.append(document.createTextNode(data.transactions[i].expense_name))
+        listElement.append(name)
+        listElement.append(div)
+
+        // date of payments
+        if ((data.transactions[i].createdAtT) !== undefined) {
+          const payDoc = document.createElement('span')
+          const div2 = document.createElement('div')
+          payDoc.append(' Time :')
+          payDoc.append(document.createTextNode(data.transactions[i].createdAtT.substring(0, data.transactions[i].createdAtT.length - 2)))
+          listElement.append(payDoc)
+          listElement.append(div2)
+        }
+
+        for (let j = 0; j < data.transactions[i].person_name.length; j++) {
+          if (data.transactions[i].payment[j] !== undefined) {
+            const name2 = document.createElement('span')
+            const div3 = document.createElement('div')
+            name2.append(document.createTextNode(data.transactions[i].person_name[j]))
+            name2.append(' Paid $')
+            name2.append(document.createTextNode(data.transactions[i].payment[j]))
+            listElement.append(name2)
+            listElement.append(div3)
+          }
+        }
+        $('.transaction-show  ul')[0].appendChild(listElement)
+        const div4 = document.createElement('div')
+        div4.style.cssText = 'margin-bottom: 15px;'
+        // listElement.append(div4)
+        $('.transaction-show  ul')[0].appendChild(div4)
+      }
+    }
+    $('.cog').hide()
+    if ($('.transaction-show ul')[0].innerHTML === '') {
+      $('#out-message3').show().text('No transaction found yet. Add people,expense and payment to see one')
+      $('#out-message3').fadeOut(5000)
+    }
+  }, 1000)
+}
+
+const deleteAllTransactionSuccess = data => {
+  for (let i = 0; i < data.transactions.length; i++) {
+    if (data.transactions[i].owner !== store.user._id) {
+    } else {
+      api.deleteTransaction(data.transactions[i]._id)
+    }
+  }
+  $('#out-message3').html('')
+  $('#out-message3').show().text(' All transaction record is removed!!')
+  $('#out-message3').fadeOut(5000)
+  $('.transaction-show ul')[0].innerHTML = ''
+}
+
 const failure = () => {
   $('#feedbackOnAction').show().text('  FAIL !!')
   $('#feedbackOnAction').fadeOut(5000)
@@ -419,5 +433,6 @@ module.exports = {
   refreshMessage,
   createTSuccess,
   failure,
-  getAllTransactionSuccess
+  getAllTransactionSuccess,
+  deleteAllTransactionSuccess
 }

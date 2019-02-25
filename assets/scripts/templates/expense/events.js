@@ -303,12 +303,20 @@ const onHideShow = function (event) {
 const onTransaction = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
-
+  // api.getAllExpense(data)
+  // save expense list and don't show the ones deleted in transaction form/modal
   api.getAllTransaction(data)
     .then(ui.getAllTransactionSuccess)
     .catch(ui.failure)
 }
 
+const onReset = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.getAllTransaction(data)
+    .then(ui.deleteAllTransactionSuccess)
+    .catch(ui.failure)
+}
 /*
   Event Handler for button actions
 */
@@ -323,6 +331,7 @@ const addHandlers = () => {
   $('#addExpenseTop').on('click', onAddExpenseTop)
   $('#hide').on('click', onHideShow)
   $('#transaction').on('click', onTransaction)
+  $('#reset').on('click', onReset)
   $('.cog').hide()
   $('#ui-message2').hide()
   $('.addPerson').hide()
