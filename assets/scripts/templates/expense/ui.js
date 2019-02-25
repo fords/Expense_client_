@@ -36,6 +36,7 @@ const getAllTransactionSuccess = data => {
     for (let i = 0; i < data.transactions.length; i++) {
       if (data.transactions[i].owner !== store.user._id) {
       } else {
+        // if the expense store.deletedExpenses in data ( meaning expense doesn't exist anymore) dont't show here
         const listElement = document.createElement('LI')
         const name = document.createElement('h3')
         name.style.cssText = 'color: blue'
@@ -73,6 +74,10 @@ const getAllTransactionSuccess = data => {
       }
     }
     $('.cog').hide()
+    if ($('.transaction-show ul')[0].innerHTML === '') {
+      $('#out-message3').show().text('No transaction found yet. Add people,expense and payment to see one')
+      $('#out-message3').fadeOut(5000)
+    }
   }, 1000)
 }
 
@@ -344,8 +349,8 @@ const onPayExpense = function (event) {
 const onDeleteExpense = function (event) {
   event.preventDefault()
   let i = event.target.parentNode
-  store.deletedExpenses.push(i.getAttribute('data-indx-i'))
   i = i.getAttribute('data-attr')
+  store.deletedExpenses.push(i)
   api.deleteExpense(i)
     .then(deleteExpenseSuccess)
     .then(() => showExpense(event))
