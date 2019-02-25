@@ -361,13 +361,19 @@ const getAllTransactionSuccess = data => {
         name.append(document.createTextNode(data.transactions[i].expense_name))
         listElement.append(name)
         listElement.append(div)
-
+        const cost = document.createElement('span')
+        const divCost = document.createElement('div')
+        cost.append(' Total Cost : ')
+        cost.append(document.createTextNode(data.transactions[i].totalAmount))
+        listElement.append(cost)
+        listElement.append(divCost)
         // date of payments
         if ((data.transactions[i].createdAtT) !== undefined) {
           const payDoc = document.createElement('span')
           const div2 = document.createElement('div')
-          payDoc.append(' Time :')
+          payDoc.append(' Time :  ')
           payDoc.append(document.createTextNode(data.transactions[i].createdAtT.substring(0, data.transactions[i].createdAtT.length - 2)))
+          payDoc.append(' \xa0 \xa0 \xa0 \xa0 \xa0 ')
           listElement.append(payDoc)
           listElement.append(div2)
         }

@@ -209,6 +209,7 @@ const onAddPayment = function (event) {
   delete data.payment0
   data.transaction = {}
   data.transaction.expense_name = store.description
+  data.transaction.totalAmount = store.amount
   data.transaction.person_name = store.payments_person_name
   data.transaction.payment = currentPay
   data.transaction.index_expense = store.index_i
