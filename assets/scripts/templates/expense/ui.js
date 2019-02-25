@@ -340,8 +340,8 @@ const show = function (event) {
 }
 
 const createTSuccess = () => {
-  $('#feedbackOnAction').show().text('create a transaction')
-  $('#feedbackOnAction').fadeOut(5000)
+  // $('#feedbackOnAction').show().text('create a transaction')
+  // $('#feedbackOnAction').fadeOut(5000)
 }
 
 const getAllTransactionSuccess = data => {

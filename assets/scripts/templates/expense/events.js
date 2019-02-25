@@ -216,7 +216,6 @@ const onAddPayment = function (event) {
   data.transaction.owner = store.user._id
 
   api.createTransaction(data)
-    .then(ui.createTSuccess)
     .catch(ui.failure)
 }
 
