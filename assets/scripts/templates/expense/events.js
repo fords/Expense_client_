@@ -283,7 +283,6 @@ const onHideShow = function (event) {
     $('.addExpense-save').hide()
     // $('.buttons').hide()
     $('.show').hide()
-    // $('#options-button').hide()
     $('.addPayment-select').hide()
     $('.addPayment-submit').hide()
     document.getElementById('hide').innerHTML = 'Show All'
