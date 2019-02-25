@@ -28,8 +28,7 @@ const onAddPersonTop = function (event) {
 const onAddPersonForm = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  // console.log(data)
-  // console.log(store.user)
+
   api.createPerson(data)
     .then(ui.createPersonSuccess)
     .then(() => show(event))
@@ -202,20 +201,18 @@ const onAddPayment = function (event) {
     .catch(ui.updateExpenseFailure)
   $('#addPayment-save')[0].reset()
   $('#addPayment-people-save')[0].reset()
-  // console.log(store.user)
-  // const data1 = {}
 
+  // keep a history of transaction
   data = getFormFields(this)
   delete data.expense
   delete data.payment0
   data.transaction = {}
   data.transaction.expense_name = store.description
-  data.transaction.person_name = store.payments_person_name  // wrong duplicate
-  data.transaction.payment = currentPay // right payment
+  data.transaction.person_name = store.payments_person_name // wrong duplicate
+  data.transaction.payment = currentPay
   data.transaction.index_expense = store.index_i
   data.transaction.owner = store.user._id
   store.data2 = data
-  // console.log(data)
   api.createTransaction(data)
     .then(ui.createTSuccess)
     .catch(ui.failure)
@@ -300,21 +297,14 @@ const onHideShow = function (event) {
   store.flag = !store.flag
 }
 
-
+/*
+  Show transaction when Transaction button is clicked
+*/
 const onTransaction = function (event) {
-  // $('.addExpense').show()
-  // $('.addPerson').hide()
-  // $('.addExpense-save').hide()
-  // $('.expense-show').show()
-  // $('.show').show()
-  // $('.cog').show()
-  // // $('#ui-message').text('')
-  // $('#ui-message2').show()
   event.preventDefault()
   const data = getFormFields(event.target)
 
   api.getAllTransaction(data)
-    // .then((data) => ui.getAllExpenseSuccess(data))
     .then(ui.getAllTransactionSuccess)
     .catch(ui.failure)
 }

@@ -30,8 +30,6 @@ const deletePersonFailure = () => {
 
 const getAllTransactionSuccess = data => {
   $('.transaction-show ul')[0].innerHTML = ''
-  console.log(data)
-  // debugger
 
   for (let i = 0; i < data.transactions.length; i++) {
     if (data.transactions[i].owner !== store.user._id) {
@@ -66,7 +64,6 @@ const getAllTransactionSuccess = data => {
         }
       }
       $('.transaction-show  ul')[0].appendChild(listElement)
-    // console.log(data)    payment
     }
   }
 }
@@ -132,7 +129,6 @@ const onDeleteName = function (event) {
   // const index = i.getAttribute('data-indx')
   i = i.getAttribute('data-attr')
   store.allPeople.slice(i, 1)
-  // store.payments[]
 
   api.deletePerson(i)
     .then(deletePersonSuccess)
@@ -270,19 +266,7 @@ const getAllExpenseSuccess = data => {
       $('.expense-show  ul')[0].appendChild(listElement2)
       k += 1
     }
-  } // console.log(store.payments)
-  // $('#listPeople')[0].innerHTML = ''
-  // store.people = []
-  // for (let i = 0; i < data.persons.length; i++) {
-  //   if (data.persons[i].owner !== store.user._id) {
-  //   } else {
-  //     const options = document.createElement('option')
-  //     options.value = data.persons[i]._id
-  //     store.people.push(data.persons[i])
-  //     options.text = data.persons[i].name
-  //     $('#listPeople')[0].appendChild(options)
-  //   }
-  // }
+  }
 }
 
 const getAllExpenseFailure = data => {
