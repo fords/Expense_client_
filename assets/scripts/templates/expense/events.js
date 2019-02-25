@@ -136,6 +136,7 @@ const onSelectPeopleForPayment = function (event) {
   $('.payment_people_list')[0].innerHTML = ''
   let payTemp = 0
   store.payments_person_id = []
+  store.payments_person_name = []
   for (const i in $('#listPeople3')[0].selectedOptions) {
     if ($('#listPeople3')[0].selectedOptions[i].value !== undefined) {
       payTemp = 0
@@ -208,11 +209,11 @@ const onAddPayment = function (event) {
   delete data.payment0
   data.transaction = {}
   data.transaction.expense_name = store.description
-  data.transaction.person_name = store.payments_person_name // wrong duplicate
+  data.transaction.person_name = store.payments_person_name
   data.transaction.payment = currentPay
   data.transaction.index_expense = store.index_i
   data.transaction.owner = store.user._id
-  store.data2 = data
+
   api.createTransaction(data)
     .then(ui.createTSuccess)
     .catch(ui.failure)
