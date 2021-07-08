@@ -2,12 +2,15 @@
 
 const store = {
   people: [],
+  payments: [],
+  payments_person_id: [],
+  payments_person_name: [],
   selectedPeople: [],
-  listpeople_with_index: [],
   description: [],
   totalAmount: [],
-  index_person: 0,
-  index_expense: 0
+  flag: true,
+  allPeople: [],
+  deletedExpenses: []
 }
 
 module.exports = store

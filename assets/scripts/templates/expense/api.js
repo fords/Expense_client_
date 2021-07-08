@@ -18,6 +18,13 @@ const getAllPerson = function () {
   })
 }
 
+const getOnePerson = function (personId) {
+  return $.ajax({
+    url: config.apiUrl + '/persons/' + personId,
+    method: 'GET'
+  })
+}
+
 const deletePerson = function (personId) {
   return $.ajax({
     url: config.apiUrl + '/persons/' + personId,
@@ -57,6 +64,13 @@ const getAllExpense = function () {
   })
 }
 
+const getOneExpense = function (expId) {
+  return $.ajax({
+    url: config.apiUrl + '/expenses/' + expId,
+    method: 'GET'
+  })
+}
+
 const deleteExpense = function (expenseId) {
   return $.ajax({
     url: config.apiUrl + '/expenses/' + expenseId,
@@ -79,13 +93,58 @@ const updateExpense = function (expId, data) {
   })
 }
 
+const createTransaction = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/transactions',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+const getAllTransaction = function () {
+  return $.ajax({
+    url: config.apiUrl + '/transactions',
+    method: 'GET'
+  })
+}
+
+const deleteTransaction = function (transactionId) {
+  return $.ajax({
+    url: config.apiUrl + '/transactions/' + transactionId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const updateTransaction = function (transactionId, data) {
+  const id = transactionId
+  return $.ajax({
+    url: config.apiUrl + '/transactions/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   createPerson,
   getAllPerson,
+  getOnePerson,
   deletePerson,
   updatePerson,
   createExpense,
   getAllExpense,
+  getOneExpense,
   deleteExpense,
-  updateExpense
+  updateExpense,
+  createTransaction,
+  getAllTransaction,
+  deleteTransaction,
+  updateTransaction
 }

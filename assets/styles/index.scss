@@ -7,12 +7,57 @@ h1 {
   // margin-bottom: 1px;
 }
 
+.cog {
+  height: auto;
+  width: 50px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: rotate;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.cog span {
+  position: absolute;
+  height: 22px;
+  width: 4px;
+  background: #333;
+}
 // @keyframes flash {
 //   0% { background-color: pink; }
 //   25% { background-color: yellow; }
 //   50% { background-color: red; }
 //   100% { background-color: blue; }
 // }
+
+#cog-0 {
+  position: absolute;
+  transform: rotate(0deg);
+}
+
+#cog-45 {
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+#cog-90 {
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+#cog-135 {
+  position: absolute;
+  transform: rotate(135deg);
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .table {
   display: table;
   text-align: center;
@@ -20,6 +65,21 @@ h1 {
   height: 100%;
   table-layout: fixed;
   margin: 10px;
+}
+
+#ui-message {
+  display: none;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 100;
+}
+
+#ui-message2 {
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 90;
 }
 
 .cell {
@@ -30,20 +90,59 @@ h1 {
 form {
   display: inline-block;
   border: 10px solid black;
+  width: 550px;
+  padding: 10px;
+  background: blue;
+  margin: 10px;
+}
+
+#sign-up,
+#sign-in,
+#sign-out,
+#change-password,
+.addPerson-panel,
+.addPerson-panel-save {
+  display: inline-block;
+  border: 10px solid black;
   width: 400px;
   padding: 10px;
   background: blue;
   margin: 10px;
 }
 
+ul {
+  list-style-type: none;
+}
+
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
 .addPerson {
   margin-left: 42px;
-  margin-right: 50px;
+  margin-right: 3px;
+  margin-top: 40px;
 }
 
 .addExpenseClass {
-  margin-left: 50px;
+  margin-left: 55px;
   margin-right: 50px;
+  margin-top: 40px;
+  width: 600px;
+}
+
+.addPayment-save {
+  // margin-right: 50px;
+  margin-top: 50px;
+}
+
+.addPerson,
+.addExpenseClass,
+.addPayment-save {
+  // margin-top: 43px;
+  float: left;
 }
 
 .formDiv {
@@ -53,8 +152,15 @@ form {
 }
 // background-color: blue;
 .person-show li,
-.expense-show li {
+.expense-show li,
+.transaction-show li {
   padding: 10px;
+  border: 10px solid black;
+  background-color: #bee1df;
+}
+
+.modal-body {
+  background-color: #8b9099;
 }
 
 #listPeople {
@@ -64,7 +170,8 @@ form {
   border: 1px solid brown;
 }
 
-#listPeople2 {
+#listPeople2,
+#listPeople3 {
   max-height: 150px;
   min-height: 50px;
   width: 250px;
@@ -75,6 +182,12 @@ body {
   background-color: lightgreen;
   animation-name: flash;
   animation-duration: 3s;
+  background-image: url('public/Image.jpg');
+  // background-repeat: repeat-y;
+  background-position: auto;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .btn {
@@ -103,5 +216,5 @@ body {
 }
 
 .person {
-  padding: 20px;
+  padding: 2px;
 }
